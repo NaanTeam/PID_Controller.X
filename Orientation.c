@@ -126,25 +126,8 @@ float Orientation_calcCompassHeading(float* magneticVectors)
 //******************************************************************************
 //Public Function Definitions
 //******************************************************************************
-void Orientation_setup()
+void Orientation_start()
 {
-    //Setup SPI and I2C
-//    FIFOSPI2_initialize();
-//    FIFOI2C2_initialize();
-
-//    INTConfigureSystem(INT_SYSTEM_CONFIG_MULT_VECTOR);
-//    INTEnableInterrupts();
-
-//    //Setup Accelerometer
-//    ADXL362_startMeasurements();
-//    //Setup Gyroscope
-//    L3G4200D_startMeasurements();
-//    //Setup 3-axis compass
-//    HMC5883L_startMeasurements();
-
-    //INTDisableInterrupts();
-
-
     //Setup Timer5
     INTClearFlag(INT_T5);
     INTSetVectorPriority(INT_TIMER_5_VECTOR, INT_PRIORITY_LEVEL_3);
@@ -152,7 +135,7 @@ void Orientation_setup()
     INTEnable(INT_T5, INT_ENABLED);
 
     //Turn on clock
-    OpenTimer5(T5_ON | T5_SOURCE_INT | T5_PS_1_32, 33333); //75hz
+    OpenTimer5(T5_ON | T5_SOURCE_INT | T5_PS_1_32, 16666); //75hz @ 40MHz
 }
 
 

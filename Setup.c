@@ -1,34 +1,33 @@
-#include "hardwareProfile.h"
 
-void initializeBoard(void)
+#include "Setup.h"
+
+
+void Setup_initializeBoard(void)
 {
     INTDisableInterrupts();
-    setupPorts();
+    Setup_setupPorts();
 
-
+    //Start Protocols
     FIFOSPI2_initialize();
     FIFOI2C2_initialize();
-	FIFOUART1_initialize();
+    FIFOUART1_initialize();
 
     INTEnableSystemMultiVectoredInt();
     //Enable system-wide interrupts
     INTEnableInterrupts();
 
-    ADXL362_startMeasurements();        //Setup Accelerometer
-    L3G4200D_startMeasurements();       //Setup Gyroscope
-    HMC5883L_startMeasurements();       //Setup 3-axis compass
+    SensorLoop_start();
+    CommunicationLoop_start();
+    Orientation_start();
 
-    INTEnableSystemMultiVectoredInt();
-    //Enable system-wide interrupts
-    INTEnableInterrupts();
 
-    setupTimers();
+    Setup_setupTimers();
     setupInputCaptures();
     setupOutputCompares();
-    configInterrupts();
+    Setup_configInterrupts();
 }
 
-void setupPorts(void)
+void Setup_setupPorts(void)
 {
     //Setup ESC pins for PWM output
     PORTSetPinsDigitalOut(IOPORT_D, BIT_0); //PWM1-OC1 digital pin 3
@@ -44,7 +43,7 @@ void setupPorts(void)
     PORTSetPinsDigitalIn(IOPORT_D, BIT_12); //IC5 digital pin 10 (GEAR)
 }
 
-void setupTimers(void)
+void Setup_setupTimers(void)
 {
     //Clear timer controller and timer values
     T2CONCLR = 0xFFFF;
@@ -62,17 +61,10 @@ void setupTimers(void)
     T3CONSET = 0x8010;      //PS = 8
     //T5CONSET = 0x8000;
 
-    //Turn on clock
-    OpenTimer1(T1_ON | T1_SOURCE_INT | T1_PS_1_8, 6250); //800hz
 
-    //Turn on clock
-    OpenTimer4(T4_ON | T4_SOURCE_INT | T4_PS_1_64, 10240);
-
-    //Turn on clock
-    OpenTimer5(T5_ON | T5_SOURCE_INT | T5_PS_1_32, 16666); //75hz
 }
 
-void configInterrupts(void)
+void Setup_configInterrupts(void)
 {
     //Enable multi-vectored mode for interrupts
     //INTEnableSystemMultiVectoredInt();
@@ -83,25 +75,5 @@ void configInterrupts(void)
     ConfigIntCapture4(IC_INT_ON | IC_INT_PRIOR_6);
     ConfigIntCapture5(IC_INT_ON | IC_INT_PRIOR_6);
     //ConfigIntTimer5(T5_INT_ON | T5_INT_PRIOR_7);
-
-    //Setup Timer1
-    INTClearFlag(INT_T1);
-    INTSetVectorPriority(INT_TIMER_1_VECTOR, INT_PRIORITY_LEVEL_3);
-    INTSetVectorSubPriority(INT_TIMER_1_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
-    INTEnable(INT_T1, INT_ENABLED);
-
-    //Setup Timer4
-    INTClearFlag(INT_T4);
-    INTSetVectorPriority(INT_TIMER_4_VECTOR, INT_PRIORITY_LEVEL_4);
-    INTSetVectorSubPriority(INT_TIMER_4_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
-    INTEnable(INT_T4, INT_ENABLED);
-
-    //Setup Timer5
-    INTClearFlag(INT_T5);
-    INTSetVectorPriority(INT_TIMER_5_VECTOR, INT_PRIORITY_LEVEL_3);
-    INTSetVectorSubPriority(INT_TIMER_5_VECTOR, INT_SUB_PRIORITY_LEVEL_1);
-    INTEnable(INT_T5, INT_ENABLED);
-
-//    //Enable system-wide interrupts
-//    INTEnableInterrupts();
 }
+

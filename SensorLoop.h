@@ -37,7 +37,7 @@ extern "C" {
 /**
  * Sets up the IRQ overflow for Timer1 to run at div 8 and a counter of 0xFFFF.
  */
-void SensorLoop_SetupAll();
+void SensorLoop_start();
 
 
 

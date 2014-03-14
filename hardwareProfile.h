@@ -16,8 +16,6 @@
 #include <p32xxxx.h>
 
 #define SYS_CLK     80000000
-#define PER_REG     44000
-#define MAX_PER     20000       //Used for Timer5 to control the PID Algorithm
 
 #define GetSystemClock()           (SYS_CLK)
 #define GetInstructionClock()      (SYS_CLK)
@@ -29,12 +27,6 @@ typedef unsigned short uint16;
 typedef signed short int16;
 typedef unsigned int uint32;
 typedef signed int int32;
-
 typedef unsigned char boolean;
-
-void initializeBoard(void);
-void setupPorts(void);
-void setupTimers(void);
-void configInterrupts(void);
 
 #endif

@@ -3,14 +3,8 @@
 //******************************************************************************
 //Public Function Definitions
 //******************************************************************************
-void SensorLoop_SetupAll()
+void SensorLoop_start()
 {
-    //Setup SPI and I2C
-    FIFOSPI2_initialize();
-    FIFOI2C2_initialize();
-
-    INTConfigureSystem(INT_SYSTEM_CONFIG_MULT_VECTOR);
-    INTEnableInterrupts();
 
 ////    //Setup Accelerometer
     ADXL362_startMeasurements();
@@ -19,8 +13,6 @@ void SensorLoop_SetupAll()
 ////   //Setup 3-axis compass
     HMC5883L_startMeasurements();
 
-    INTDisableInterrupts();
-
 
     //Setup Timer1
     INTClearFlag(INT_T1);
@@ -28,7 +20,7 @@ void SensorLoop_SetupAll()
     INTSetVectorSubPriority(INT_TIMER_1_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
     INTEnable(INT_T1, INT_ENABLED);
     //Turn on clock
-    OpenTimer1(T1_ON | T1_SOURCE_INT | T1_PS_1_8, 12500); //800hz
+    OpenTimer1(T1_ON | T1_SOURCE_INT | T1_PS_1_8, 6250); //800hz @ 40MHz
 
 }
 

@@ -16,6 +16,8 @@
 #include "FIFOSPI2.h"
 #include "HMC5883L.h"
 #include "Orientation.h"
+#include "setup.h"
+
 
 #pragma config FNOSC    = PRIPLL    // Oscillator selection
 //NOTE: Connor's POSCMOD was different -> HS
@@ -39,6 +41,7 @@
 #pragma config OSCIOFNC = OFF
 #pragma config IESO     = OFF
 
+
 void DelayTime(int inter)
 {
     int i = 0;
@@ -51,7 +54,8 @@ void DelayTime(int inter)
 
 int main (void)
 {
-    initializeBoard();
+    Setup_initializeBoard();
+
     zeroController();
     enableProps();
     startupMotors();

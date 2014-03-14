@@ -4,6 +4,11 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f5" displayName="Oreintation Filter" projectFiles="true">
+        <itemPath>Orientation.h</itemPath>
+        <itemPath>MathFunctions.h</itemPath>
+        <itemPath>DCM.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f4"
                      displayName="PID and Output Controller"
                      projectFiles="true">
@@ -27,9 +32,7 @@
         <itemPath>SensorLoop.h</itemPath>
       </logicalFolder>
       <itemPath>hardwareProfile.h</itemPath>
-      <itemPath>DCM.h</itemPath>
-      <itemPath>MathFunctions.h</itemPath>
-      <itemPath>Orientation.h</itemPath>
+      <itemPath>Setup.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -45,7 +48,7 @@
         <itemPath>MsgInterpreter.c</itemPath>
         <itemPath>CommunicationLoop.c</itemPath>
       </logicalFolder>
-      <logicalFolder name="f5" displayName="Oreintation" projectFiles="true">
+      <logicalFolder name="f5" displayName="Oreintation Filter" projectFiles="true">
         <itemPath>Orientation.c</itemPath>
         <itemPath>DCM.c</itemPath>
         <itemPath>MathFunctions.c</itemPath>
@@ -66,7 +69,7 @@
         <itemPath>SensorLoop.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>hardwareProfile.c</itemPath>
+      <itemPath>Setup.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

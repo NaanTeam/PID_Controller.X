@@ -12,9 +12,8 @@ uint8 CommunicationLoop_PossibleError = 0;
 //******************************************************************************
 //Public Function Definitions
 //******************************************************************************
-void CommunicationLoop_initialize()
+void CommunicationLoop_start()
 {
-    FIFOUART1_initialize();
 
     //Setup Timer4
     INTClearFlag(INT_T4);
@@ -22,7 +21,7 @@ void CommunicationLoop_initialize()
     INTSetVectorSubPriority(INT_TIMER_4_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
     INTEnable(INT_T4, INT_ENABLED);
     //Turn on clock
-    OpenTimer4(T4_ON | T4_SOURCE_INT | T4_PS_1_64, 0x4FFF);
+    OpenTimer4(T4_ON | T4_SOURCE_INT | T4_PS_1_64, 10240); // 200hz(?) @40MHz
 
 }
 

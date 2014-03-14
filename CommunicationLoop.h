@@ -37,7 +37,7 @@ extern "C" {
  * Initializes the communication loop (which starts timer4) which monitors UART1
  *  for new messages and passes that information to the Msg interpreter.
  */
-void CommunicationLoop_initialize();
+void CommunicationLoop_start();
 
 
 #ifdef	__cplusplus
