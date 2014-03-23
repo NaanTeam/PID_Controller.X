@@ -151,7 +151,7 @@ void Orientation_Update()
     float Magnetic_Heading = 0.0;
 
 
-    float timeDiff = 0.01638;
+    float timeDiff = 1/75.0;
     
     //Correct for raw sensor error
     Orientation_adjustSensorError(accelCorrected, gyroCorrected, magneticCorrected);

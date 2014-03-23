@@ -5,6 +5,13 @@
 //Local Variable and Typedef Declarations
 //******************************************************************************
 
+float DCM_RollPitch_Kp = 30.0/GRAVITY;
+float DCM_RollPitch_Ki = 5.0/GRAVITY;
+//float DCM_Yaw_Kp = 22.0;
+//float DCM_Yaw_Ki = 2.0;
+float DCM_Yaw_Kp = 12.0;
+float DCM_Yaw_Ki = 1.5;
+
 float Omega_Vector[3]= {0,0,0}; //Corrected Gyro_Vector data
 float Omega_P[3]= {0,0,0};//Omega Proportional correction
 float Omega_I[3]= {0,0,0};//Omega Integrator
@@ -182,9 +189,9 @@ void DCM_driftCorrection(float* accelVector, float scaledAccelMag, float magneti
 
 
     Vector_Cross_Product(&errorRollPitch[0],&accelVector[0],&DCM_Matrix[2][0]); //adjust the ground of reference
-    Vector_Scale(&Omega_P[0],&errorRollPitch[0],Kp_ROLLPITCH*Accel_weight);
+    Vector_Scale(&Omega_P[0],&errorRollPitch[0],DCM_RollPitch_Kp*Accel_weight);
 
-    Vector_Scale(&Scaled_Omega_I[0],&errorRollPitch[0],Ki_ROLLPITCH*Accel_weight);
+    Vector_Scale(&Scaled_Omega_I[0],&errorRollPitch[0],DCM_RollPitch_Ki*Accel_weight);
     Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);
 
 
@@ -197,10 +204,10 @@ void DCM_driftCorrection(float* accelVector, float scaledAccelMag, float magneti
     errorCourse=(DCM_Matrix[0][0]*magneticHeading_Y) - (DCM_Matrix[1][0]*magneticHeading_X);  //Calculating YAW error
     Vector_Scale(errorYaw,&DCM_Matrix[2][0],errorCourse); //Applys the yaw correction to the XYZ rotation of the aircraft, depeding the position.
 
-    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],Kp_YAW);
+    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],DCM_Yaw_Kp);
     Vector_Add(Omega_P,Omega_P,Scaled_Omega_P);//Adding  Proportional.
 
-    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],Ki_YAW);
+    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],DCM_Yaw_Ki);
     Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);//adding integrator to the Omega_I
 
 

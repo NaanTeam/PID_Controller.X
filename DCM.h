@@ -31,12 +31,20 @@ extern "C" {
 //Configuration #defines
 //******************************************************************************
 
-#define Kp_ROLLPITCH 5.0/GRAVITY
-#define Ki_ROLLPITCH 0.5/GRAVITY
+//#define Kp_ROLLPITCH 1.0/GRAVITY
+//#define Ki_ROLLPITCH 0.1/GRAVITY
+//
+//#define Kp_YAW 5.0
+//#define Ki_YAW 0.1
 
-#define Kp_YAW 5.0
-#define Ki_YAW 0.5
+//******************************************************************************
+//Public Variables
+//******************************************************************************
 
+extern float DCM_RollPitch_Kp;
+extern float DCM_RollPitch_Ki;
+extern float DCM_Yaw_Kp;
+extern float DCM_Yaw_Ki;
 
 
 //******************************************************************************

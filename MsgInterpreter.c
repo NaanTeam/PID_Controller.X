@@ -213,7 +213,6 @@ inline int MsgInterpreter_interpret_readRegisters(uint8 message[])
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
-
             case SERIALCOMM_REGISTER_Motor2:
                 temp = (uint8*)(&OC_TWO_PC);
                 buffer[buffer_len++] = temp[0];
@@ -221,7 +220,6 @@ inline int MsgInterpreter_interpret_readRegisters(uint8 message[])
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
-
             case SERIALCOMM_REGISTER_Motor3:
                 temp = (uint8*)(&OC_THREE_PC);
                 buffer[buffer_len++] = temp[0];
@@ -229,9 +227,38 @@ inline int MsgInterpreter_interpret_readRegisters(uint8 message[])
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
-
             case SERIALCOMM_REGISTER_Motor4:
                 temp = (uint8*)(&OC_FOUR_PC);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
+
+          case SERIALCOMM_CONFIG_RollPitch_Kp:
+                temp = (uint8*)(&DCM_RollPitch_Kp);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_CONFIG_RollPitch_Ki:
+                temp = (uint8*)(&DCM_RollPitch_Ki);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_CONFIG_Yaw_Kp:
+                temp = (uint8*)(&DCM_Yaw_Kp);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_CONFIG_Yaw_Ki:
+                temp = (uint8*)(&DCM_Yaw_Ki);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
@@ -247,6 +274,45 @@ inline int MsgInterpreter_interpret_readRegisters(uint8 message[])
 
 inline int MsgInterpreter_interpret_writeRegisters(uint8 message[])
 {
+    uint8* temp;
+    uint8 buffer[32];
+
+    while(MsgInterpreter_Index < MsgInterpreter_Length)
+    {
+        switch (message[MsgInterpreter_Index++])
+        {
+            case SERIALCOMM_CONFIG_RollPitch_Kp:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                DCM_RollPitch_Kp = *((float*)buffer);
+                break;
+            case SERIALCOMM_CONFIG_RollPitch_Ki:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                DCM_RollPitch_Ki = *((float*)buffer);
+
+                break;
+            case SERIALCOMM_CONFIG_Yaw_Kp:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                DCM_Yaw_Kp = *((float*)buffer);
+                break;
+            case SERIALCOMM_CONFIG_Yaw_Ki:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                DCM_Yaw_Ki = *((float*)buffer);
+                break;
+        }
+    }
+
     return 0;
 }
 

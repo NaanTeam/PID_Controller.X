@@ -98,6 +98,13 @@ extern "C" {
 #define SERIALCOMM_REGISTER_Motor3              0x52
 #define SERIALCOMM_REGISTER_Motor4              0x53
 
+
+
+#define SERIALCOMM_CONFIG_RollPitch_Kp        0x80
+#define SERIALCOMM_CONFIG_RollPitch_Ki        0x81
+#define SERIALCOMM_CONFIG_Yaw_Kp              0x82
+#define SERIALCOMM_CONFIG_Yaw_Ki              0x83
+
 //******************************************************************************
 //Function Prototypes
 //******************************************************************************

@@ -48,7 +48,7 @@ void Setup_setupTimers(void)
     //Clear timer controller and timer values
     T2CONCLR = 0xFFFF;
     T3CONCLR = 0xFFFF;
-    T5CONCLR = 0xFFFF;
+    //T5CONCLR = 0xFFFF;
     TMR2CLR = 0xFFFF;
     TMR3CLR = 0xFFFF;
     //TMR5CLR = 0xFFFF;
