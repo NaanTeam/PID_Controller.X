@@ -51,9 +51,9 @@ void Orientation_adjustSensorError(float* accelCorrected, float* gyroCorrected, 
     accelCorrected[1] = ADXL362_YAcceleration_Raw - YAccel_Offeset;
     accelCorrected[2] = ADXL362_ZAcceleration_Raw - ZAccel_Offeset;
     //Gyro
-    gyroCorrected[0] = L3G4200D_XAngularRate_Raw - XGyro_Offeset;
-    gyroCorrected[1] = L3G4200D_YAngularRate_Raw - YGyro_Offeset;
-    gyroCorrected[2] = L3G4200D_ZAngularRate_Raw - ZGyroc_Offeset;
+    gyroCorrected[0] = (float)(L3G4200D_XAngularRate_Raw_Avg - Calibration_Gyro_Offset_X);
+    gyroCorrected[1] = (float)(L3G4200D_YAngularRate_Raw_Avg - Calibration_Gyro_Offset_Y);
+    gyroCorrected[2] = (float)(L3G4200D_ZAngularRate_Raw_Avg - Calibration_Gyro_Offset_Z);
     //Magn
     magneticCorrected[0] = HMC5883L_XMagneticVector_Raw - XMagnetic_Offeset;
     magneticCorrected[1] = HMC5883L_YMagneticVector_Raw - YMagnetic_Offeset;
@@ -75,9 +75,9 @@ float Orientation_calcAccelMag(float* accelVector)
 
 void Orientation_scaleGyro(float* rawGyro, float* scaledGyro)
 {
-    scaledGyro[0]=Gyro_Scaled_X(rawGyro[0]); //gyro x roll
-    scaledGyro[1]=Gyro_Scaled_Y(rawGyro[1]); //gyro y pitch
-    scaledGyro[2]=Gyro_Scaled_Z(rawGyro[2]); //gyro Z yaw
+    scaledGyro[0]=-1.0*Gyro_Scaled_X(rawGyro[0]); //gyro x roll
+    scaledGyro[1]=-1.0*Gyro_Scaled_Y(rawGyro[1]); //gyro y pitch
+    scaledGyro[2]=-1.0*Gyro_Scaled_Z(rawGyro[2]); //gyro Z yaw
 }
 
 float Orientation_calcCompassHeading(float* magneticVectors)
@@ -136,6 +136,7 @@ void Orientation_start()
 
     //Turn on clock
     OpenTimer5(T5_ON | T5_SOURCE_INT | T5_PS_1_32, 16666); //75hz @ 40MHz
+    //OpenTimer5(T5_ON | T5_SOURCE_INT | T5_PS_1_32, 3333); //375hz @ 40MHz  (0.0026664 sec)
 }
 
 

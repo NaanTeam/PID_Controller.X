@@ -31,8 +31,11 @@
         <itemPath>ADXL362.h</itemPath>
         <itemPath>SensorLoop.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f6" displayName="Startup" projectFiles="true">
+        <itemPath>Setup.h</itemPath>
+        <itemPath>Calibration.h</itemPath>
+      </logicalFolder>
       <itemPath>hardwareProfile.h</itemPath>
-      <itemPath>Setup.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -68,8 +71,11 @@
         <itemPath>L3G4200D.c</itemPath>
         <itemPath>SensorLoop.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f6" displayName="Startup" projectFiles="true">
+        <itemPath>Setup.c</itemPath>
+        <itemPath>Calibration.c</itemPath>
+      </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>Setup.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

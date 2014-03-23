@@ -17,7 +17,7 @@
 #include "HMC5883L.h"
 #include "Orientation.h"
 #include "setup.h"
-
+#include "Calibration.h"
 
 #pragma config FNOSC    = PRIPLL    // Oscillator selection
 //NOTE: Connor's POSCMOD was different -> HS
@@ -46,7 +46,7 @@ void DelayTime(int inter)
 {
     int i = 0;
 
-    while (i < (inter * 1000))
+    while (i < (inter * 200))
     {
         i++;
     }
@@ -56,11 +56,16 @@ int main (void)
 {
     Setup_initializeBoard();
 
+    DelayTime(500);
+
+    Calibration_sensorsOffsets();
+    Orientation_start();
+
     zeroController();
     enableProps();
     startupMotors();
 
-    DelayTime(100);
+
 
     //StartSequence()
 

@@ -81,6 +81,8 @@ extern "C" {
 #define SERIALCOMM_REGISTER_ZAngularRate_Raw        0x26
 #define SERIALCOMM_REGISTER_GyroTemperature_Raw     0x27
 #define SERIALCOMM_REGISTER_XAngularRate_Raw_Avg    0x28
+#define SERIALCOMM_REGISTER_YAngularRate_Raw_Avg    0x29
+#define SERIALCOMM_REGISTER_ZAngularRate_Raw_Avg    0x2A
 
 #define SERIALCOMM_REGISTER_XMagneticVector     0x30
 #define SERIALCOMM_REGISTER_YMagneticVector     0x31

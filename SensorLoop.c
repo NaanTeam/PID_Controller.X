@@ -41,8 +41,6 @@ int gyroTotal_x = 0;
 int accelRunning_x[Avg_Count];
 int accelTotal_x = 0;
 
-int output = 0;
-
 //TODO KNOWN BUG: with SPI. Reordering ADXl and L3G will make L3G's reading bad.
 void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
 {
@@ -64,8 +62,12 @@ void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
 //    output = (int)(alpha * (float)L3G4200D_XAngularRate_Raw + output * (1.0 - alpha));
 //    L3G4200D_XAngularRate_Raw_Avg = output;
     
-    output = (L3G4200D_XAngularRate_Raw + 19 * output) / 20; //13
-    L3G4200D_XAngularRate_Raw_Avg = output;
+    L3G4200D_XAngularRate_Raw_Avg = (2*L3G4200D_XAngularRate_Raw +
+            18 * L3G4200D_XAngularRate_Raw_Avg) / 20;
+    L3G4200D_YAngularRate_Raw_Avg = (2*L3G4200D_YAngularRate_Raw +
+            18 * L3G4200D_YAngularRate_Raw_Avg) / 20;
+    L3G4200D_ZAngularRate_Raw_Avg = (2*L3G4200D_ZAngularRate_Raw +
+            18 * L3G4200D_ZAngularRate_Raw_Avg) / 20;
 
 
     //Convert Raw data into meaningful data(optional and potential optimization)

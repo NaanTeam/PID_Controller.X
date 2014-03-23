@@ -18,7 +18,6 @@ void Setup_initializeBoard(void)
 
     SensorLoop_start();
     CommunicationLoop_start();
-    Orientation_start();
 
 
     Setup_setupTimers();

@@ -81,12 +81,12 @@ void DCM_matrixUpdate(float timeDiff, float* gyroRadSec)
     while (x < 3)
     {
         y= 0;
-     while (y < 3)
-     {
-         DCM_Matrix[x][y]+=Temporary_Matrix[x][y];
-         y++;
-     }
-     x++;
+        while (y < 3)
+        {
+             DCM_Matrix[x][y]+=Temporary_Matrix[x][y];
+             y++;
+        }
+        x++;
     }
 
 }
