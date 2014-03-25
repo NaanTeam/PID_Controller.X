@@ -50,6 +50,7 @@ void zeroController(void)
     int i, j, k;
 
     while(zero_mode = 1)
+    {
             for(i = 0; i < 10; i++)
         {
             if(period2 > MID_THRESH_L && period2 < MID_THRESH_H)
@@ -85,7 +86,7 @@ void zeroController(void)
             break;
         }
     }
-    return;
+//    return 0;
 }
 
 //Both sticks down and in
