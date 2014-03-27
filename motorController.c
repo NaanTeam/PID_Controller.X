@@ -11,10 +11,10 @@
 #include "RC_Receiver.h"
 #include "PID_Algorithm.h"
 
-unsigned int OC_ONE = OC_MIN,    //Pulse-width on Left-Front motor from 2000 to 4000
-             OC_TWO = OC_MIN,    //Pulse-width on Right-Front motor from 2000 to 4000
-             OC_THREE = OC_MIN,  //Pulse-width on Right-Back motor from 2000 to 4000
-             OC_FOUR = OC_MIN;   //Pulse-width on Left-Back motor from 2000 to 4000
+unsigned int OC_ONE = OC_KILL,    //Pulse-width on Left-Front motor from 2000 to 4000
+             OC_TWO = OC_KILL,    //Pulse-width on Right-Front motor from 2000 to 4000
+             OC_THREE = OC_KILL,  //Pulse-width on Right-Back motor from 2000 to 4000
+             OC_FOUR = OC_KILL;   //Pulse-width on Left-Back motor from 2000 to 4000
 
 unsigned int OC_ONE_PC,
              OC_TWO_PC,

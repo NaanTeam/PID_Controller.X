@@ -2,17 +2,17 @@
 #include "RC_Receiver.h"
 #include <time.h>
 
-float SENS_ROLL = 0.0,  //These are just placeholders for Connor's sensor output
+float SENS_ROLL = 0.0,      //These are just placeholders for Connor's sensor output
       SENS_PITCH = 0.0, 
       SENS_YAW = 0.0;   
 
-float PID_ROLL,         //
-      PID_PITCH,        //
-      PID_YAW;          //
+float PID_ROLL = 0.0,       //Roll output for motor controller
+      PID_PITCH = 0.0,      //Pitch output for motor controller
+      PID_YAW = 0.0;        //Yaw output for motor controller
 
-float pConst = 1,       //
-      iConst = 1,       //
-      dConst = 1;       //
+float pConst = 1.0,         //Peripheral constant
+      iConst = 1.0,         //Intergral constant
+      dConst = 1.0;         //Derivative constant
 
 clock_t rLastTime, pLastTime, yLastTime;
 
@@ -31,9 +31,9 @@ void setPIDRoll(void)
     float rTimeChange, rError;
 
     //time change is saved as milliseconds
-    rTimeChange = (((float)rNow - (float)rLastTime) / 1000000.0F) * 1000;
+    rTimeChange = (((float)rNow - (float)rLastTime) / 1000000.0F) * 1000.0F;
 
-    rError = (2 * IC_ROLL) - SENS_ROLL;
+    rError = (2.0F * (float)IC_ROLL) - (float)SENS_ROLL;
 
     rErrSum += (rError * rTimeChange);
 
@@ -48,9 +48,9 @@ void setPIDPitch(void)
     clock_t pNow = clock();
     float pTimeChange, pError;
 
-    pTimeChange = (((float)pNow - (float)pLastTime) / 1000000.0F) * 1000;
+    pTimeChange = (((float)pNow - (float)pLastTime) / 1000000.0F) * 1000.0F;
 
-    pError = (2 * IC_PITCH) - SENS_PITCH;
+    pError = (2.0F * (float)IC_PITCH) - (float)SENS_PITCH;
 
     pErrSum += (pError * pTimeChange);
 
@@ -67,7 +67,7 @@ void setPIDYaw(void)
 
     yTimeChange = (((float)yNow - (float)yLastTime) / 1000000.0F) * 1000;
 
-    yError = IC_YAW - SENS_YAW;
+    yError = (float)IC_YAW - (float)SENS_YAW;
 
     yErrSum += (yError * yTimeChange);
 
@@ -77,18 +77,9 @@ void setPIDYaw(void)
     yLastTime = yNow;
 }
 
-/*void __ISR(_TIMER_5_VECTOR) TIMER5Handler(void)
-{
-    mT5ClearIntFlag();
-
-    getSensorValues();
-    computePIDValues();
-    adjustOCValues();
-}*/
-
 void getSensorValues(void)
 {
-    SENS_ROLL = 0;
-    SENS_PITCH = 0;
-    SENS_YAW = 0;
+    SENS_ROLL = 0.0;
+    SENS_PITCH = 0.0;
+    SENS_YAW = 0.0;
 }

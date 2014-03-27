@@ -9,18 +9,18 @@
  ******************************************************************************/
 #include "RC_Receiver.h"
 
-#define THRO_H          4085.0
-#define YAW_H           4086.0
-#define PITCH_H         4085.0
-#define ROLL_H          4086.0
+#define THRO_H          40904.0
+#define YAW_H           40920.0
+#define PITCH_H         40915.0
+#define ROLL_H          40928.0
 
-#define MID_THRESH_H    3050.0
-#define MID_THRESH_L    3025.0
+#define MID_THRESH_H    30425.0
+#define MID_THRESH_L    30380.0
 
-#define THRO_L          1986.0 //1981.0
-#define YAW_L           1984.0 //1979.0
-#define PITCH_L         1983.0 //1979.0
-#define ROLL_L          1983.0 //1980.0
+#define THRO_L          19831.0
+#define YAW_L           19811.0
+#define PITCH_L         19814.0
+#define ROLL_L          19815.0
 
 unsigned int IC1_CT_Rise, IC1_CT_Fall, period1,
              IC2_CT_Rise, IC2_CT_Fall, period2, ym,
@@ -49,9 +49,9 @@ void zeroController(void)
     ym, pm, rm = 0;
     int i, j, k;
 
-    while(zero_mode = 1)
+    while(zero_mode == 1)
     {
-            for(i = 0; i < 10; i++)
+        for(i = 0; i < 10; i++)
         {
             if(period2 > MID_THRESH_L && period2 < MID_THRESH_H)
                 ym = ym + period2;
@@ -83,10 +83,8 @@ void zeroController(void)
            rm > MID_THRESH_L && rm < MID_THRESH_H)
         {
             zero_mode = 0;
-            break;
         }
     }
-//    return 0;
 }
 
 //Both sticks down and in
@@ -100,11 +98,18 @@ void enableProps(void)
 //Both sticks down and out
 int disableProps(void)
 {
+    if(IC_AUX == 100)
+    {
+        PROPS_ENABLE = 0;
+        return 1;
+    }
+
     if(IC_THRO < 0.1 && IC_YAW > 179.9 && IC_PITCH > 89.9 && IC_ROLL < -89.9)
     {
         PROPS_ENABLE = 0;
         return 1;
     }
+    
     return 0;
 }
 
@@ -143,9 +148,9 @@ void __ISR(_INPUT_CAPTURE_1_VECTOR) INT_IC1_Handler(void)
         period1 = IC1_CT_Fall - IC1_CT_Rise;
 
     //Correct period if out of range
-    if(period1 > THRO_H - 3)
+    if(period1 > THRO_H - 15)
         period1 = THRO_H;
-    else if(period1 < THRO_L + 3)
+    else if(period1 < THRO_L + 15)
         period1 = THRO_L;
 
     //Turn period into Throttle percentage 0.0 thru 100.0%
@@ -175,9 +180,9 @@ void __ISR(_INPUT_CAPTURE_2_VECTOR) INT_IC2_Handler(void)
         period2 = IC2_CT_Fall - IC2_CT_Rise;
 
     //Correct period if out of range
-    if(period2 > YAW_H - 2)
+    if(period2 > YAW_H - 15)
         period2 = YAW_H;
-    else if(period2 < YAW_L + 2)
+    else if(period2 < YAW_L + 15)
         period2 = YAW_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
@@ -222,9 +227,9 @@ void __ISR(_INPUT_CAPTURE_3_VECTOR) INT_IC3_Handler(void)
         period3 = IC3_CT_Fall - IC3_CT_Rise;
 
     //Correct period if out of range
-    if(period3 > PITCH_H - 2)
+    if(period3 > PITCH_H - 15)
         period3 = PITCH_H;
-    else if(period3 < PITCH_L + 2)
+    else if(period3 < PITCH_L + 15)
         period3 = PITCH_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
@@ -271,9 +276,9 @@ void __ISR(_INPUT_CAPTURE_4_VECTOR) INT_IC4_Handler(void)
         period4 = IC4_CT_Fall - IC4_CT_Rise;
 
     //Correct period if out of range
-    if(period4 > ROLL_H - 2)
+    if(period4 > ROLL_H - 15)
         period4 = ROLL_H;
-    else if(period4 < ROLL_L + 2)
+    else if(period4 < ROLL_L + 15)
         period4 = ROLL_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
@@ -320,9 +325,9 @@ void __ISR(_INPUT_CAPTURE_5_VECTOR) INT_IC5_Handler(void)
         period5 = IC5_CT_Fall - IC5_CT_Rise;
 
     //Turn period into Aux percentage 0.0 or 100.0%
-    if(period5 > 3000) //3000 just a good mid value
+    if(period5 > (int)MID_THRESH_L)
         IC_AUX = 100;
-    else if(period5 < 3000)
+    else if(period5 < (int)MID_THRESH_L)
         IC_AUX = 0;
 
     ReadCapture5(garbage); //clear any remaining capture values

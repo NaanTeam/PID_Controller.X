@@ -20,7 +20,7 @@ void Setup_initializeBoard(void);
 void Setup_setupPorts(void);
 void Setup_setupTimers(void);
 void Setup_configInterrupts(void);
-
+void Setup_startupCommunications(void);
 
 #ifdef	__cplusplus
 }

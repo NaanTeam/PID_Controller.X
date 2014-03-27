@@ -7,23 +7,26 @@ void Setup_initializeBoard(void)
     INTDisableInterrupts();
     Setup_setupPorts();
 
+    INTEnableSystemMultiVectoredInt();
+    
+    Setup_setupTimers();
+    setupInputCaptures();
+    setupOutputCompares();
+    Setup_configInterrupts();
+}
+
+void Setup_startupCommunications(void)
+{
     //Start Protocols
     FIFOSPI2_initialize();
     FIFOI2C2_initialize();
     FIFOUART1_initialize();
 
-    INTEnableSystemMultiVectoredInt();
     //Enable system-wide interrupts
     INTEnableInterrupts();
 
     SensorLoop_start();
     CommunicationLoop_start();
-
-
-    Setup_setupTimers();
-    setupInputCaptures();
-    setupOutputCompares();
-    Setup_configInterrupts();
 }
 
 void Setup_setupPorts(void)
@@ -47,32 +50,22 @@ void Setup_setupTimers(void)
     //Clear timer controller and timer values
     T2CONCLR = 0xFFFF;
     T3CONCLR = 0xFFFF;
-    //T5CONCLR = 0xFFFF;
     TMR2CLR = 0xFFFF;
     TMR3CLR = 0xFFFF;
-    //TMR5CLR = 0xFFFF;
 
     //Set PR values to desired period register value and enable timers
     PR2 = PER_REG;
     PR3 = PER_REG;
-    //PR5 = MAX_PER;
+    
     T2CONSET = 0x8010;      //PS = 8
     T3CONSET = 0x8010;      //PS = 8
-    //T5CONSET = 0x8000;
-
-
 }
 
 void Setup_configInterrupts(void)
 {
-    //Enable multi-vectored mode for interrupts
-    //INTEnableSystemMultiVectoredInt();
-
     ConfigIntCapture1(IC_INT_ON | IC_INT_PRIOR_6);
     ConfigIntCapture2(IC_INT_ON | IC_INT_PRIOR_6);
     ConfigIntCapture3(IC_INT_ON | IC_INT_PRIOR_6);
     ConfigIntCapture4(IC_INT_ON | IC_INT_PRIOR_6);
     ConfigIntCapture5(IC_INT_ON | IC_INT_PRIOR_6);
-    //ConfigIntTimer5(T5_INT_ON | T5_INT_PRIOR_7);
 }
-

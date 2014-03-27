@@ -20,12 +20,11 @@
 #include "Calibration.h"
 
 #pragma config FNOSC    = PRIPLL    // Oscillator selection
-//NOTE: Connor's POSCMOD was different -> HS
-#pragma config POSCMOD  = HS        // Primary oscillator mode
+//NOTE: Mike and I had POSCMOD set to EC
+#pragma config POSCMOD  = HS        // HS oscillator mode
 #pragma config FPLLIDIV = DIV_2     // PLL input divider
 #pragma config FPLLMUL  = MUL_20    // PLL multiplier
 #pragma config FPLLODIV = DIV_1     // PLL output divider
-//NOTE: Connor's PPBDIV was different -> DIV_1 (80MHz clock)
 #pragma config FPBDIV   = DIV_2     // Peripheral bus clock divider (40MHz)
 #pragma config FSOSCEN  = OFF       // Secondary oscillator enable
 
@@ -41,7 +40,6 @@
 #pragma config OSCIOFNC = OFF
 #pragma config IESO     = OFF
 
-
 void DelayTime(int inter)
 {
     int i = 0;
@@ -56,16 +54,17 @@ int main (void)
 {
     Setup_initializeBoard();
 
+    zeroController();
+
+    Setup_startupCommunications();
+
     DelayTime(500);
 
     Calibration_sensorsOffsets();
     Orientation_start();
 
-    zeroController();
     enableProps();
     startupMotors();
-
-
 
     //StartSequence()
 
