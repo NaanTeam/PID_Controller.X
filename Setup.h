@@ -7,14 +7,9 @@
 
 #ifndef SETUP_H
 #define	SETUP_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
     
 #include "hardwareProfile.h"
 #include "RC_Receiver.h"
-
 
 void Setup_initializeBoard(void);
 void Setup_setupPorts(void);
@@ -22,9 +17,4 @@ void Setup_setupTimers(void);
 void Setup_configInterrupts(void);
 void Setup_startupCommunications(void);
 
-#ifdef	__cplusplus
-}
-#endif
-
 #endif	/* SETUP_H */
-

@@ -9,18 +9,18 @@
  ******************************************************************************/
 #include "RC_Receiver.h"
 
-#define THRO_H          40904.0
-#define YAW_H           40920.0
-#define PITCH_H         40915.0
-#define ROLL_H          40928.0
+#define THRO_H          5114.0
+#define YAW_H           5116.0
+#define PITCH_H         5115.0
+#define ROLL_H          5116.0
 
-#define MID_THRESH_H    30425.0
-#define MID_THRESH_L    30380.0
+#define MID_THRESH_H    3805.0
+#define MID_THRESH_L    3795.0
 
-#define THRO_L          19831.0
-#define YAW_L           19811.0
-#define PITCH_L         19814.0
-#define ROLL_L          19815.0
+#define THRO_L          2479.0
+#define YAW_L           2476.0
+#define PITCH_L         2477.0
+#define ROLL_L          2477.0
 
 unsigned int IC1_CT_Rise, IC1_CT_Fall, period1,
              IC2_CT_Rise, IC2_CT_Fall, period2, ym,
@@ -148,9 +148,9 @@ void __ISR(_INPUT_CAPTURE_1_VECTOR) INT_IC1_Handler(void)
         period1 = IC1_CT_Fall - IC1_CT_Rise;
 
     //Correct period if out of range
-    if(period1 > THRO_H - 15)
+    if(period1 > THRO_H - 2)
         period1 = THRO_H;
-    else if(period1 < THRO_L + 15)
+    else if(period1 < THRO_L + 2)
         period1 = THRO_L;
 
     //Turn period into Throttle percentage 0.0 thru 100.0%
@@ -180,9 +180,9 @@ void __ISR(_INPUT_CAPTURE_2_VECTOR) INT_IC2_Handler(void)
         period2 = IC2_CT_Fall - IC2_CT_Rise;
 
     //Correct period if out of range
-    if(period2 > YAW_H - 15)
+    if(period2 > YAW_H - 3)
         period2 = YAW_H;
-    else if(period2 < YAW_L + 15)
+    else if(period2 < YAW_L + 3)
         period2 = YAW_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
@@ -227,9 +227,9 @@ void __ISR(_INPUT_CAPTURE_3_VECTOR) INT_IC3_Handler(void)
         period3 = IC3_CT_Fall - IC3_CT_Rise;
 
     //Correct period if out of range
-    if(period3 > PITCH_H - 15)
+    if(period3 > PITCH_H - 2)
         period3 = PITCH_H;
-    else if(period3 < PITCH_L + 15)
+    else if(period3 < PITCH_L + 2)
         period3 = PITCH_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
@@ -276,9 +276,9 @@ void __ISR(_INPUT_CAPTURE_4_VECTOR) INT_IC4_Handler(void)
         period4 = IC4_CT_Fall - IC4_CT_Rise;
 
     //Correct period if out of range
-    if(period4 > ROLL_H - 15)
+    if(period4 > ROLL_H - 2)
         period4 = ROLL_H;
-    else if(period4 < ROLL_L + 15)
+    else if(period4 < ROLL_L + 2)
         period4 = ROLL_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and

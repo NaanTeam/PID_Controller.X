@@ -12,9 +12,9 @@
 
 #include "hardwareProfile.h"
 
-#define OC_KILL 2000
-#define OC_MIN 2120
-#define OC_MAX 3200
+#define OC_KILL 2500
+#define OC_MIN  2750
+#define OC_MAX  4000
 
 extern unsigned int OC_ONE,    //Pulse-width on Left-Front motor from 2000 to 4000
                     OC_TWO,    //Pulse-width on Right-Front motor from 2000 to 4000

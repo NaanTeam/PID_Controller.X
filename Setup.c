@@ -1,6 +1,4 @@
-
 #include "Setup.h"
-
 
 void Setup_initializeBoard(void)
 {
@@ -57,8 +55,8 @@ void Setup_setupTimers(void)
     PR2 = PER_REG;
     PR3 = PER_REG;
     
-    T2CONSET = 0x8010;      //PS = 8
-    T3CONSET = 0x8010;      //PS = 8
+    T2CONSET = 0x8040;      //Timer enabled, PS = 16
+    T3CONSET = 0x8040;      //Timer enabled, PS = 16
 }
 
 void Setup_configInterrupts(void)
