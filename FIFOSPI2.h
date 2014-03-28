@@ -54,7 +54,7 @@ extern "C" {
 //******************************************************************************
 
 /**Indicates whether spi-2's IRQ is currently running. 1 it is. 0 it's not.*/
-extern uint8 FIFOSPI2_isRunnning;
+extern UINT8 FIFOSPI2_isRunnning;
 
 
 
@@ -73,9 +73,9 @@ extern uint8 FIFOSPI2_isRunnning;
 void FIFOSPI2_initialize();
 
 /**
- * Adds uint8's to the SPI TX buffer.
+ * Adds UINT8 's to the SPI TX buffer.
  *
- * @param data: An array of uint8 to queue in the TX buffer.
+ * @param data: An array of UINT8 to queue in the TX buffer.
  * @param length: The length of the data array.
  * @param deviceSSLine: The device to write to. Modify #defines for different
  * pins.
@@ -83,19 +83,19 @@ void FIFOSPI2_initialize();
  * @return A '1' if the characters where succesfully added. '-1' if the TX
  * buffer is full.
  */
-int FIFOSPI2_pushTxQueue(uint8 data[], int length, int deviceSSLine);
+int FIFOSPI2_pushTxQueue(UINT8 data[], int length, int deviceSSLine);
 
 /**
- * Transfers a byte from the SPI RX buffer to a uint8.
+ * Transfers a byte from the SPI RX buffer to a UINT8 .
  *
- * @param readByte: A pointer to a uint8 variable.
+ * @param readByte: A pointer to a UINT8 variable.
  *
  * @return A '1' if the character was succesfully retrieved.
  * A '0' if the buffer is empty.
  * A '-1' if the receive buffer is overflowing.
  * A '-3' if ti's an unknown error.
 */
-int FIFOSPI2_popRxQueue(uint8 *bytesBuffer);
+int FIFOSPI2_popRxQueue(UINT8 *bytesBuffer);
 
 /**
  * Determines the occupied length of the receive buffer.

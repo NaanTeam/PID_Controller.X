@@ -146,20 +146,20 @@ extern float L3G4200D_ZAngularRate;
 extern float L3G4200D_Temperature;
 
 /** Contains the L3G4200D's raw X angular rate reading*/
-extern int16 L3G4200D_XAngularRate_Raw;
+extern INT16 L3G4200D_XAngularRate_Raw;
 /** Contains the L3G4200D's raw Y angular rate reading*/
-extern int16 L3G4200D_YAngularRate_Raw;
+extern INT16 L3G4200D_YAngularRate_Raw;
 /** Contains the L3G4200D's raw Z angular rate reading*/
-extern int16 L3G4200D_ZAngularRate_Raw;
+extern INT16 L3G4200D_ZAngularRate_Raw;
 /** Contains the L3G4200D's raw temperature reading*/
-extern int16 L3G4200D_Temperature_Raw;
+extern INT16 L3G4200D_Temperature_Raw;
 
 /** Contains the L3G4200D's running average of raw X angular rate readings*/
-extern int16 L3G4200D_XAngularRate_Raw_Avg;
+extern INT16 L3G4200D_XAngularRate_Raw_Avg;
 /** Contains the L3G4200D's running average of raw Y angular rate readings*/
-extern int16 L3G4200D_YAngularRate_Raw_Avg;
+extern INT16 L3G4200D_YAngularRate_Raw_Avg;
 /** Contains the L3G4200D's running average of raw Z angular rate readings*/
-extern int16 L3G4200D_ZAngularRate_Raw_Avg;
+extern INT16 L3G4200D_ZAngularRate_Raw_Avg;
 
 
 //******************************************************************************
@@ -177,12 +177,12 @@ int L3G4200D_startMeasurements();
  * @param reg: The register to write to.
  * @param value: The value to write to the register.
  */
-void L3G4200D_pushWriteRegister(uint8 reg, uint8 value);
+void L3G4200D_pushWriteRegister(UINT8 reg, UINT8 value);
 /**
  * Queues a read-register command for the L3G4200D in the FIFOSPI buffer.
  * @param reg: The register to write to.
  */
-void L3G4200D_pushReadRegister(uint8 reg);
+void L3G4200D_pushReadRegister(UINT8 reg);
 
 /**
  * Queues a write-register command for the L3G4200D in the FIFOSPI buffer
@@ -190,7 +190,7 @@ void L3G4200D_pushReadRegister(uint8 reg);
  * @param reg: The register to write to.
  * @param value: The value to write to the register.
  */
-void L3G4200D_writeRegister_Blocking(uint8 reg, uint8 value);
+void L3G4200D_writeRegister_Blocking(UINT8 reg, UINT8 value);
 /**
  * Queues a read-register command for the L3G4200D in the FIFOSPI buffer
  * then waits for the transmission to complete.
@@ -198,7 +198,7 @@ void L3G4200D_writeRegister_Blocking(uint8 reg, uint8 value);
  * @param value: The value to write to the register.
  * @return The read unsigned character.
  */
-uint8 L3G4200D_readRegister_Blocking(uint8 reg);
+UINT8 L3G4200D_readRegister_Blocking(UINT8 reg);
 
 /**
  * Queues a read X, Y, Z and temperature data register command for the

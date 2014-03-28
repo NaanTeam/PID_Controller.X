@@ -4,25 +4,25 @@
 //******************************************************************************
 // Local Variables and Typedefs
 //******************************************************************************
-uint16 FIFOUART1_RxBuffer_Index = 0;
-uint16 FIFOUART1_RxBuffer_ReadIndex = 0;
-uint8 FIFOUART1_RxBuffer[FIFOUART1_BUFFERSIZE]; //Holds all the receive chars from UART
+UINT16 FIFOUART1_RxBuffer_Index = 0;
+UINT16 FIFOUART1_RxBuffer_ReadIndex = 0;
+UINT8 FIFOUART1_RxBuffer[FIFOUART1_BUFFERSIZE]; //Holds all the receive chars from UART
 
-uint16 FIFOUART1_TxBuffer_Index = 0;
-uint16 FIFOUART1_TxBuffer_TxIndex = 0;
-uint8 FIFOUART1_TxBuffer[FIFOUART1_BUFFERSIZE]; //Holds all the chars to TX on UART1
+UINT16 FIFOUART1_TxBuffer_Index = 0;
+UINT16 FIFOUART1_TxBuffer_TxIndex = 0;
+UINT8 FIFOUART1_TxBuffer[FIFOUART1_BUFFERSIZE]; //Holds all the chars to TX on UART1
 
 
 //******************************************************************************
 //Local Function Declarations
 //******************************************************************************
-inline int FIFOUART1_pushRxQueue(uint8 rxBytes[], int length);
-inline int FIFOUART1_popTxQueue(uint8* txByte);
+inline int FIFOUART1_pushRxQueue(UINT8 rxBytes[], int length);
+inline int FIFOUART1_popTxQueue(UINT8 * txByte);
 
 //******************************************************************************
 //Local Function Definitions
 //******************************************************************************
-inline int FIFOUART1_pushRxQueue(uint8 rxBytes[], int length)
+inline int FIFOUART1_pushRxQueue(UINT8 rxBytes[], int length)
 {
     int i = 0;
 
@@ -45,7 +45,7 @@ inline int FIFOUART1_pushRxQueue(uint8 rxBytes[], int length)
         return 1;
     }
 }
-inline int FIFOUART1_popTxQueue(uint8* txByte)
+inline int FIFOUART1_popTxQueue(UINT8 * txByte)
 {
     if (FIFOUART1_TxBuffer_Index <= 0)
     {//The receive buffer is empty.
@@ -122,7 +122,7 @@ void FIFOUART1_initialize()
 
 }
 
-int FIFOUART1_pushTxQueue(uint8 txBytes[], int length)
+int FIFOUART1_pushTxQueue(UINT8 txBytes[], int length)
 {
     int i = 0;
 
@@ -151,7 +151,7 @@ int FIFOUART1_pushTxQueue(uint8 txBytes[], int length)
 
 }
 
-int FIFOUART1_popRxQueue(uint8* rxByte)
+int FIFOUART1_popRxQueue(UINT8 * rxByte)
 {
     if (FIFOUART1_RxBuffer_Index <= 0)
     {//The receive buffer is empty.
@@ -197,8 +197,8 @@ int FIFOUART1_popRxQueue(uint8* rxByte)
 //******************************************************************************
 void __ISR(_UART_1_VECTOR, IPL5AUTO) __UART1Interrupt(void)
 {
-    uint8 rxByte = 0;
-    uint8 txByte = 0;
+    UINT8 rxByte = 0;
+    UINT8 txByte = 0;
     int rslt = 0;
 
     if (INTGetFlag(INT_U1RX))

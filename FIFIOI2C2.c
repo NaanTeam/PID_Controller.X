@@ -20,9 +20,9 @@
 //Local Variable and Typedef Declarations
 //******************************************************************************
 static FIFOI2C2_Device FIFOI2C2_Devices_List[FIFOI2C2_DEVICES_COUNT];
-static uint8 FIFOI2C2_isRunning = 0;
-static uint16 FIFOI2C2_currentDevice = 0;
-static uint8 FIFOI2C2_nextInterruptReceive = 0;
+static UINT8 FIFOI2C2_isRunning = 0;
+static UINT16 FIFOI2C2_currentDevice = 0;
+static UINT8 FIFOI2C2_nextInterruptReceive = 0;
 
 
 
@@ -188,7 +188,7 @@ void FIFOI2C2_initialize()
     I2C2CONbits.ON = 1;
 }
 
-uint8 FIFOI2C2_pushTxQueue(uint16 device, uint8 byte_buffer[], FIFOI2C2_Device_Commands state_buffer[], uint32 buffer_length)
+UINT8 FIFOI2C2_pushTxQueue(UINT16 device, UINT8 byte_buffer[], FIFOI2C2_Device_Commands state_buffer[], UINT32 buffer_length)
 {
     int i = 0, ind = 0;
     FIFOI2C2_TX_Byte txb;
@@ -228,7 +228,7 @@ uint8 FIFOI2C2_pushTxQueue(uint16 device, uint8 byte_buffer[], FIFOI2C2_Device_C
     return 1;
 }
 
-FIFOI2C2_RX_Byte FIFOI2C2_popRxQueue(uint16 device)
+FIFOI2C2_RX_Byte FIFOI2C2_popRxQueue(UINT16 device)
 {
     int ind = 0;
     FIFOI2C2_RX_Byte rxb;
@@ -275,12 +275,12 @@ FIFOI2C2_RX_Byte FIFOI2C2_popRxQueue(uint16 device)
     }
 }
 
-uint8 FIFOI2C2_pushTxQueue_readDeviceRegisters(uint16 device, uint8 start_register, int number_to_read)
+UINT8 FIFOI2C2_pushTxQueue_readDeviceRegisters(UINT16 device, UINT8 start_register, int number_to_read)
 {
     int i = 0;
     int ind = 0;
     int j = 0; 
-    uint8 byte_buffer[FIFOI2C2_TRANSMIT_BUFFER_SIZE];
+    UINT8 byte_buffer[FIFOI2C2_TRANSMIT_BUFFER_SIZE];
     FIFOI2C2_Device_Commands state_buffer[FIFOI2C2_TRANSMIT_BUFFER_SIZE];
 
     //If their are bytes actually requeste to read
@@ -354,10 +354,10 @@ uint8 FIFOI2C2_pushTxQueue_readDeviceRegisters(uint16 device, uint8 start_regist
     }
 }
 
-uint8 FIFOI2C2_pushTxQueue_writeDeviceRegisters(uint16 device, uint8 start_register, uint8 byte_buffer[], uint32 buffer_length)
+UINT8 FIFOI2C2_pushTxQueue_writeDeviceRegisters(UINT16 device, UINT8 start_register, UINT8 byte_buffer[], UINT32 buffer_length)
 {
     int i = 0, ind = 0;
-    uint8 send_byte_buffer[FIFOI2C2_TRANSMIT_BUFFER_SIZE];
+    UINT8 send_byte_buffer[FIFOI2C2_TRANSMIT_BUFFER_SIZE];
     FIFOI2C2_Device_Commands state_buffer[FIFOI2C2_TRANSMIT_BUFFER_SIZE];
 
     if ((FIFOI2C2_Devices_List[device].transmit_buffer_length + buffer_length) <= (FIFOI2C2_TRANSMIT_BUFFER_SIZE - 1))

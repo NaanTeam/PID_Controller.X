@@ -9,21 +9,21 @@ float L3G4200D_YAngularRate = 0;
 float L3G4200D_ZAngularRate = 0;
 float L3G4200D_Temperature = 0;
 
-int16 L3G4200D_XAngularRate_Raw = 0;
-int16 L3G4200D_YAngularRate_Raw = 0;
-int16 L3G4200D_ZAngularRate_Raw = 0;
-int16 L3G4200D_Temperature_Raw = 0;
+INT16 L3G4200D_XAngularRate_Raw = 0;
+INT16 L3G4200D_YAngularRate_Raw = 0;
+INT16 L3G4200D_ZAngularRate_Raw = 0;
+INT16 L3G4200D_Temperature_Raw = 0;
 
-int16 L3G4200D_XAngularRate_Raw_Avg = 0;
-int16 L3G4200D_YAngularRate_Raw_Avg = 0;
-int16 L3G4200D_ZAngularRate_Raw_Avg = 0;
+INT16 L3G4200D_XAngularRate_Raw_Avg = 0;
+INT16 L3G4200D_YAngularRate_Raw_Avg = 0;
+INT16 L3G4200D_ZAngularRate_Raw_Avg = 0;
 
 //******************************************************************************
 //Public Function Definitions
 //******************************************************************************
 int L3G4200D_startMeasurements()
 {
-    uint8 command = 0;
+    UINT8 command = 0;
     //Check to see if we are communicating correctly.
     if (L3G4200D_readRegister_Blocking(L3G4200D_Reg_WHOAMI) != 0xD3)
     {
@@ -91,18 +91,18 @@ int L3G4200D_startMeasurements()
 
 }
 
-void L3G4200D_pushWriteRegister(uint8 reg, uint8 value)
+void L3G4200D_pushWriteRegister(UINT8 reg, UINT8 value)
 {
     //Control Register one
-    uint8 buff[3];
+    UINT8 buff[3];
     buff[0] = reg; //Register ADDR.. Defualt return: 11010011 .. 0xD3
     buff[0] &= 0x7F; //Sets the write flag
     buff[1] = value;
     FIFOSPI2_pushTxQueue(buff, 2, L3G4200D_SLAVE_SELECT_LINE);
 }
-void L3G4200D_pushReadRegister(uint8 reg)
+void L3G4200D_pushReadRegister(UINT8 reg)
 {
-    uint8 buff[3];
+    UINT8 buff[3];
     buff[0] = reg;
     //Sets the read flag
     buff[0] |= (1 << 7);
@@ -111,17 +111,17 @@ void L3G4200D_pushReadRegister(uint8 reg)
 }
 
 //TODO: Fix so I can get rid of ReceiveBufferIndex function
-void L3G4200D_writeRegister_Blocking(uint8 reg, uint8 value)
+void L3G4200D_writeRegister_Blocking(UINT8 reg, UINT8 value)
 {
     //Control Register one
-    uint8 buff[3];
+    UINT8 buff[3];
     buff[0] = reg; //Register ADDR.. Defualt return: 11010011 .. 0xD3
     buff[0] &= 0x7F; //Sets the write flag
     buff[1] = value;
     FIFOSPI2_pushTxQueue(buff, 2, L3G4200D_SLAVE_SELECT_LINE);
 
 
-    uint8 func_rslt, read_rslt;
+    UINT8 func_rslt, read_rslt;
     while (FIFOSPI2_rxBufferIndex() < 2 || FIFOSPI2_isRunnning != 0) {}
     func_rslt = FIFOSPI2_popRxQueue(&read_rslt);
     func_rslt = FIFOSPI2_popRxQueue(&read_rslt);
@@ -129,10 +129,10 @@ void L3G4200D_writeRegister_Blocking(uint8 reg, uint8 value)
 
 
 //TODO: Change things into unsigned char
-uint8 L3G4200D_readRegister_Blocking(uint8 reg)
+UINT8 L3G4200D_readRegister_Blocking(UINT8 reg)
 {
     
-    uint8 buff[3];
+    UINT8 buff[3];
     buff[0] = reg; 
     //Sets the read flag
     buff[0] |= (1 << 7);
@@ -165,12 +165,12 @@ void L3G4200D_pushReadXYZT()
 
 void L3G4200D_popXYZT()
 {
-    uint8 func_rslt, fluff;
+    UINT8 func_rslt, fluff;
     
-    uint8 x_msb = 0, x_lsb = 0;
-    uint8 y_msb = 0, y_lsb = 0;    
-    uint8 z_msb = 0, z_lsb = 0;
-    uint8 temp;
+    UINT8 x_msb = 0, x_lsb = 0;
+    UINT8 y_msb = 0, y_lsb = 0;    
+    UINT8 z_msb = 0, z_lsb = 0;
+    UINT8 temp;
     
     short x_16b = 0, y_16b = 0, z_16b= 0;
 

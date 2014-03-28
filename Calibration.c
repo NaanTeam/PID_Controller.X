@@ -5,9 +5,9 @@
 //******************************************************************************
 //Public Variable Declarations
 //******************************************************************************
-int16 Calibration_Gyro_Offset_X = 0;
-int16 Calibration_Gyro_Offset_Y = 0;
-int16 Calibration_Gyro_Offset_Z = 0;
+INT16 Calibration_Gyro_Offset_X = 0;
+INT16 Calibration_Gyro_Offset_Y = 0;
+INT16 Calibration_Gyro_Offset_Z = 0;
 
 
 //******************************************************************************

@@ -8,9 +8,9 @@
 float HMC5883L_XMagneticVector = 0;
 float HMC5883L_ZMagneticVector = 0;
 float HMC5883L_YMagneticVector = 0;
-int16 HMC5883L_XMagneticVector_Raw = 0;
-int16 HMC5883L_ZMagneticVector_Raw = 0;
-int16 HMC5883L_YMagneticVector_Raw = 0;
+INT16 HMC5883L_XMagneticVector_Raw = 0;
+INT16 HMC5883L_ZMagneticVector_Raw = 0;
+INT16 HMC5883L_YMagneticVector_Raw = 0;
 
 
 //******************************************************************************
@@ -20,7 +20,7 @@ int16 HMC5883L_YMagneticVector_Raw = 0;
 void HMC5883L_startMeasurements()
 {
     int i = 0;
-    uint8 buffer[10];
+    UINT8 buffer[10];
 
     //Config Register A
     //buffer[0] = 0x74; //111 0100  //30hz refresh rate
@@ -52,9 +52,9 @@ void HMC5883L_pushReadXZY()
 
 void HMC5883L_popXZY()
 {
-    uint8 x_msb = 0, x_lsb = 0;
-    uint8 z_msb = 0, z_lsb = 0;
-    uint8 y_msb = 0, y_lsb = 0;
+    UINT8 x_msb = 0, x_lsb = 0;
+    UINT8 z_msb = 0, z_lsb = 0;
+    UINT8 y_msb = 0, y_lsb = 0;
     short x_tmp = 0, z_tmp = 0, y_tmp= 0;
 
     x_msb = FIFOI2C2_popRxQueue(0).rx_byte;

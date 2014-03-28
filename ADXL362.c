@@ -9,10 +9,10 @@ float ADXL362_YAcceleration = 0;
 float ADXL362_ZAcceleration = 0;
 float ADXL362_Temperature = 0;
 
-int16 ADXL362_XAcceleration_Raw = 0;
-int16 ADXL362_YAcceleration_Raw = 0;
-int16 ADXL362_ZAcceleration_Raw = 0;
-int16 ADXL362_Temperature_Raw = 0;
+INT16 ADXL362_XAcceleration_Raw = 0;
+INT16 ADXL362_YAcceleration_Raw = 0;
+INT16 ADXL362_ZAcceleration_Raw = 0;
+INT16 ADXL362_Temperature_Raw = 0;
 
 
 //******************************************************************************
@@ -21,8 +21,8 @@ int16 ADXL362_Temperature_Raw = 0;
 void ADXL362_startMeasurements()
 {
     int i = 0;
-    uint8 func_rslt, read_rslt1;
-    uint8 command[3];
+    UINT8 func_rslt, read_rslt1;
+    UINT8 command[3];
 
 
     //Reset the Device
@@ -166,7 +166,7 @@ void ADXL362_startMeasurements()
 void ADXL362_pushReadXYZT()
 {
     //Burst read
-    uint8 read[10];
+    UINT8 read[10];
     read[0] = ADXL362_REG_READ; //Read
     read[1] = ADXL362_XDATAL; //read X-reg
     read[2] = 0x00; //ADXL362_XDATAL
@@ -181,12 +181,12 @@ void ADXL362_pushReadXYZT()
 }
 void ADXL362_popXYZT()
 {    
-    uint8 func_rslt, fluff;
+    UINT8 func_rslt, fluff;
     
-    uint8 x_msb = 0, x_lsb = 0;
-    uint8 y_msb = 0, y_lsb = 0;    
-    uint8 z_msb = 0, z_lsb = 0;
-    uint8 temp_msb = 0, temp_lsb = 0;
+    UINT8 x_msb = 0, x_lsb = 0;
+    UINT8 y_msb = 0, y_lsb = 0;    
+    UINT8 z_msb = 0, z_lsb = 0;
+    UINT8 temp_msb = 0, temp_lsb = 0;
     
     short x_16b = 0, y_16b = 0, z_16b= 0, temp_16b = 0;
 

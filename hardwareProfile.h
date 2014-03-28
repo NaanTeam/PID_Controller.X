@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <plib.h>
 #include <p32xxxx.h>
+#include <GenericTypeDefs.h>
 
 #define SYS_CLK     80000000
 
@@ -21,12 +22,12 @@
 #define GetInstructionClock()      (SYS_CLK)
 #define GetPeripheralClock()       (SYS_CLK / (1 << OSCCONbits.PBDIV))
 
-typedef unsigned char uint8;
-typedef signed char int8;
-typedef unsigned short uint16;
-typedef signed short int16;
-typedef unsigned int uint32;
-typedef signed int int32;
-typedef unsigned char boolean;
+//typedef unsigned char UINT8 ;
+//typedef signed char int8;
+//typedef unsigned short uint16;
+//typedef signed short int16;
+//typedef unsigned int uint32;
+//typedef signed int int32;
+//typedef unsigned char boolean;
 
 #endif

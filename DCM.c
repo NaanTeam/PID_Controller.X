@@ -96,7 +96,7 @@ void DCM_normalize(void)
   float error=0;
   float temporary[3][3];
   float renorm=0;
-  boolean problem=0;
+  BOOL problem=FALSE;
 
   error= -Vector_Dot_Product(&DCM_Matrix[0][0],&DCM_Matrix[1][0])*.5; //eq.19
 
@@ -119,7 +119,7 @@ void DCM_normalize(void)
   }
   else
   {
-    problem = 1;
+    problem = TRUE;
   }
 
   Vector_Scale(&DCM_Matrix[0][0], &temporary[0][0], renorm);
@@ -135,7 +135,7 @@ void DCM_normalize(void)
   }
   else
   {
-    problem = 1;
+    problem = TRUE;
 
   }
 
@@ -151,12 +151,12 @@ void DCM_normalize(void)
   }
   else
   {
-    problem = 1;
+    problem = TRUE;
 
   }
   Vector_Scale(&DCM_Matrix[2][0], &temporary[2][0], renorm);
 
-  if (problem) {                // Our solution is blowing up and we will force back to initial condition.  Hope we are not upside down!
+  if (problem == TRUE) {                // Our solution is blowing up and we will force back to initial condition.  Hope we are not upside down!
       DCM_Matrix[0][0]= 1.0f;
       DCM_Matrix[0][1]= 0.0f;
       DCM_Matrix[0][2]= 0.0f;

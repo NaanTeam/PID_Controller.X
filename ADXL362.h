@@ -186,13 +186,13 @@ extern float ADXL362_ZAcceleration;
 extern float ADXL362_Temperature;
 
 /** Contains the ADXL362's raw X acceleration reading*/
-extern int16 ADXL362_XAcceleration_Raw;
+extern INT16 ADXL362_XAcceleration_Raw;
 /** Contains the ADXL362's raw Y acceleration reading*/
-extern int16 ADXL362_YAcceleration_Raw;
+extern INT16 ADXL362_YAcceleration_Raw;
 /** Contains the ADXL362's raw Z acceleration reading*/
-extern int16 ADXL362_ZAcceleration_Raw;
+extern INT16 ADXL362_ZAcceleration_Raw;
 /** Contains the ADXL362's raw temperature reading*/
-extern int16 ADXL362_Temperature_Raw;
+extern INT16 ADXL362_Temperature_Raw;
 
 //******************************************************************************
 //Function Prototypes

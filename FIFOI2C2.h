@@ -91,7 +91,7 @@ typedef enum
 typedef struct FIFOI2C2_tx_byte
 {
     /**The corresponding byte*/
-    uint8 tx_byte;
+    UINT8 tx_byte;
     /**Action for I2C IRQ to take.*/
     FIFOI2C2_Device_Commands device_command;
 }FIFOI2C2_TX_Byte;
@@ -100,7 +100,7 @@ typedef struct FIFOI2C2_tx_byte
 typedef struct FIFOI2C2_rx_byte
 {
     /**The read byte*/
-    uint8 rx_byte;
+    UINT8 rx_byte;
     /**Corresponding action that the IRQ was on.*/
     FIFOI2C2_Device_Commands device_command;
 }FIFOI2C2_RX_Byte;
@@ -109,7 +109,7 @@ typedef struct FIFOI2C2_rx_byte
 typedef struct FIFOI2C2_device
 {
     /**The 7-bit address*/
-    uint8 address;
+    UINT8 address;
 
     /**The index of the byte to be transmitted next*/
     int transmit_buffer_current;
@@ -152,7 +152,7 @@ void FIFOI2C2_initialize();
  *
  * @return: Returns 1 if successful, -1 if their is an error.
  */
-uint8 FIFOI2C2_pushTxQueue(uint16 device, uint8 byte_buffer[], FIFOI2C2_Device_Commands state_buffer[], uint32 buffer_length);
+UINT8 FIFOI2C2_pushTxQueue(UINT16 device, UINT8 byte_buffer[], FIFOI2C2_Device_Commands state_buffer[], UINT32 buffer_length);
 
 /**
  * Reads a single RX_byte from receive buffer.
@@ -161,7 +161,7 @@ uint8 FIFOI2C2_pushTxQueue(uint16 device, uint8 byte_buffer[], FIFOI2C2_Device_C
  *
  * @return: An RX_byte from the device receive buffer.
  */
-FIFOI2C2_RX_Byte FIFOI2C2_popRxQueue(uint16 device);
+FIFOI2C2_RX_Byte FIFOI2C2_popRxQueue(UINT16 device);
 
 /**
  * Queues a 'read register' command sequence for I2C in the TX buffer.
@@ -175,7 +175,7 @@ FIFOI2C2_RX_Byte FIFOI2C2_popRxQueue(uint16 device);
  * @return: Returns 0 if the command sequence was succesively added to
  * the TX buffer, -1 otherwise.
  */
-uint8 FIFOI2C2_pushTxQueue_readDeviceRegisters(uint16 device, uint8 start_register, int number_to_read);
+UINT8 FIFOI2C2_pushTxQueue_readDeviceRegisters(UINT16 device, UINT8 start_register, int number_to_read);
 
 /**
  * Queues a 'write register' command sequence for I2C in the TX buffer.
@@ -190,7 +190,7 @@ uint8 FIFOI2C2_pushTxQueue_readDeviceRegisters(uint16 device, uint8 start_regist
  * @return: Returns 0 if the command sequence was succesively added to
  * the TX buffer, -1 otherwise.
  */
-uint8 FIFOI2C2_pushTxQueue_writeDeviceRegisters(uint16 device, uint8 start_address, uint8 byte_buffer[], uint32 buffer_length);
+UINT8 FIFOI2C2_pushTxQueue_writeDeviceRegisters(UINT16 device, UINT8 start_address, UINT8 byte_buffer[], UINT32 buffer_length);
 
 #endif	/* FIFOI2C2_H */
 

@@ -19,9 +19,9 @@ extern "C" {
 //******************************************************************************
 //Public Variables
 //******************************************************************************
-extern int16 Calibration_Gyro_Offset_X;
-extern int16 Calibration_Gyro_Offset_Y;
-extern int16 Calibration_Gyro_Offset_Z;
+extern INT16 Calibration_Gyro_Offset_X;
+extern INT16 Calibration_Gyro_Offset_Y;
+extern INT16 Calibration_Gyro_Offset_Z;
 
 //******************************************************************************
 //Function Prototypes

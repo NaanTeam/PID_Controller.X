@@ -122,11 +122,11 @@ extern float HMC5883L_ZMagneticVector;
 extern float HMC5883L_YMagneticVector;
 
 /** Contains the HMC5883L's raw X magnetic reading*/
-extern int16 HMC5883L_XMagneticVector_Raw;
+extern INT16 HMC5883L_XMagneticVector_Raw;
 /** Contains the HMC5883L's raw Z magnetic reading*/
-extern int16 HMC5883L_ZMagneticVector_Raw;
+extern INT16 HMC5883L_ZMagneticVector_Raw;
 /** Contains the HMC5883L's raw Y magnetic reading*/
-extern int16 HMC5883L_YMagneticVector_Raw;
+extern INT16 HMC5883L_YMagneticVector_Raw;
 
 
 //******************************************************************************

@@ -39,7 +39,7 @@ extern "C" {
 // Public Variables and Typedefs
 //******************************************************************************
 /**The index of the next empty RX buffer byte.*/
-extern uint16 FIFOUART1_RxBuffer_Index;
+extern UINT16 FIFOUART1_RxBuffer_Index;
 
 
 //******************************************************************************
@@ -59,7 +59,7 @@ void FIFOUART1_initialize();
  * @param length: How long the buffer of bytes is.
  * @return  A 1 on success. A -1 on an overflow.
  */
-int FIFOUART1_pushTxQueue(uint8 txBytes[], int length);
+int FIFOUART1_pushTxQueue(UINT8 txBytes[], int length);
 /**
  * Reads a byte from the Queue containing bytes read from UART1.
  *
@@ -67,7 +67,7 @@ int FIFOUART1_pushTxQueue(uint8 txBytes[], int length);
  * @return A 2 on sucess and non-empty buffer. A 1 on success and empty buffer.
  * A -1 on an overflow. A -2 if the queue is empty.
  */
-int FIFOUART1_popRxQueue(uint8* rxByte);
+int FIFOUART1_popRxQueue(UINT8 * rxByte);
 
 
 

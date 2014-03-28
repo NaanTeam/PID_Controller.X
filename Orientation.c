@@ -4,7 +4,7 @@
 //******************************************************************************
 //Local Variable and Typedef Declarations
 //******************************************************************************
-uint8 Orientation_loopToggle = 1;
+UINT8 Orientation_loopToggle = 1;
 
 float accelCorrected[3];
 float gyroCorrected[3];

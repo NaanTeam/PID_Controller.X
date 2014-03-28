@@ -23,18 +23,18 @@
 //******************************************************************************
 
 //Flags
-uint8 FIFOSPI2_isRunnning = 0; //Represents if the SPI2 is currently running
+UINT8 FIFOSPI2_isRunnning = 0; //Represents if the SPI2 is currently running
 int isTransmitsTurn = 1; //used for toggling between transmit and receive 
 
 //Send buffers and indexes
 int TxBuffer_Index = 0; //Index of how full the send buffer is.
 int TxBuffer_TxIndex = 0; //Index of what has been sent
-uint8 TxBuffer[FIFOSPI2_BUFFERSIZE]; //Contains the unit8's to send
-uint8 TxBufferFlags[FIFOSPI2_BUFFERSIZE]; //Flags for when to drive SS.
+UINT8 TxBuffer[FIFOSPI2_BUFFERSIZE]; //Contains the unit8's to send
+UINT8 TxBufferFlags[FIFOSPI2_BUFFERSIZE]; //Flags for when to drive SS.
 
 int RxBuffer_Index = 0; //Index of how full the receive buffer is
 int RxBuffer_ReadIndex = 0; //Index of what has been read out of the buffer
-uint8 RxBuffer[FIFOSPI2_BUFFERSIZE]; //Holds all the receive chars from SPI2
+UINT8 RxBuffer[FIFOSPI2_BUFFERSIZE]; //Holds all the receive chars from SPI2
 
 
 //******************************************************************************
@@ -107,7 +107,7 @@ void FIFOSPI2_initialize()
     SPI2CONbits.ON = 1;     //SPI ON
 }
 
-int FIFOSPI2_pushTxQueue(uint8 data[], int length, int deviceSSLine)
+int FIFOSPI2_pushTxQueue(UINT8 data[], int length, int deviceSSLine)
 {
     int i = 0;
     //If the send buffer isn't full then add another char
@@ -149,7 +149,7 @@ int FIFOSPI2_pushTxQueue(uint8 data[], int length, int deviceSSLine)
     }
 }
 
-int FIFOSPI2_popRxQueue(uint8 *bytesBuffer)
+int FIFOSPI2_popRxQueue(UINT8 *bytesBuffer)
 {
     //The receive buffer is empty.
     if (RxBuffer_Index == 0)

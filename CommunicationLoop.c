@@ -4,9 +4,9 @@
 //******************************************************************************
 //Local Variable and Typedef Declarations
 //******************************************************************************
-uint16 CommunicationLoop_Index = 0;
-uint8 CommunicationLoop_MsgBuffer[COMMUNICATIONLOOP_BUFFERSIZE];
-uint8 CommunicationLoop_PossibleError = 0;
+UINT16 CommunicationLoop_Index = 0;
+UINT8 CommunicationLoop_MsgBuffer[COMMUNICATIONLOOP_BUFFERSIZE];
+UINT8 CommunicationLoop_PossibleError = 0;
 
 
 //******************************************************************************
@@ -21,7 +21,7 @@ void CommunicationLoop_start()
     INTSetVectorSubPriority(INT_TIMER_4_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
     INTEnable(INT_T4, INT_ENABLED);
     //Turn on clock
-    OpenTimer4(T4_ON | T4_SOURCE_INT | T4_PS_1_64, 10240); // 200hz(?) @40MHz
+    OpenTimer4(T4_ON | T4_SOURCE_INT | T4_PS_1_64, 6250); // 100hz@40MHz
 
 }
 
@@ -31,8 +31,8 @@ void CommunicationLoop_start()
 //******************************************************************************
 void __ISR(_TIMER_4_VECTOR, IPL4AUTO) Timer4Handler(void)
 {
-    uint8 rxByte = 0;
-    uint8 rslt = 0;
+    UINT8 rxByte = 0;
+    UINT8 rslt = 0;
 
     //This could happen if the incorrect msg length was sent
     if (CommunicationLoop_Index > 0)

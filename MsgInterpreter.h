@@ -117,7 +117,7 @@ extern "C" {
  * @param length: The length of the array.
  * @return This function returns 0 currently.
  */
-int MsgInterpreter_interpret(uint8 message[], uint16 length);
+int MsgInterpreter_interpret(UINT8 message[], UINT16 length);
 
 
 
