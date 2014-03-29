@@ -14,8 +14,8 @@
 #define PITCH_H         5115.0
 #define ROLL_H          5116.0
 
-#define MID_THRESH_H    3805.0
-#define MID_THRESH_L    3795.0
+#define MID_THRESH_H    3815.0
+#define MID_THRESH_L    3785.0
 
 #define THRO_L          2479.0
 #define YAW_L           2476.0
