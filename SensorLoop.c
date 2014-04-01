@@ -60,14 +60,14 @@ void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
     L3G4200D_ZAngularRate_Raw_Avg = (2*L3G4200D_ZAngularRate_Raw +
             18 * L3G4200D_ZAngularRate_Raw_Avg) / 20;
     
-    if (SensorLoop_ToggleCount % 4  == 0) //close to around 200hz
+    if (SensorLoop_ToggleCount == (Avg_Count - 1)) //close to around 200hz
     {
-        ADXL362_XAcceleration_Raw_Avg = (5*ADXL362_XAcceleration_Raw +
-                95 * ADXL362_XAcceleration_Raw_Avg) / 100;
-        ADXL362_YAcceleration_Raw_Avg = (5*ADXL362_YAcceleration_Raw +
-                95 * ADXL362_YAcceleration_Raw_Avg) / 100;
-        ADXL362_ZAcceleration_Raw_Avg = (5*ADXL362_ZAcceleration_Raw +
-                95 * ADXL362_ZAcceleration_Raw_Avg) / 100;
+        ADXL362_XAcceleration_Raw_Avg = (150*ADXL362_XAcceleration_Raw +
+                850 * ADXL362_XAcceleration_Raw_Avg) / 1000;
+        ADXL362_YAcceleration_Raw_Avg = (150*ADXL362_YAcceleration_Raw +
+                850 * ADXL362_YAcceleration_Raw_Avg) / 1000;
+        ADXL362_ZAcceleration_Raw_Avg = (150*ADXL362_ZAcceleration_Raw +
+                850 * ADXL362_ZAcceleration_Raw_Avg) / 1000;
     }
 
 
