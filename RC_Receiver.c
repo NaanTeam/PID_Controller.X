@@ -90,8 +90,8 @@ void zeroController(void)
 //Both sticks down and in
 void enableProps(void)
 {
-    while(IC_THRO > 0.1 || IC_YAW > -179.9 || IC_PITCH < 89.9 || IC_ROLL < 89.9){}
-    while(IC_THRO > 0.1 || IC_YAW != 0.0 || IC_PITCH != 0.0 || IC_ROLL != 0.0){}
+    while(IC_THRO > 0.25 || IC_YAW > -179.5 || IC_PITCH < 89.5 || IC_ROLL < 89.5){}
+    while(IC_THRO > 0.25 || IC_YAW != 0.0 || IC_PITCH != 0.0 || IC_ROLL != 0.0){}
     PROPS_ENABLE = 1;
 }
 

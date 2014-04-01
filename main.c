@@ -73,9 +73,10 @@ int main (void)
 
     Setup_startupCommunications();
 
-    DelayTime(500);
+    DelayTime(1000);
 
     Calibration_sensorsOffsets();
+    Calibration_zeroYaw();
     Orientation_start();
 
     enableProps();

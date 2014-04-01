@@ -12,6 +12,8 @@
 
 #include "hardwareProfile.h"
 
+#define PID_YAW_ROC             .005556
+
 extern float SENS_ROLL,         //These will come from Connor, delete later
              SENS_PITCH,
              SENS_YAW;

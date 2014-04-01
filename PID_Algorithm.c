@@ -10,17 +10,17 @@ float PID_ROLL = 0.0,       //Roll output for motor controller
       PID_PITCH = 0.0,      //Pitch output for motor controller
       PID_YAW = 0.0;        //Yaw output for motor controller
 
-float pRollConst = 0.0,         //Peripheral constant
-      iRollConst = 0.0,         //Intergral constant
-      dRollConst = 0.0;         //Derivative constant
+float pRollConst = 0.0,     //Peripheral constant
+      iRollConst = 0.0,     //Intergral constant
+      dRollConst = 0.0;     //Derivative constant
 
-float pPitchConst = 0.0,         //Peripheral constant
-      iPitchConst = 0.0,         //Intergral constant
-      dPitchConst = 0.0;         //Derivative constant
+float pPitchConst = 0.0,    //Peripheral constant
+      iPitchConst = 0.0,    //Intergral constant
+      dPitchConst = 0.0;    //Derivative constant
 
-float pYawConst = 50.0,         //Peripheral constant
-      iYawConst = 0.0,         //Intergral constant
-      dYawConst = 0.0;         //Derivative constant
+float pYawConst = 50.0,     //Peripheral constant
+      iYawConst = 0.0,      //Intergral constant
+      dYawConst = 0.0;      //Derivative constant
 
 clock_t rLastTime, pLastTime, yLastTime;
 
@@ -87,7 +87,12 @@ void setPIDYaw(void)
 
 void getSensorValues(void)
 {
-    SENS_ROLL = 0.0;
-    SENS_PITCH = 0.0;
-    SENS_YAW = 0.0;
+    SENS_ROLL = Orientation_Roll;
+    SENS_PITCH = Orientation_Pitch;
+    SENS_YAW = Orientation_Yaw;
+}
+
+void determineZeroYaw(void)
+{
+    Calibration_Yaw_Zero_Point += (IC_YAW * PID_YAW_ROC);
 }
