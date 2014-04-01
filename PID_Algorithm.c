@@ -94,5 +94,5 @@ void getSensorValues(void)
 
 void determineZeroYaw(void)
 {
-    Calibration_Yaw_Zero_Point += (IC_YAW * PID_YAW_ROC);
+    //Calibration_Yaw_Zero_Point += (IC_YAW * PID_YAW_ROC);
 }

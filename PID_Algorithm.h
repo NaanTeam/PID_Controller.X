@@ -11,6 +11,7 @@
 #define	PID_ALGORITHM_H
 
 #include "hardwareProfile.h"
+#include "Orientation.h"
 
 #define PID_YAW_ROC             .005556
 
