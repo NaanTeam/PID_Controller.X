@@ -69,7 +69,7 @@ int main (void)
 {
     Setup_initializeBoard();
 
-    zeroController();
+    //zeroController();
 
     Setup_startupCommunications();
 
@@ -79,8 +79,8 @@ int main (void)
     Calibration_zeroYaw();
     Orientation_start();
 
-    enableProps();
-    startupMotors();
+    //enableProps();
+    //startupMotors();
 
     //StartSequence()
 
