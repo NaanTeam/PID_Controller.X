@@ -47,9 +47,9 @@ float Orientation_calcCompassHeading(float* magneticVectors);
 void Orientation_adjustSensorError(float* accelCorrected, float* gyroCorrected, float* magneticCorrected)
 {
     //Accel
-    accelCorrected[0] = ADXL362_XAcceleration_Raw - XAccel_Offeset;
-    accelCorrected[1] = ADXL362_YAcceleration_Raw - YAccel_Offeset;
-    accelCorrected[2] = ADXL362_ZAcceleration_Raw - ZAccel_Offeset;
+    accelCorrected[0] = ADXL362_XAcceleration_Raw_Avg - XAccel_Offeset;
+    accelCorrected[1] = ADXL362_YAcceleration_Raw_Avg - YAccel_Offeset;
+    accelCorrected[2] = ADXL362_ZAcceleration_Raw_Avg - ZAccel_Offeset;
     //Gyro
     gyroCorrected[0] = (float)(L3G4200D_XAngularRate_Raw_Avg - Calibration_Gyro_Offset_X);
     gyroCorrected[1] = (float)(L3G4200D_YAngularRate_Raw_Avg - Calibration_Gyro_Offset_Y);
@@ -187,7 +187,7 @@ void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void) //75hz
 
     INTClearFlag(INT_T5);// Be sure to clear the Timer1 interrupt status
 
-    getSensorValues();
-    computePIDValues();
-    adjustOCValues();
+//    getSensorValues();
+//    computePIDValues();
+//    adjustOCValues();
 }

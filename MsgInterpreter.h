@@ -71,6 +71,9 @@ extern "C" {
 #define SERIALCOMM_REGISTER_YAcceleration_Raw       0x15
 #define SERIALCOMM_REGISTER_ZAcceleration_Raw       0x16
 #define SERIALCOMM_REGISTER_AcceloTemperature_Raw   0x17
+#define SERIALCOMM_REGISTER_XAcceleration_Raw_Avg       0x18
+#define SERIALCOMM_REGISTER_YAcceleration_Raw_Avg       0x19
+#define SERIALCOMM_REGISTER_ZAcceleration_Raw_Avg       0x1A
 
 #define SERIALCOMM_REGISTER_XAngularRate        0x20
 #define SERIALCOMM_REGISTER_YAngularRate        0x21

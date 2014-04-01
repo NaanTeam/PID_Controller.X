@@ -52,15 +52,6 @@ void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
         HMC5883L_popXZY();
     }
 
-
-////    //Calculate Running  x
-////    gyroTotal_x += L3G4200D_XAngularRate_Raw;
-////    gyroTotal_x -= gyroRunning_x[SensorLoop_ToggleCount];
-////    gyroRunning_x[SensorLoop_ToggleCount] = L3G4200D_XAngularRate_Raw;
-////    L3G4200D_XAngularRate_Raw_Avg = gyroTotal_x/Avg_Count;
-    
-//    output = (int)(alpha * (float)L3G4200D_XAngularRate_Raw + output * (1.0 - alpha));
-//    L3G4200D_XAngularRate_Raw_Avg = output;
     
     L3G4200D_XAngularRate_Raw_Avg = (2*L3G4200D_XAngularRate_Raw +
             18 * L3G4200D_XAngularRate_Raw_Avg) / 20;
@@ -68,6 +59,18 @@ void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
             18 * L3G4200D_YAngularRate_Raw_Avg) / 20;
     L3G4200D_ZAngularRate_Raw_Avg = (2*L3G4200D_ZAngularRate_Raw +
             18 * L3G4200D_ZAngularRate_Raw_Avg) / 20;
+    
+    if (SensorLoop_ToggleCount % 4  == 0) //close to around 200hz
+    {
+        ADXL362_XAcceleration_Raw_Avg = (5*ADXL362_XAcceleration_Raw +
+                95 * ADXL362_XAcceleration_Raw_Avg) / 100;
+        ADXL362_YAcceleration_Raw_Avg = (5*ADXL362_YAcceleration_Raw +
+                95 * ADXL362_YAcceleration_Raw_Avg) / 100;
+        ADXL362_ZAcceleration_Raw_Avg = (5*ADXL362_ZAcceleration_Raw +
+                95 * ADXL362_ZAcceleration_Raw_Avg) / 100;
+    }
+
+
 
 
     //Convert Raw data into meaningful data(optional and potential optimization)

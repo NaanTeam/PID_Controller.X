@@ -14,6 +14,10 @@ INT16 ADXL362_YAcceleration_Raw = 0;
 INT16 ADXL362_ZAcceleration_Raw = 0;
 INT16 ADXL362_Temperature_Raw = 0;
 
+INT16 ADXL362_XAcceleration_Raw_Avg = 0;
+INT16 ADXL362_YAcceleration_Raw_Avg = 0;
+INT16 ADXL362_ZAcceleration_Raw_Avg = 0;
+
 
 //******************************************************************************
 //Public Function Definitions
@@ -235,64 +239,4 @@ void ADXL362_convertXYZT()
     ADXL362_ZAcceleration = G_per_LSB * (float)ADXL362_ZAcceleration_Raw;
     ADXL362_Temperature = C_per_LSB * (float)ADXL362_Temperature_Raw;
 }
-
-//
-//void ADXL362_queueReadMSBX()
-//{
-//    char read[3];
-//    read[0] = ADXL362_REG_READ; //Read
-//    read[1] = ADXL362_XDATA8; //read X-reg
-//    read[2] = 0x00; //fluff for read (8 MSB of X accel reg)
-//    FIFOSPI2_addQueue(read, 3, 1);
-//}
-//void ADXL362_interpretMSBX()
-//{
-//    char func_rslt, read_rslt1, read_rslt2;
-//
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt1); //fluff
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt2); //fluff
-//
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt1); //ADXL362_XDATA8 (8 MSB)
-//    ADXL362_XAcceleration = read_rslt1 ;
-//
-//}
-//
-//void ADXL362_queueReadMSBY()
-//{
-//    char read[3];
-//    read[0] = ADXL362_REG_READ; //Read
-//    read[1] = ADXL362_YDATA8; //read Y-reg
-//    read[2] = 0x00; //fluff
-//    FIFOSPI2_addQueue(read, 3, 1);
-//}
-//void ADXL362_interpretMSBY()
-//{
-//    char func_rslt, read_rslt1, read_rslt2;
-//
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt1); //fluff
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt2); //fluff
-//
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt1); //ADXL362_YDATA8 (Y 8-MSB)
-//    ADXL362_YAcceleration = read_rslt1 ;
-//
-//}
-//
-//void ADXL362_queueReadMSBZ()
-//{
-//    char read[3];
-//    read[0] = ADXL362_REG_READ; //Read
-//    read[1] = ADXL362_ZDATA8; //read Z-reg
-//    read[2] = 0x00; //fluff
-//    FIFOSPI2_addQueue(read, 3, 1);
-//}
-//void ADXL362_InterpretMSBZ()
-//{
-//    char func_rslt, read_rslt1, read_rslt2;
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt1); //fluff
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt2); //fluff
-//
-//    func_rslt = FIFOSPI2_readQueue(&read_rslt1); //ADXL362_ZDATA8 (Z 8-MSB)
-//    ADXL362_ZAcceleration = read_rslt1 ;
-//
-//}
 

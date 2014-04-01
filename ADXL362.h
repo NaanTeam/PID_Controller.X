@@ -194,6 +194,13 @@ extern INT16 ADXL362_ZAcceleration_Raw;
 /** Contains the ADXL362's raw temperature reading*/
 extern INT16 ADXL362_Temperature_Raw;
 
+/** Contains the ADXL362's raw X acceleration reading w/ LP filte*/
+extern INT16 ADXL362_XAcceleration_Raw_Avg;
+/** Contains the ADXL362's raw Y acceleration reading w/ LP filte*/
+extern INT16 ADXL362_YAcceleration_Raw_Avg;
+/** Contains the ADXL362's raw Z acceleration reading w/ LP filter*/
+extern INT16 ADXL362_ZAcceleration_Raw_Avg;
+
 //******************************************************************************
 //Function Prototypes
 //******************************************************************************

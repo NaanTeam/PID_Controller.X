@@ -83,6 +83,21 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 break;
+            case SERIALCOMM_REGISTER_XAcceleration_Raw_Avg:
+                temp = (UINT8 *)(&ADXL362_XAcceleration_Raw_Avg);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                break;
+            case SERIALCOMM_REGISTER_YAcceleration_Raw_Avg:
+                temp = (UINT8 *)(&ADXL362_YAcceleration_Raw_Avg);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                break;
+            case SERIALCOMM_REGISTER_ZAcceleration_Raw_Avg:
+                temp = (UINT8 *)(&ADXL362_ZAcceleration_Raw_Avg);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                break;
 
 
             //Gyroscope
