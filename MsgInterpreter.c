@@ -300,6 +300,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
 
     buffer[0] = buffer_len;
     FIFOUART1_pushTxQueue(buffer, buffer_len);
+    FIFOUART4_pushTxQueue(buffer, buffer_len);  //Maher
     return 0;
 }
 

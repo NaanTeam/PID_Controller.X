@@ -49,7 +49,46 @@ void __ISR(_TIMER_4_VECTOR, IPL4AUTO) Timer4Handler(void)
     {
         CommunicationLoop_PossibleError = 0;
     }
-    
+    //Maher
+    //***************** Maher **********************
+    //if their are bytes in the receive buffer
+    while(FIFOUART4_RxBuffer_Index > 0)
+    {
+        //Pop the byte
+        rslt = FIFOUART4_popRxQueue(&rxByte);
+
+        if (rslt > 0) //successful read
+        {
+            //Store byte
+            CommunicationLoop_MsgBuffer[CommunicationLoop_Index] = rxByte;
+            CommunicationLoop_Index++;
+
+            //If we are done receiving msgs (the 0th index holds how long the msg is)
+            if (CommunicationLoop_Index >= CommunicationLoop_MsgBuffer[0])
+            {
+                //Process the message (skims the first and last byte)
+                MsgInterpreter_interpret(&(CommunicationLoop_MsgBuffer[1]), CommunicationLoop_MsgBuffer[0] - 1);
+
+                //reset message
+                CommunicationLoop_MsgBuffer[0] = 0;
+                CommunicationLoop_Index = 0;
+            }
+        }
+        else
+        {
+            //Don't process the message and reset
+            CommunicationLoop_MsgBuffer[0] = 0;
+            CommunicationLoop_Index = 0;
+        }
+    }
+   
+    //Reset them to 0 in case there are use in the following loop //Mahee
+    rxByte = 0;
+    rslt = 0;
+    CommunicationLoop_MsgBuffer[0] = 0;
+    CommunicationLoop_Index = 0;
+
+    //**********************************************
 
     //if their are bytes in the receive buffer
     while(FIFOUART1_RxBuffer_Index > 0)
@@ -81,7 +120,7 @@ void __ISR(_TIMER_4_VECTOR, IPL4AUTO) Timer4Handler(void)
             CommunicationLoop_Index = 0;
         }
     }
-
+  
     INTClearFlag(INT_T4);// Be sure to clear the Timer1 interrupt status
 }
 
