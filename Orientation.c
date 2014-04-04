@@ -187,8 +187,8 @@ void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void) //75hz
 
     INTClearFlag(INT_T5);// Be sure to clear the Timer1 interrupt status
 
-    getSensorValues();
-    determineZeroYaw();
-    computePIDValues();
-    adjustOCValues();
+//    getSensorValues();
+//    determineZeroYaw();
+//    computePIDValues();
+//    adjustOCValues();
 }
