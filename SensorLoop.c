@@ -20,7 +20,7 @@ void SensorLoop_start()
     INTSetVectorSubPriority(INT_TIMER_1_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
     INTEnable(INT_T1, INT_ENABLED);
     //Turn on clock
-    OpenTimer1(T1_ON | T1_SOURCE_INT | T1_PS_1_8, 6250); //800hz @ 40MHz
+    OpenTimer1(T1_ON | T1_SOURCE_INT | T1_PS_1_8, 2*6250);//400hz @ 40MHz  //6250); //800hz @ 40MHz
 
 }
 
@@ -32,7 +32,7 @@ void SensorLoop_start()
 //800 hz
 int SensorLoop_ToggleCount = 0;
 
-#define Avg_Count 11
+#define Avg_Count 6
 #define alpha 0.05
 //Running Average 
 int gyroRunning_x[Avg_Count];
