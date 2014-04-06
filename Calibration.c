@@ -1,5 +1,6 @@
 #include "Calibration.h"
 #include "Orientation.h"
+#include "PID_Algorithm.h"
 
 //******************************************************************************
 //Public Variable Declarations
@@ -22,5 +23,5 @@ void Calibration_sensorsOffsets()
 
 void Calibration_zeroYaw()
 {
-    Calibration_Yaw_Zero_Point = Orientation_Yaw;
+    Calibration_Yaw_Zero_Point = scaledOrientationYaw;
 }

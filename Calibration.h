@@ -19,6 +19,8 @@ extern INT16 Calibration_Gyro_Offset_X;
 extern INT16 Calibration_Gyro_Offset_Y;
 extern INT16 Calibration_Gyro_Offset_Z;
 
+extern float Calibration_Yaw_Zero_Point;
+
 //******************************************************************************
 //Function Prototypes
 //******************************************************************************

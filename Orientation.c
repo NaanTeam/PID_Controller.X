@@ -15,7 +15,7 @@ float gyroScaled[3];
 float Magnetic_Heading = 0.0;
 
 
-float timeDiff = 0.01638;
+float timer5TimeChange = 13.333;
     
 
 //******************************************************************************
@@ -180,15 +180,16 @@ void Orientation_Update()
 }
 
 
-void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void) //75hz
+void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void) //~75hz
 {
-
     Orientation_Update();
 
-    INTClearFlag(INT_T5);// Be sure to clear the Timer1 interrupt status
+    INTClearFlag(INT_T5);   // Be sure to clear the Timer1 interrupt status
 
     getSensorValues();
     determineZeroYaw();
     computePIDValues();
     adjustOCValues();
+
+    //LATFINV = BIT_1;
 }

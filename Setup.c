@@ -41,6 +41,9 @@ void Setup_setupPorts(void)
     PORTSetPinsDigitalIn(IOPORT_D, BIT_10); //IC3 digital pin 8  (ELEV)
     PORTSetPinsDigitalIn(IOPORT_D, BIT_11); //IC4 digital pin 35 (RUDD)
     PORTSetPinsDigitalIn(IOPORT_D, BIT_12); //IC5 digital pin 10 (GEAR)
+
+    //Toggle pin for Timer 5
+    //PORTSetPinsDigitalOut(IOPORT_F, BIT_1); //pin 4
 }
 
 void Setup_setupTimers(void)

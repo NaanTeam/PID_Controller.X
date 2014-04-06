@@ -64,7 +64,7 @@ extern float Orientation_Roll;
 extern float Orientation_Pitch;
 extern float Orientation_Yaw;
 
-
+extern float timer5TimeChange;
 
 //******************************************************************************
 //Function Prototypes

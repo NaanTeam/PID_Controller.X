@@ -51,10 +51,6 @@
 #pragma config BWP = OFF                // Boot Flash Write Protect bit (Protection Disabled)
 #pragma config CP = OFF                 // Code Protect (Protection Disabled)
 
-
-
-
-
 void DelayTime(int inter)
 {
     int i = 0;
@@ -76,15 +72,13 @@ int main (void)
     DelayTime(1000);
 
     Calibration_sensorsOffsets();
-    Calibration_zeroYaw();
-    Orientation_start();
+
+    DelayTime(1000);
 
     enableProps();
     startupMotors();
 
-    //StartSequence()
-
-    //Zero Sensors()
+    Orientation_start();
 
     while (1)
     {
