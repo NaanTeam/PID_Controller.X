@@ -5,12 +5,15 @@
 //Local Variable and Typedef Declarations
 //******************************************************************************
 
-float DCM_RollPitch_Kp = 3.0/GRAVITY; //divided all these by 10
-float DCM_RollPitch_Ki = .50/GRAVITY;
+//Stationing working: 30, 5, 12, 1.5
+
+
+float DCM_RollPitch_Kp = 30/GRAVITY; //divided all these by 10
+float DCM_RollPitch_Ki = 5/GRAVITY;
 //float DCM_Yaw_Kp = 22.0;
 //float DCM_Yaw_Ki = 2.0;
-float DCM_Yaw_Kp = 1.20;
-float DCM_Yaw_Ki = .15;
+float DCM_Yaw_Kp = 12;
+float DCM_Yaw_Ki = 1.5;
 
 float Omega_Vector[3]= {0,0,0}; //Corrected Gyro_Vector data
 float Omega_P[3]= {0,0,0};//Omega Proportional correction

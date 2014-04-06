@@ -118,7 +118,8 @@ float Orientation_calcCompassHeading(float* magneticVectors)
           Magnetic_Heading += (2.0 * M_PI);
   }
 
-  return Magnetic_Heading;
+  //return Magnetic_Heading;
+  return 0;
 
 }
 

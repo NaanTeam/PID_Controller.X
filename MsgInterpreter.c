@@ -23,15 +23,26 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
     UINT8 buffer[SERIALCOMM_MAX_TX_BUFFER];
     int buffer_len = 0;
     buffer[buffer_len++] = 0;
-
+    int a = 0;
+    int old_a = 0;
     while(MsgInterpreter_Index < MsgInterpreter_Length)
     {
+        old_a = a;
+        a = message[MsgInterpreter_Index];
+        
         switch(message[MsgInterpreter_Index++])
         {
             default:
                 return;
             case SERIALCOMM_END_TOKEN:
-                return;
+                if (MsgInterpreter_Index == MsgInterpreter_Length) //Should be last msg
+                {
+                    break;
+                }
+                else
+                {
+                    return; //error
+                }
 
             //Accelerometer
             case SERIALCOMM_REGISTER_XAcceleration:
@@ -297,7 +308,10 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 break;
         }
     }
-
+    if (buffer_len > 97)
+    {
+        buffer_len = 97;
+    }
     buffer[0] = buffer_len;
     FIFOUART1_pushTxQueue(buffer, buffer_len);
     FIFOUART4_pushTxQueue(buffer, buffer_len);  //Maher
