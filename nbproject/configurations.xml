@@ -24,6 +24,7 @@
         <itemPath>FIFOUART1.h</itemPath>
         <itemPath>CommunicationLoop.h</itemPath>
         <itemPath>MsgInterpreter.h</itemPath>
+        <itemPath>FIFOUART4.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Sensor Headers" projectFiles="true">
         <itemPath>HMC5883L.h</itemPath>
@@ -50,6 +51,7 @@
         <itemPath>FIFOUART1.c</itemPath>
         <itemPath>MsgInterpreter.c</itemPath>
         <itemPath>CommunicationLoop.c</itemPath>
+        <itemPath>FIFOUART4.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f5" displayName="Oreintation Filter" projectFiles="true">
         <itemPath>Orientation.c</itemPath>

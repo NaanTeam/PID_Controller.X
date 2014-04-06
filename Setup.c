@@ -19,6 +19,7 @@ void Setup_startupCommunications(void)
     FIFOSPI2_initialize();
     FIFOI2C2_initialize();
     FIFOUART1_initialize();
+    FIFOUART4_initialize(); //Maher
 
     //Enable system-wide interrupts
     INTEnableInterrupts();

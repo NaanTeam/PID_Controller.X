@@ -13,8 +13,8 @@
 #include "hardwareProfile.h"
 
 #define OC_KILL 2500
-#define OC_MIN  3000
-#define OC_MAX  3750
+#define OC_MIN  3000//2700 //3000, idle speed
+#define OC_MAX  3750//3400//3750, max throttle
 
 extern unsigned int OC_ONE,    //Pulse-width on Left-Front motor from 2000 to 4000
                     OC_TWO,    //Pulse-width on Right-Front motor from 2000 to 4000

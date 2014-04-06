@@ -22,6 +22,7 @@ extern "C" {
 #include <plib.h>
 #include "hardwareProfile.h"
 #include "FIFOUART1.h"
+#include "FIFOUART4.h"  //Maher
 #include "MsgInterpreter.h"
 
 //******************************************************************************

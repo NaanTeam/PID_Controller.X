@@ -26,12 +26,20 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
 
     while(MsgInterpreter_Index < MsgInterpreter_Length)
     {
+
         switch(message[MsgInterpreter_Index++])
         {
             default:
                 return;
             case SERIALCOMM_END_TOKEN:
-                return;
+                if (MsgInterpreter_Index == MsgInterpreter_Length) //Should be last msg
+                {
+                    break;
+                }
+                else
+                {
+                    return; //error
+                }
 
             //Accelerometer
             case SERIALCOMM_REGISTER_XAcceleration:
@@ -87,16 +95,22 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 temp = (UINT8 *)(&ADXL362_XAcceleration_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_YAcceleration_Raw_Avg:
                 temp = (UINT8 *)(&ADXL362_YAcceleration_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_ZAcceleration_Raw_Avg:
                 temp = (UINT8 *)(&ADXL362_ZAcceleration_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
 
 
@@ -155,16 +169,22 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 temp = (UINT8 *)(&L3G4200D_XAngularRate_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_YAngularRate_Raw_Avg:
                 temp = (UINT8 *)(&L3G4200D_YAngularRate_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_ZAngularRate_Raw_Avg:
                 temp = (UINT8 *)(&L3G4200D_ZAngularRate_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
 
 
@@ -294,6 +314,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
 
     buffer[0] = buffer_len;
     FIFOUART1_pushTxQueue(buffer, buffer_len);
+    FIFOUART4_pushTxQueue(buffer, buffer_len);  //Maher
     return 0;
 }
 

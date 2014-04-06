@@ -155,11 +155,11 @@ extern INT16 L3G4200D_ZAngularRate_Raw;
 extern INT16 L3G4200D_Temperature_Raw;
 
 /** Contains the L3G4200D's running average of raw X angular rate readings*/
-extern INT16 L3G4200D_XAngularRate_Raw_Avg;
+extern float L3G4200D_XAngularRate_Raw_Avg;
 /** Contains the L3G4200D's running average of raw Y angular rate readings*/
-extern INT16 L3G4200D_YAngularRate_Raw_Avg;
+extern float L3G4200D_YAngularRate_Raw_Avg;
 /** Contains the L3G4200D's running average of raw Z angular rate readings*/
-extern INT16 L3G4200D_ZAngularRate_Raw_Avg;
+extern float L3G4200D_ZAngularRate_Raw_Avg;
 
 
 //******************************************************************************
