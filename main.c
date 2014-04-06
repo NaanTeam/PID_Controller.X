@@ -73,12 +73,11 @@ int main (void)
 
     Calibration_sensorsOffsets();
 
-    DelayTime(1000);
-
-    enableProps();
-    startupMotors();
+    //enableProps();
 
     Orientation_start();
+
+    //startupMotors();
 
     while (1)
     {

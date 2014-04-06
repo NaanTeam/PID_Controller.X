@@ -13,7 +13,8 @@
 #include "hardwareProfile.h"
 #include "Orientation.h"
 
-#define PID_YAW_ROC             .005556
+#define PID_YAW_ROC             .0000931
+#define PI                      3.14159
 
 extern float SENS_ROLL,         //These will come from Connor, delete later
              SENS_PITCH,

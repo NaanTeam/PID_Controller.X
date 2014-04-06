@@ -14,13 +14,7 @@ float scaledAccelMagnitude = 0.0;
 float gyroScaled[3];
 float Magnetic_Heading = 0.0;
 
-
-<<<<<<< HEAD
 float timer5TimeChange = 13.333;
-=======
-float timeDiff = 0.02;
->>>>>>> 16a23cae21b1f71c4439df6c9722f7399ec9f40e
-    
 
 //******************************************************************************
 //Public Variable Declarations
@@ -191,17 +185,10 @@ void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void) //~75hz
 
     INTClearFlag(INT_T5);   // Be sure to clear the Timer1 interrupt status
 
-<<<<<<< HEAD
     getSensorValues();
     determineZeroYaw();
     computePIDValues();
     adjustOCValues();
 
     //LATFINV = BIT_1;
-=======
-//    getSensorValues();
-//    determineZeroYaw();
-//    computePIDValues();
-//    adjustOCValues();
->>>>>>> 16a23cae21b1f71c4439df6c9722f7399ec9f40e
 }

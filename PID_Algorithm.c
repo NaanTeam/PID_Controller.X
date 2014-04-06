@@ -2,7 +2,6 @@
 #include "RC_Receiver.h"
 #include "Orientation.h"
 #include "Calibration.h"
-#include <time.h>
 
 float SENS_ROLL = 0.0,      //These are just placeholders for Connor's sensor output
       SENS_PITCH = 0.0, 
@@ -130,16 +129,26 @@ void getSensorValues(void)
 
 void determineZeroYaw(void)
 {
-<<<<<<< HEAD
-    if (yawFlag == 0)
+    if (yawFlag < 25)
+    {
+        yawFlag++;
+    }
+
+    else if (yawFlag == 25)
     {
         Calibration_zeroYaw();
-
-        yawFlag = 1;
+        yawFlag++;
     }
 
     Calibration_Yaw_Zero_Point += (IC_YAW * PID_YAW_ROC);
-=======
-    //Calibration_Yaw_Zero_Point += (IC_YAW * PID_YAW_ROC);
->>>>>>> 16a23cae21b1f71c4439df6c9722f7399ec9f40e
+
+    if (Calibration_Yaw_Zero_Point > PI)
+    {
+        Calibration_Yaw_Zero_Point -= (2 * PI);
+    }
+
+    else if (Calibration_Yaw_Zero_Point < (-1 * PI))
+    {
+        Calibration_Yaw_Zero_Point += (2 * PI);
+    }
 }
