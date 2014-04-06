@@ -22,6 +22,8 @@
 #define GetInstructionClock()      (SYS_CLK)
 #define GetPeripheralClock()       (SYS_CLK / (1 << OSCCONbits.PBDIV))
 
+#define PI                         3.14159
+
 //typedef unsigned char UINT8 ;
 //typedef signed char int8;
 //typedef unsigned short uint16;

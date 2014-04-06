@@ -4,6 +4,7 @@ void Setup_initializeBoard(void)
 {
     INTDisableInterrupts();
     Setup_setupPorts();
+    setup_ADC();
 
     INTEnableSystemMultiVectoredInt();
     

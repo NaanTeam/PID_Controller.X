@@ -190,5 +190,7 @@ void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void) //~75hz
     computePIDValues();
     adjustOCValues();
 
+    read_voltage();
+
     //LATFINV = BIT_1;
 }
