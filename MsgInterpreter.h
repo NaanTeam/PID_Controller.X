@@ -44,6 +44,9 @@ extern "C" {
 #include "DCM.h"
 #include "Orientation.h"
 #include "motorController.h"
+#include "PID_Algorithm.h"
+#include "RC_Receiver.h"
+
 
 //******************************************************************************
 //Configuration #defines
@@ -98,11 +101,19 @@ extern "C" {
 #define SERIALCOMM_REGISTER_Pitch               0x40
 #define SERIALCOMM_REGISTER_Yaw                 0x41
 #define SERIALCOMM_REGISTER_Roll                0x42
+#define SERIALCOMM_REGISTER_ScaledYaw           0x43
+#define SERIALCOMM_REGISTER_DesiredPitch        0x44
+#define SERIALCOMM_REGISTER_DesiredYaw          0x45
+#define SERIALCOMM_REGISTER_DesiredRoll         0x46
+#define SERIALCOMM_REGISTER_DesiredThrottle     0x47
 
 #define SERIALCOMM_REGISTER_Motor1              0x50
 #define SERIALCOMM_REGISTER_Motor2              0x51
 #define SERIALCOMM_REGISTER_Motor3              0x52
 #define SERIALCOMM_REGISTER_Motor4              0x53
+    
+
+
 
 
 

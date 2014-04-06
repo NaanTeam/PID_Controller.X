@@ -250,6 +250,44 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
+            case SERIALCOMM_REGISTER_ScaledYaw:
+                temp = (UINT8 *)(&scaledOrientationYaw);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
+            case SERIALCOMM_REGISTER_DesiredPitch:
+                temp = (UINT8 *)(&IC_PITCH);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_REGISTER_DesiredYaw:
+                temp = (UINT8 *)(&IC_YAW);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_REGISTER_DesiredRoll:
+                temp = (UINT8 *)(&IC_ROLL);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_REGISTER_DesiredThrottle:
+                temp = (UINT8 *)(&IC_THRO);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
+
 
             case SERIALCOMM_REGISTER_Motor1:
                 temp = (UINT8 *)(&OC_ONE_PC);
