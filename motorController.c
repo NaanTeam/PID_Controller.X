@@ -16,7 +16,7 @@ unsigned int OC_ONE = OC_MIN,    //Pulse-width on Left-Front motor from 2000 to 
              OC_THREE = OC_MIN,  //Pulse-width on Right-Back motor from 2000 to 4000
              OC_FOUR = OC_MIN;   //Pulse-width on Left-Back motor from 2000 to 4000
 
-unsigned int OC_ONE_PC,
+float OC_ONE_PC,
              OC_TWO_PC,
              OC_THREE_PC,
              OC_FOUR_PC;

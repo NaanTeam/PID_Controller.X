@@ -65,7 +65,7 @@ int main (void)
 {
     Setup_initializeBoard();
 
-    //zeroController();
+    zeroController();
 
     Setup_startupCommunications();
 
@@ -73,11 +73,11 @@ int main (void)
 
     Calibration_sensorsOffsets();
 
-    //enableProps();
+    enableProps();
 
     Orientation_start();
 
-    //startupMotors();
+    startupMotors();
 
     while (1)
     {
@@ -97,10 +97,10 @@ int main (void)
         OC3RS = OC_THREE;   //Back-Right Motor
         OC4RS = OC_FOUR;    //Back-Left Motor
 
-        OC_ONE_PC = (OC_ONE - OC_KILL) / (OC_MAX - OC_KILL);
-        OC_TWO_PC = (OC_TWO - OC_KILL) / (OC_MAX - OC_KILL);
-        OC_THREE_PC = (OC_THREE - OC_KILL) / (OC_MAX - OC_KILL);
-        OC_FOUR_PC = (OC_FOUR - OC_KILL) / (OC_MAX - OC_KILL);
+        OC_ONE_PC = 100.0 * (float)(OC_ONE - OC_KILL) / (float)(OC_MAX - OC_KILL);
+        OC_TWO_PC = 100.0 * (float)(OC_TWO - OC_KILL) / (float)(OC_MAX - OC_KILL);
+        OC_THREE_PC = 100.0 * (float)(OC_THREE - OC_KILL) / (float)(OC_MAX - OC_KILL);
+        OC_FOUR_PC = 100.0 * (float)(OC_FOUR - OC_KILL) / (float)(OC_MAX - OC_KILL);
     }
 
     return 0;

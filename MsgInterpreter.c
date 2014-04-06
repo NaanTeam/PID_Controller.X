@@ -347,6 +347,14 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
+
+            case SERIALCOMM_REGISTER_VBatt:
+                temp = (UINT8 *)(&v_batt);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
         }
     }
 

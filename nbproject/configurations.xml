@@ -37,6 +37,7 @@
         <itemPath>Calibration.h</itemPath>
       </logicalFolder>
       <itemPath>hardwareProfile.h</itemPath>
+      <itemPath>battery_voltage.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -78,6 +79,7 @@
         <itemPath>Calibration.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
+      <itemPath>battery_voltage.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

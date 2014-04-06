@@ -21,7 +21,7 @@ extern unsigned int OC_ONE,    //Pulse-width on Left-Front motor from 2000 to 40
                     OC_THREE,  //Pulse-width on Right-Back motor from 2000 to 4000
                     OC_FOUR;   //Pulse-width on Left-Back motor from 2000 to 4000
 
-extern unsigned int OC_ONE_PC,
+extern  float OC_ONE_PC,
                     OC_TWO_PC,
                     OC_THREE_PC,
                     OC_FOUR_PC;
