@@ -69,7 +69,7 @@ int main (void)
 {
     Setup_initializeBoard();
 
-    //zeroController();
+    zeroController();
 
     Setup_startupCommunications();
 

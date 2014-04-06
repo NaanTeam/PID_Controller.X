@@ -8,8 +8,8 @@
 //Stationing working: 30, 5, 12, 1.5
 
 
-float DCM_RollPitch_Kp = 30/GRAVITY; //divided all these by 10
-float DCM_RollPitch_Ki = 5/GRAVITY;
+float DCM_RollPitch_Kp = 3.0/GRAVITY; //divided all these by 10
+float DCM_RollPitch_Ki = .02/GRAVITY;
 //float DCM_Yaw_Kp = 22.0;
 //float DCM_Yaw_Ki = 2.0;
 float DCM_Yaw_Kp = 12;

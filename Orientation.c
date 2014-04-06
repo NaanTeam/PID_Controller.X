@@ -15,7 +15,7 @@ float gyroScaled[3];
 float Magnetic_Heading = 0.0;
 
 
-float timeDiff = 0.01638;
+float timeDiff = 0.02;
     
 
 //******************************************************************************
@@ -118,8 +118,8 @@ float Orientation_calcCompassHeading(float* magneticVectors)
           Magnetic_Heading += (2.0 * M_PI);
   }
 
-  //return Magnetic_Heading;
-  return 0;
+  return Magnetic_Heading;
+  //return 0;
 
 }
 
@@ -136,7 +136,7 @@ void Orientation_start()
     INTEnable(INT_T5, INT_ENABLED);
 
     //Turn on clock
-    OpenTimer5(T5_ON | T5_SOURCE_INT | T5_PS_1_32, 16666); //75hz @ 40MHz
+    OpenTimer5(T5_ON | T5_SOURCE_INT | T1_PS_1_64, 12500);//50hz @ 40MHz
     //OpenTimer5(T5_ON | T5_SOURCE_INT | T5_PS_1_32, 3333); //375hz @ 40MHz  (0.0026664 sec)
 }
 

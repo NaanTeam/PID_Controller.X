@@ -14,9 +14,9 @@ INT16 ADXL362_YAcceleration_Raw = 0;
 INT16 ADXL362_ZAcceleration_Raw = 0;
 INT16 ADXL362_Temperature_Raw = 0;
 
-int ADXL362_XAcceleration_Raw_Avg = 0;
-int ADXL362_YAcceleration_Raw_Avg = 0;
-int ADXL362_ZAcceleration_Raw_Avg = 0;
+float ADXL362_XAcceleration_Raw_Avg = 0;
+float ADXL362_YAcceleration_Raw_Avg = 0;
+float ADXL362_ZAcceleration_Raw_Avg = 0;
 
 
 //******************************************************************************

@@ -23,13 +23,10 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
     UINT8 buffer[SERIALCOMM_MAX_TX_BUFFER];
     int buffer_len = 0;
     buffer[buffer_len++] = 0;
-    int a = 0;
-    int old_a = 0;
+
     while(MsgInterpreter_Index < MsgInterpreter_Length)
     {
-        old_a = a;
-        a = message[MsgInterpreter_Index];
-        
+
         switch(message[MsgInterpreter_Index++])
         {
             default:
@@ -172,16 +169,22 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 temp = (UINT8 *)(&L3G4200D_XAngularRate_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_YAngularRate_Raw_Avg:
                 temp = (UINT8 *)(&L3G4200D_YAngularRate_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_ZAngularRate_Raw_Avg:
                 temp = (UINT8 *)(&L3G4200D_ZAngularRate_Raw_Avg);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
                 break;
 
 
@@ -308,10 +311,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 break;
         }
     }
-    if (buffer_len > 97)
-    {
-        buffer_len = 97;
-    }
+
     buffer[0] = buffer_len;
     FIFOUART1_pushTxQueue(buffer, buffer_len);
     FIFOUART4_pushTxQueue(buffer, buffer_len);  //Maher
