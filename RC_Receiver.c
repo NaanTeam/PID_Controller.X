@@ -90,7 +90,7 @@ void zeroController(void)
 //Both sticks down and in
 void enableProps(void)
 {
-    while(IC_THRO > 0.25 || IC_YAW > -179.5 || IC_PITCH < 89.5 || IC_ROLL < 89.5){}
+    while(IC_THRO > 0.25 || IC_YAW > (-1.0*(PI-0.2)) || IC_PITCH < ((PI/2.0)-0.1) || IC_ROLL < ((PI/2.0)-0.1)){}
     while(IC_THRO > 0.25 || IC_YAW != 0.0 || IC_PITCH != 0.0 || IC_ROLL != 0.0){}
     PROPS_ENABLE = 1;
 }
@@ -104,7 +104,7 @@ int disableProps(void)
         return 1;
     }
 
-    if(IC_THRO < 0.1 && IC_YAW > 179.9 && IC_PITCH > 89.9 && IC_ROLL < -89.9)
+    if(IC_THRO < 0.25 && IC_YAW > (PI-0.2) && IC_PITCH > ((PI/2)-0.1) && IC_ROLL < -(PI/2)-0.2)
     {
         PROPS_ENABLE = 0;
         return 1;
@@ -189,22 +189,22 @@ void __ISR(_INPUT_CAPTURE_2_VECTOR) INT_IC2_Handler(void)
     //a Yaw angle -180.0 thru 180.0 degrees
     if(zero_mode == 0)
     {
-        if(period2 > ym + 2)
+        if(period2 > ym + 3)
         {
             yaw_pc = ((YAW_H + period2 - (2 * ym)) / (YAW_H - ym)) * 50.0;
-            IC_YAW = 360.0 * ((yaw_pc - 50) / 100.0);
+            IC_YAW = 2 * PI * ((yaw_pc - 50) / 100.0);
         }
         
-        else if(period2 < ym - 2)
+        else if(period2 < ym - 3)
         {
             yaw_pc = ((period2 - YAW_L) / (ym - YAW_L)) * 50.0;
-            IC_YAW = -1.0 * 360.0 * ((50.0 - yaw_pc) / 100.0);
+            IC_YAW = -2.0 * PI * ((50.0 - yaw_pc) / 100.0);
         }
         
         else
         {
             yaw_pc = 50.0;
-            IC_YAW = 0;
+            IC_YAW = 0.0;
         }
     }
 }
@@ -236,22 +236,22 @@ void __ISR(_INPUT_CAPTURE_3_VECTOR) INT_IC3_Handler(void)
     //a Pitch angle -90.0 thru 90.0 degrees
     if(zero_mode == 0)
     {
-        if(period3 > pm + 2)
+        if(period3 > pm + 3)
         {
             pitch_pc = ((PITCH_H + period3 - (2 * pm)) / (PITCH_H - pm)) * 50.0;
-            IC_PITCH = -1.0 * 180.0 * ((pitch_pc - 50) / 100.0);
+            IC_PITCH = -1.0 * PI * ((pitch_pc - 50) / 100.0);
         }
         
-        else if(period3 < pm - 2)
+        else if(period3 < pm - 3)
         {
             pitch_pc = ((period3 - PITCH_L) / (pm - PITCH_L)) * 50.0;
-            IC_PITCH = 180.0 * ((50.0 - pitch_pc) / 100.0);
+            IC_PITCH = PI * ((50.0 - pitch_pc) / 100.0);
         }
         
         else
         {
             pitch_pc = 50.0;
-            IC_PITCH = 0;
+            IC_PITCH = 0.0;
         }
     }
 
@@ -288,19 +288,19 @@ void __ISR(_INPUT_CAPTURE_4_VECTOR) INT_IC4_Handler(void)
         if(period4 > rm + 2)
         {
             roll_pc = ((ROLL_H + period4 - (2 * rm)) / (ROLL_H - rm)) * 50.0;
-            IC_ROLL = 180.0 * ((roll_pc - 50) / 100.0);
+            IC_ROLL = PI * ((roll_pc - 50) / 100.0);
         }
         
         else if(period4 < rm - 2)
         {
             roll_pc = ((period4 - ROLL_L) / (rm-ROLL_L)) * 50.0;
-            IC_ROLL = -1.0 * 180.0 * ((50.0 - roll_pc) / 100.0);
+            IC_ROLL = -1.0 * PI * ((50.0 - roll_pc) / 100.0);
         }
         
         else
         {
             roll_pc = 50.0;
-            IC_ROLL = 0;
+            IC_ROLL = 0.0;
         }
     }
 
