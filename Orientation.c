@@ -14,7 +14,7 @@ float scaledAccelMagnitude = 0.0;
 float gyroScaled[3];
 float Magnetic_Heading = 0.0;
 
-float timer5TimeChange = 13.333;
+float timer5TimeChange = 20.0;
 
 //******************************************************************************
 //Public Variable Declarations

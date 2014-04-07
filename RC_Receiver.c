@@ -150,7 +150,7 @@ void __ISR(_INPUT_CAPTURE_1_VECTOR) INT_IC1_Handler(void)
     //Correct period if out of range
     if(period1 > THRO_H - 2)
         period1 = THRO_H;
-    else if(period1 < THRO_L + 2)
+    else if(period1 < THRO_L + 5)
         period1 = THRO_L;
 
     //Turn period into Throttle percentage 0.0 thru 100.0%
@@ -189,13 +189,13 @@ void __ISR(_INPUT_CAPTURE_2_VECTOR) INT_IC2_Handler(void)
     //a Yaw angle -180.0 thru 180.0 degrees
     if(zero_mode == 0)
     {
-        if(period2 > ym + 3)
+        if(period2 > ym + 5)
         {
             yaw_pc = ((YAW_H + period2 - (2 * ym)) / (YAW_H - ym)) * 50.0;
             IC_YAW = 2 * PI * ((yaw_pc - 50) / 100.0);
         }
         
-        else if(period2 < ym - 3)
+        else if(period2 < ym - 5)
         {
             yaw_pc = ((period2 - YAW_L) / (ym - YAW_L)) * 50.0;
             IC_YAW = -2.0 * PI * ((50.0 - yaw_pc) / 100.0);
@@ -227,22 +227,22 @@ void __ISR(_INPUT_CAPTURE_3_VECTOR) INT_IC3_Handler(void)
         period3 = IC3_CT_Fall - IC3_CT_Rise;
 
     //Correct period if out of range
-    if(period3 > PITCH_H - 2)
+    if(period3 > PITCH_H - 3)
         period3 = PITCH_H;
-    else if(period3 < PITCH_L + 2)
+    else if(period3 < PITCH_L + 3)
         period3 = PITCH_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
     //a Pitch angle -90.0 thru 90.0 degrees
     if(zero_mode == 0)
     {
-        if(period3 > pm + 3)
+        if(period3 > pm + 5)
         {
             pitch_pc = ((PITCH_H + period3 - (2 * pm)) / (PITCH_H - pm)) * 50.0;
             IC_PITCH = -1.0 * PI * ((pitch_pc - 50) / 100.0);
         }
         
-        else if(period3 < pm - 3)
+        else if(period3 < pm - 5)
         {
             pitch_pc = ((period3 - PITCH_L) / (pm - PITCH_L)) * 50.0;
             IC_PITCH = PI * ((50.0 - pitch_pc) / 100.0);
@@ -276,22 +276,22 @@ void __ISR(_INPUT_CAPTURE_4_VECTOR) INT_IC4_Handler(void)
         period4 = IC4_CT_Fall - IC4_CT_Rise;
 
     //Correct period if out of range
-    if(period4 > ROLL_H - 2)
+    if(period4 > ROLL_H - 3)
         period4 = ROLL_H;
-    else if(period4 < ROLL_L + 2)
+    else if(period4 < ROLL_L + 3)
         period4 = ROLL_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
     //a Roll angle -90.0 thru 90.0 degrees
     if(zero_mode == 0)
     {
-        if(period4 > rm + 2)
+        if(period4 > rm + 5)
         {
             roll_pc = ((ROLL_H + period4 - (2 * rm)) / (ROLL_H - rm)) * 50.0;
             IC_ROLL = PI * ((roll_pc - 50) / 100.0);
         }
         
-        else if(period4 < rm - 2)
+        else if(period4 < rm - 5)
         {
             roll_pc = ((period4 - ROLL_L) / (rm-ROLL_L)) * 50.0;
             IC_ROLL = -1.0 * PI * ((50.0 - roll_pc) / 100.0);

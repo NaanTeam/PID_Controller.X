@@ -16,10 +16,10 @@ unsigned int OC_ONE = OC_MIN,    //Pulse-width on Left-Front motor from 2000 to 
              OC_THREE = OC_MIN,  //Pulse-width on Right-Back motor from 2000 to 4000
              OC_FOUR = OC_MIN;   //Pulse-width on Left-Back motor from 2000 to 4000
 
-float OC_ONE_PC,
-             OC_TWO_PC,
-             OC_THREE_PC,
-             OC_FOUR_PC;
+float   OC_ONE_PC,
+        OC_TWO_PC,
+        OC_THREE_PC,
+        OC_FOUR_PC;
 
 unsigned int OC_ADJ = 0;
 
@@ -88,16 +88,6 @@ void adjustThrust(void)
 {
     unsigned int OC_VAL = 0;
 
-    if (IC_THRO == 0)
-    {
-        OC_ONE = OC_KILL;
-        OC_TWO = OC_KILL;
-        OC_THREE = OC_KILL;
-        OC_FOUR = OC_KILL;
-
-        return;
-    }
-
     //Ensures the throttle value is between OC_MIN and OC_MAX
     OC_VAL = IC_THRO * (((float)OC_MAX - (float)OC_MIN) / 100.0) + (float)OC_MIN;
 
@@ -109,11 +99,13 @@ void adjustThrust(void)
 
 void adjustRoll(void)
 {
+    unsigned int adjustedRoll = OC_PID_SCALE * PID_ROLL;
+
     //Adjust motor ratio between motors 1/4 and 2/3
-    OC_ONE += PID_ROLL;
-    OC_TWO -= PID_ROLL;
-    OC_THREE -= PID_ROLL;
-    OC_FOUR += PID_ROLL;
+    OC_ONE += adjustedRoll;
+    OC_TWO -= adjustedRoll;
+    OC_THREE -= adjustedRoll;
+    OC_FOUR += adjustedRoll;
 
     /*
     If OC_ONE exceeds OC_MAX, then we need to ensure that OC_THREE decreases by
@@ -148,6 +140,28 @@ void adjustRoll(void)
             OC_THREE = OC_MAX;
     }
 
+    if (OC_THREE > OC_MAX)
+    {
+        OC_ADJ = OC_THREE - OC_MAX;
+
+        OC_THREE = OC_MAX;
+        OC_ONE -= OC_ADJ;
+
+        if (OC_ONE < OC_MIN)
+            OC_ONE = OC_MIN;
+    }
+
+    else if (OC_THREE < OC_MIN)
+    {
+        OC_ADJ = OC_MIN - OC_THREE;
+
+        OC_THREE = OC_MIN;
+        OC_ONE += OC_ADJ;
+
+        if (OC_ONE > OC_MAX)
+            OC_ONE = OC_MAX;
+    }
+
     //We need to check likewise with OC_FOUR and OC_TWO
     if (OC_FOUR > OC_MAX)
     {
@@ -170,15 +184,39 @@ void adjustRoll(void)
         if (OC_TWO > OC_MAX)
             OC_TWO = OC_MAX;
     }
+
+    if (OC_TWO > OC_MAX)
+    {
+        OC_ADJ = OC_TWO - OC_MAX;
+
+        OC_TWO = OC_MAX;
+        OC_FOUR -= OC_ADJ;
+
+        if (OC_FOUR < OC_MIN)
+            OC_FOUR = OC_MIN;
+    }
+
+    else if (OC_TWO < OC_MIN)
+    {
+        OC_ADJ = OC_MIN - OC_TWO;
+
+        OC_TWO = OC_MIN;
+        OC_FOUR += OC_ADJ;
+
+        if (OC_FOUR > OC_MAX)
+            OC_FOUR = OC_MAX;
+    }
 }
 
 void adjustPitch(void)
 {
+    unsigned int adjustedPitch = OC_PID_SCALE * PID_PITCH;
+
     //Adjust motor ratio between motors 1/2 and 3/4
-    OC_ONE += PID_PITCH;
-    OC_TWO += PID_PITCH;
-    OC_THREE -= PID_PITCH;
-    OC_FOUR -= PID_PITCH;
+    OC_ONE += adjustedPitch;
+    OC_TWO += adjustedPitch;
+    OC_THREE -= adjustedPitch;
+    OC_FOUR -= adjustedPitch;
 
     if (OC_ONE > OC_MAX)
     {
@@ -200,6 +238,28 @@ void adjustPitch(void)
 
         if (OC_FOUR > OC_MAX)
             OC_FOUR = OC_MAX;
+    }
+
+    if (OC_FOUR > OC_MAX)
+    {
+        OC_ADJ = OC_FOUR - OC_MAX;
+
+        OC_FOUR = OC_MAX;
+        OC_ONE -= OC_ADJ;
+
+        if (OC_ONE < OC_MIN)
+            OC_ONE = OC_MIN;
+    }
+
+    else if (OC_FOUR < OC_MIN)
+    {
+        OC_ADJ = OC_MIN - OC_FOUR;
+
+        OC_FOUR = OC_MIN;
+        OC_ONE += OC_ADJ;
+
+        if (OC_ONE > OC_MAX)
+            OC_ONE = OC_MAX;
     }
 
     if (OC_TWO > OC_MAX)
@@ -223,15 +283,74 @@ void adjustPitch(void)
         if (OC_THREE > OC_MAX)
             OC_THREE = OC_MAX;
     }
+
+    if (OC_THREE > OC_MAX)
+    {
+        OC_ADJ = OC_THREE - OC_MAX;
+
+        OC_THREE = OC_MAX;
+        OC_TWO -= OC_ADJ;
+
+        if (OC_TWO < OC_MIN)
+            OC_TWO = OC_MIN;
+    }
+
+    else if (OC_THREE < OC_MIN)
+    {
+        OC_ADJ = OC_MIN - OC_THREE;
+
+        OC_THREE = OC_MIN;
+        OC_TWO += OC_ADJ;
+
+        if (OC_TWO > OC_MAX)
+            OC_TWO = OC_MAX;
+    }
 }
 
 void adjustYaw(void)
 {
+    float OC_PERC;
+    unsigned int adjustedYaw = OC_PID_SCALE * PID_YAW;
+
     //Adjust motor ratio between motors 1/3 and 2/4
-    OC_ONE += PID_YAW;
-    OC_TWO -= PID_YAW;
-    OC_THREE += PID_YAW;
-    OC_FOUR -= PID_YAW;
+    OC_ONE += adjustedYaw;
+    OC_TWO -= adjustedYaw;
+    OC_THREE += adjustedYaw;
+    OC_FOUR -= adjustedYaw;
+
+    if ((OC_ONE > OC_MAX) && (OC_TWO > OC_MAX))
+    {
+        if (OC_ONE > OC_TWO)
+        {
+            OC_PERC = (float)OC_TWO / (float)OC_ONE;
+            OC_ONE = OC_MAX;
+            OC_TWO = (float)OC_MAX * OC_PERC;
+        }
+
+        else
+        {
+            OC_PERC = (float)OC_ONE / (float)OC_TWO;
+            OC_TWO = OC_MAX;
+            OC_ONE = (float)OC_MAX * OC_PERC;
+        }
+    }
+
+    if ((OC_THREE > OC_MAX) && (OC_FOUR > OC_MAX))
+    {
+        if (OC_THREE > OC_FOUR)
+        {
+            OC_PERC = (float)OC_FOUR / (float)OC_THREE;
+            OC_THREE = OC_MAX;
+            OC_FOUR = (float)OC_MAX * OC_PERC;
+        }
+
+        else
+        {
+            OC_PERC = (float)OC_THREE / (float)OC_FOUR;
+            OC_FOUR = OC_MAX;
+            OC_THREE = (float)OC_MAX * OC_PERC;
+        }
+    }
 
     if (OC_ONE > OC_MAX)
     {
@@ -242,6 +361,9 @@ void adjustYaw(void)
 
         if (OC_TWO < OC_MIN)
             OC_TWO = OC_MIN;
+
+        else if (OC_TWO > OC_MAX)
+            OC_TWO = OC_MAX;
     }
 
     else if (OC_ONE < OC_MIN)
@@ -253,6 +375,37 @@ void adjustYaw(void)
 
         if (OC_TWO > OC_MAX)
             OC_TWO = OC_MAX;
+
+        else if (OC_TWO < OC_MIN)
+            OC_TWO = OC_MIN;
+    }
+
+    if (OC_TWO > OC_MAX)
+    {
+        OC_ADJ = OC_TWO - OC_MAX;
+
+        OC_TWO = OC_MAX;
+        OC_ONE -= OC_ADJ;
+
+        if (OC_ONE < OC_MIN)
+            OC_ONE = OC_MIN;
+
+        else if (OC_ONE > OC_MAX)
+            OC_ONE = OC_MAX;
+    }
+
+    else if (OC_TWO < OC_MIN)
+    {
+        OC_ADJ = OC_MIN - OC_TWO;
+
+        OC_TWO = OC_MIN;
+        OC_ONE += OC_ADJ;
+
+        if (OC_ONE > OC_MAX)
+            OC_ONE = OC_MAX;
+
+        else if (OC_ONE < OC_MIN)
+            OC_ONE = OC_MIN;
     }
 
     if (OC_THREE > OC_MAX)
@@ -264,6 +417,9 @@ void adjustYaw(void)
 
         if (OC_FOUR < OC_MIN)
             OC_FOUR = OC_MIN;
+
+        else if (OC_FOUR > OC_MAX)
+            OC_FOUR = OC_MAX;
     }
 
     else if (OC_THREE < OC_MIN)
@@ -275,5 +431,36 @@ void adjustYaw(void)
 
         if (OC_FOUR > OC_MAX)
             OC_FOUR = OC_MAX;
+
+        else if (OC_FOUR < OC_MIN)
+            OC_FOUR = OC_MIN;
+    }
+
+    if (OC_FOUR > OC_MAX)
+    {
+        OC_ADJ = OC_FOUR - OC_MAX;
+
+        OC_FOUR = OC_MAX;
+        OC_THREE -= OC_ADJ;
+
+        if (OC_THREE < OC_MIN)
+            OC_THREE = OC_MIN;
+
+        else if (OC_THREE > OC_MAX)
+            OC_THREE = OC_MAX;
+    }
+
+    else if (OC_FOUR < OC_MIN)
+    {
+        OC_ADJ = OC_MIN - OC_FOUR;
+
+        OC_FOUR = OC_MIN;
+        OC_THREE += OC_ADJ;
+
+        if (OC_THREE > OC_MAX)
+            OC_THREE = OC_MAX;
+
+        else if (OC_THREE < OC_MIN)
+            OC_THREE = OC_MIN;
     }
 }

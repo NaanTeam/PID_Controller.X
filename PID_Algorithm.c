@@ -11,15 +11,15 @@ float PID_ROLL = 0.0,       //Roll output for motor controller
       PID_PITCH = 0.0,      //Pitch output for motor controller
       PID_YAW = 0.0;        //Yaw output for motor controller
 
-float pRollConst = 1.0,     //Peripheral constant
+float pRollConst = 0.0,     //Peripheral constant
       iRollConst = 0.0,     //Intergral constant
       dRollConst = 0.0;     //Derivative constant
 
-float pPitchConst = 1.0,    //Peripheral constant
+float pPitchConst = 0.0,    //Peripheral constant
       iPitchConst = 0.0,    //Intergral constant
       dPitchConst = 0.0;    //Derivative constant
 
-float pYawConst = 1.0,     //Peripheral constant
+float pYawConst = 50.0,     //Peripheral constant
       iYawConst = 0.0,      //Intergral constant
       dYawConst = 0.0;      //Derivative constant
 
@@ -88,8 +88,39 @@ void setPIDYaw(void)
     float yError, dYawErr;
 
     //yTimeChange = (((float)yNow - (float)yLastTime) / 1000000.0F) * 1000;
+    
+    //This if-else block corrects for -PI to +PI jump
+    /*if ((((-1.0 * PI) < SENS_YAW) && (SENS_YAW < (-1.0 * PI / 2.0))) && \
+       (((PI / 2.0) < Calibration_Yaw_Zero_Point) && (Calibration_Yaw_Zero_Point < PI)))
+    {
+        yError = Calibration_Yaw_Zero_Point - SENS_YAW - (2.0 * PI);
+    }
 
-    yError = Calibration_Yaw_Zero_Point - SENS_YAW;
+    else if ((((PI / 2.0) < SENS_YAW) && (SENS_YAW < PI)) && \
+            (((-1.0 * PI) < Calibration_Yaw_Zero_Point) && (Calibration_Yaw_Zero_Point < (-1.0 * PI / 2.0))))
+    {
+        yError = Calibration_Yaw_Zero_Point - SENS_YAW + (2.0 * PI);
+    }
+
+    else
+    {
+        yError = Calibration_Yaw_Zero_Point - SENS_YAW;
+    }*/
+
+    if ((Calibration_Yaw_Zero_Point - SENS_YAW) > PI)
+    {
+        yError = Calibration_Yaw_Zero_Point - SENS_YAW - (2.0 * PI);
+    }
+
+    else if ((Calibration_Yaw_Zero_Point - SENS_YAW) < (-1.0 * PI))
+    {
+        yError = Calibration_Yaw_Zero_Point - SENS_YAW + (2.0 * PI);
+    }
+
+    else
+    {
+        yError = Calibration_Yaw_Zero_Point - SENS_YAW;
+    }
 
     //yErrSum += (yError * yTimeChange);
     yErrSum += (yError * timer5TimeChange);
@@ -131,12 +162,12 @@ void getSensorValues(void)
 
 void determineZeroYaw(void)
 {
-    if (yawFlag < 25)
+    if (yawFlag < 250)
     {
         yawFlag++;
     }
 
-    else if (yawFlag == 25)
+    else if (yawFlag == 250)
     {
         Calibration_zeroYaw();
         yawFlag++;

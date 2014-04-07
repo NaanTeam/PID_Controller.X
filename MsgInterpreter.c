@@ -237,7 +237,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_Yaw:
-                temp = (UINT8 *)(&Orientation_Yaw);
+                temp = (UINT8 *)(&scaledOrientationYaw);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
@@ -266,7 +266,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_DesiredYaw:
-                temp = (UINT8 *)(&IC_YAW);
+                temp = (UINT8 *)(&Calibration_Yaw_Zero_Point);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
