@@ -34,5 +34,7 @@ void adjustThrust(void);
 void adjustRoll(void);
 void adjustPitch(void);
 void adjustYaw(void);
+void adjustRollPitchYaw(void);
+
 
 #endif

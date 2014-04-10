@@ -71,9 +71,42 @@ void startupMotors(void)
 void adjustOCValues(void)
 {
     adjustThrust();
-    adjustRoll();
-    adjustPitch();
-    adjustYaw();
+    //adjustRoll();
+    //adjustPitch();
+    //adjustYaw();
+    adjustRollPitchYaw();
+}
+
+void adjustRollPitchYaw(void)
+{
+    OC_ONE = OC_ONE + PID_ROLL + PID_PITCH + PID_YAW;
+    OC_TWO = OC_TWO - PID_ROLL + PID_PITCH - PID_YAW;
+    OC_THREE = OC_THREE - PID_ROLL - PID_PITCH + PID_YAW;
+    OC_FOUR = OC_FOUR + PID_ROLL - PID_PITCH - PID_YAW;
+
+    if (OC_ONE > OC_MAX)
+        OC_ONE = OC_MAX;
+
+    else if (OC_ONE < OC_MIN)
+        OC_ONE = OC_MIN;
+
+    if (OC_TWO > OC_MAX)
+        OC_TWO = OC_MAX;
+
+    else if (OC_TWO < OC_MIN)
+        OC_TWO = OC_MIN;
+
+    if (OC_THREE > OC_MAX)
+        OC_THREE = OC_MAX;
+
+    else if (OC_THREE < OC_MIN)
+        OC_THREE = OC_MIN;
+
+    if (OC_FOUR > OC_MAX)
+        OC_FOUR = OC_MAX;
+
+    else if (OC_FOUR < OC_MIN)
+        OC_FOUR = OC_MIN;
 }
 
 /*
@@ -97,7 +130,7 @@ void adjustThrust(void)
     OC_FOUR = OC_VAL;
 }
 
-void adjustRoll(void)
+/*void adjustRoll(void)
 {
     unsigned int adjustedRoll = OC_PID_SCALE * PID_ROLL;
 
@@ -107,13 +140,13 @@ void adjustRoll(void)
     OC_THREE -= adjustedRoll;
     OC_FOUR += adjustedRoll;
 
-    /*
-    If OC_ONE exceeds OC_MAX, then we need to ensure that OC_THREE decreases by
-    an amount equal to the amount OC_MAX was surpassed in order to get the full
-    effect of what the PID values are trying to give to the motors. This math
-    exists for adjustRoll, adjustPitch, and adjustYaw, just for the different
-    motor configurations required for movement in each of those individually.
-    */
+    
+//    If OC_ONE exceeds OC_MAX, then we need to ensure that OC_THREE decreases by
+//    an amount equal to the amount OC_MAX was surpassed in order to get the full
+//    effect of what the PID values are trying to give to the motors. This math
+//    exists for adjustRoll, adjustPitch, and adjustYaw, just for the different
+//    motor configurations required for movement in each of those individually.
+    
     if (OC_ONE > OC_MAX)
     {
         OC_ADJ = OC_ONE - OC_MAX;
@@ -125,10 +158,10 @@ void adjustRoll(void)
             OC_THREE = OC_MIN;
     }
 
-    /*
-    As above, we need to adjust, but this time by the amount that OC_ONE is
-    less than OC_MIN. The math here is the same, just inverted.
-    */
+    
+    //As above, we need to adjust, but this time by the amount that OC_ONE is
+    //less than OC_MIN. The math here is the same, just inverted.
+    
     else if (OC_ONE < OC_MIN)
     {
         OC_ADJ = OC_MIN - OC_ONE;
@@ -464,3 +497,4 @@ void adjustYaw(void)
             OC_THREE = OC_MIN;
     }
 }
+*/

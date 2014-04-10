@@ -19,7 +19,7 @@ float pPitchConst = 0.0,    //Peripheral constant
       iPitchConst = 0.0,    //Intergral constant
       dPitchConst = 0.0;    //Derivative constant
 
-float pYawConst = 50.0,     //Peripheral constant
+float pYawConst = 10.0,     //Peripheral constant
       iYawConst = 0.0,      //Intergral constant
       dYawConst = 0.0;      //Derivative constant
 
