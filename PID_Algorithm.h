@@ -25,6 +25,8 @@ extern float PID_ROLL,          //Roll correction value between -100.0 and 100.0
 
 extern float scaledOrientationYaw;
 
+extern int yawFlag;
+
 void getSensorValues(void);
 void setPIDValues(void);
 void setPIDRoll(void);

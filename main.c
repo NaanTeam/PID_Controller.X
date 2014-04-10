@@ -88,7 +88,21 @@ int main (void)
             OC3RS = OC_KILL;
             OC4RS = OC_KILL;
 
+            OC_ONE = OC_MIN;
+            OC_TWO = OC_MIN;
+            OC_THREE = OC_MIN;
+            OC_FOUR = OC_MIN;
+
+            T5CONCLR = 0x8000;
+
             enableProps();
+
+            T5CONSET = 0x8000;
+
+            yawFlag = 0;
+            determineZeroYaw();
+
+            startupMotors();
         }
         
         //Update OCxRS registers with newly calculated values
