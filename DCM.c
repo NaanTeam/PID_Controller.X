@@ -225,7 +225,7 @@ void DCM_eulerAngle(float* roll, float* pitch, float* yaw)
 {
     pitch[0] = -asin(DCM_Matrix[2][0]);
     roll[0] = atan2(DCM_Matrix[2][1],DCM_Matrix[2][2]);
-    yaw[0] = atan2(DCM_Matrix[1][0],DCM_Matrix[0][0]);
+    yaw[0] = 0.0;//atan2(DCM_Matrix[1][0],DCM_Matrix[0][0]);
 
 //    roll = atan2(Accel_Vector[1],Accel_Vector[2]);    // atan2(acc_y,acc_z)
 //    pitch = -asin((Accel_Vector[0])/(double)GRAVITY); // asin(acc_x)
