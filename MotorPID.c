@@ -9,11 +9,7 @@ float PID_ROLL = 0.0,       //Roll output for motor controller
       PID_PITCH = 0.0,      //Pitch output for motor controller
       PID_YAW = 0.0;        //Yaw output for motor controller
 
-<<<<<<< HEAD:MotorPID.c
-float pRollConst = 0.0,     //Proportional constant
-=======
 float pRollConst = 20.0,     //Peripheral constant
->>>>>>> d15dfd8b75810ecf1d2ab73f7a0d27fbd0086568:PID_Algorithm.c
       iRollConst = 0.0,     //Intergral constant
       dRollConst = 0.0;     //Derivative constant
 
@@ -21,11 +17,7 @@ float pPitchConst = 0.0,    //Proportional constant
       iPitchConst = 0.0,    //Intergral constant
       dPitchConst = 0.0;    //Derivative constant
 
-<<<<<<< HEAD:MotorPID.c
 float pYawConst = 10.0,     //Proportional constant
-=======
-float pYawConst = 0.0,      //Peripheral constant
->>>>>>> d15dfd8b75810ecf1d2ab73f7a0d27fbd0086568:PID_Algorithm.c
       iYawConst = 0.0,      //Intergral constant
       dYawConst = 0.0;      //Derivative constant
 
