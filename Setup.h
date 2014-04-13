@@ -9,12 +9,12 @@
 #define	SETUP_H
     
 #include "hardwareProfile.h"
-#include "RC_Receiver.h"
+#include "RcRx.h"
 
 void Setup_initializeBoard(void);
-void Setup_setupPorts(void);
-void Setup_setupTimers(void);
+void Setup_ports(void);
+void Setup_timers(void);
 void Setup_configInterrupts(void);
-void Setup_startupCommunications(void);
+void Setup_communications(void);
 
 #endif	/* SETUP_H */

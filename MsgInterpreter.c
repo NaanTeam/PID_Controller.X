@@ -230,7 +230,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
 
 
             case SERIALCOMM_REGISTER_Pitch:
-                temp = (UINT8 *)(&Orientation_Pitch);
+                temp = (UINT8 *)(&OrientationLoop_Pitch);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
@@ -244,7 +244,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_Roll:
-                temp = (UINT8 *)(&Orientation_Roll);
+                temp = (UINT8 *)(&OrientationLoop_Roll);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
@@ -290,28 +290,28 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
 
 
             case SERIALCOMM_REGISTER_Motor1:
-                temp = (UINT8 *)(&OC_ONE_PC);
+                temp = (UINT8 *)(&MotorCtrl_OC_ONE_PC);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_Motor2:
-                temp = (UINT8 *)(&OC_TWO_PC);
+                temp = (UINT8 *)(&MotorCtrl_OC_TWO_PC);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_Motor3:
-                temp = (UINT8 *)(&OC_THREE_PC);
+                temp = (UINT8 *)(&MotorCtrl_OC_THREE_PC);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_Motor4:
-                temp = (UINT8 *)(&OC_FOUR_PC);
+                temp = (UINT8 *)(&MotorCtrl_OC_FOUR_PC);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];

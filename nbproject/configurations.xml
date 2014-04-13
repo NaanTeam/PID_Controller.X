@@ -4,21 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="f5" displayName="Oreintation Filter" projectFiles="true">
-        <itemPath>Orientation.h</itemPath>
-        <itemPath>MathFunctions.h</itemPath>
-        <itemPath>DCM.h</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f4"
-                     displayName="PID and Output Controller"
-                     projectFiles="true">
-        <itemPath>PID_Algorithm.h</itemPath>
-        <itemPath>motorController.h</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f2" displayName="RC Input" projectFiles="true">
-        <itemPath>RC_Receiver.h</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f3" displayName="Sensor Communication" projectFiles="true">
+      <logicalFolder name="f3" displayName="Communication" projectFiles="true">
         <itemPath>FIFOI2C2.h</itemPath>
         <itemPath>FIFOSPI2.h</itemPath>
         <itemPath>FIFOUART1.h</itemPath>
@@ -26,7 +12,22 @@
         <itemPath>MsgInterpreter.h</itemPath>
         <itemPath>FIFOUART4.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="f1" displayName="Sensor Headers" projectFiles="true">
+      <logicalFolder name="f7" displayName="Misc" projectFiles="true">
+        <itemPath>battery_voltage.h</itemPath>
+        <itemPath>MathFunctions.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f5" displayName="Oreintation" projectFiles="true">
+        <itemPath>DCM.h</itemPath>
+        <itemPath>OrientationLoop.h</itemPath>
+        <itemPath>MotorPID.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2"
+                     displayName="RC Rx and Motor Output"
+                     projectFiles="true">
+        <itemPath>MotorCtrl.h</itemPath>
+        <itemPath>RcRx.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="Sensors" projectFiles="true">
         <itemPath>HMC5883L.h</itemPath>
         <itemPath>L3G4200D.h</itemPath>
         <itemPath>ADXL362.h</itemPath>
@@ -37,7 +38,6 @@
         <itemPath>Calibration.h</itemPath>
       </logicalFolder>
       <itemPath>hardwareProfile.h</itemPath>
-      <itemPath>battery_voltage.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -54,19 +54,20 @@
         <itemPath>CommunicationLoop.c</itemPath>
         <itemPath>FIFOUART4.c</itemPath>
       </logicalFolder>
-      <logicalFolder name="f5" displayName="Oreintation Filter" projectFiles="true">
-        <itemPath>Orientation.c</itemPath>
-        <itemPath>DCM.c</itemPath>
+      <logicalFolder name="f7" displayName="Misc" projectFiles="true">
+        <itemPath>battery_voltage.c</itemPath>
         <itemPath>MathFunctions.c</itemPath>
       </logicalFolder>
-      <logicalFolder name="f3"
-                     displayName="PID and Output Controller"
-                     projectFiles="true">
-        <itemPath>PID_Algorithm.c</itemPath>
-        <itemPath>motorController.c</itemPath>
+      <logicalFolder name="f5" displayName="Oreintation" projectFiles="true">
+        <itemPath>DCM.c</itemPath>
+        <itemPath>OrientationLoop.c</itemPath>
+        <itemPath>MotorPID.c</itemPath>
       </logicalFolder>
-      <logicalFolder name="f4" displayName="RC Input" projectFiles="true">
-        <itemPath>RC_Receiver.c</itemPath>
+      <logicalFolder name="f4"
+                     displayName="RC Rx and Motor Output"
+                     projectFiles="true">
+        <itemPath>MotorCtrl.c</itemPath>
+        <itemPath>RcRx.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Sensors" projectFiles="true">
         <itemPath>ADXL362.c</itemPath>
@@ -79,7 +80,6 @@
         <itemPath>Calibration.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>battery_voltage.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

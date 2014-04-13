@@ -3,19 +3,22 @@
 void Setup_initializeBoard(void)
 {
     INTDisableInterrupts();
-    Setup_setupPorts();
+    Setup_ports();
     setup_ADC();
 
     INTEnableSystemMultiVectoredInt();
     
-    Setup_setupTimers();
-    setupInputCaptures();
-    setupOutputCompares();
+    Setup_timers();
+    RcRx_setupInputCaptures();
+    MotorCtrl_setupOutputCompares();
     Setup_configInterrupts();
 }
 
-void Setup_startupCommunications(void)
+void Setup_communications(void)
 {
+    int i = 0;
+
+
     //Start Protocols
     FIFOSPI2_initialize();
     FIFOI2C2_initialize();
@@ -27,9 +30,16 @@ void Setup_startupCommunications(void)
 
     SensorLoop_start();
     CommunicationLoop_start();
+
+    //gives it time to start up
+    while (i < (1400 * 200))
+    {
+        i++;
+    }
+
 }
 
-void Setup_setupPorts(void)
+void Setup_ports(void)
 {
     //Setup ESC pins for PWM output
     PORTSetPinsDigitalOut(IOPORT_D, BIT_0); //PWM1-OC1 digital pin 3
@@ -48,7 +58,7 @@ void Setup_setupPorts(void)
     //PORTSetPinsDigitalOut(IOPORT_F, BIT_1); //pin 4
 }
 
-void Setup_setupTimers(void)
+void Setup_timers(void)
 {
     //Clear timer controller and timer values
     T2CONCLR = 0xFFFF;

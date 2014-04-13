@@ -40,12 +40,12 @@ extern "C" {
 #include "L3G4200D.h"
 #include "HMC5883L.h"
 #include "FIFOUART1.h"
-#include "FIFOUART4.h" //Maher
+#include "FIFOUART4.h" 
 #include "DCM.h"
-#include "Orientation.h"
-#include "motorController.h"
-#include "PID_Algorithm.h"
-#include "RC_Receiver.h"
+#include "OrientationLoop.h"
+#include "MotorCtrl.h"
+#include "MotorPID.h"
+#include "RcRx.h"
 #include "battery_voltage.h"
 
 //******************************************************************************

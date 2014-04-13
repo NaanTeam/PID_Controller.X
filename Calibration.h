@@ -11,6 +11,9 @@
 #include "L3G4200D.h"
 #include "ADXL362.h"
 #include "HMC5883L.h"
+#include "OrientationLoop.h"
+#include "MotorPID.h"
+
 
 //******************************************************************************
 //Public Variables

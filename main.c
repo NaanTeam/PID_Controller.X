@@ -7,15 +7,15 @@
  *              Team Naan's senior design project, which is to impelement a PID*
  *              algorithm to control four motors (quadcopter).                 *
  ******************************************************************************/
-#include "RC_Receiver.h"
-#include "PID_Algorithm.h"
-#include "motorController.h"
+#include "RcRx.h"
+#include "MotorPID.h"
+#include "MotorCtrl.h"
 #include "CommunicationLoop.h"
 #include "ADXL362.h"
 #include "L3G4200D.h"
 #include "FIFOSPI2.h"
 #include "HMC5883L.h"
-#include "Orientation.h"
+#include "OrientationLoop.h"
 #include "setup.h"
 #include "Calibration.h"
 #include <xc.h>
@@ -51,74 +51,71 @@
 #pragma config BWP = OFF                // Boot Flash Write Protect bit (Protection Disabled)
 #pragma config CP = OFF                 // Code Protect (Protection Disabled)
 
-void DelayTime(int inter)
-{
-    int i = 0;
 
-    while (i < (inter * 200))
-    {
-        i++;
-    }
-}
 
 int main (void)
 {
+    //Configures the board for operation
     Setup_initializeBoard();
 
-    zeroController();
+    //Blocking Call// waits for RC controller to zero
+    RcRx_zeroController();
 
-    Setup_startupCommunications();
+    //Starts the various communication protocols
+    Setup_communications();
 
-    DelayTime(1000);
-
+    //Calibrates the on-board sensors
     Calibration_sensorsOffsets();
 
-    enableProps();
+    //Blocking Call// waits for a startup sequnce on the RC controller
+    RcRx_enableProps();
 
-    Orientation_start();
+    //Starts the PID Roll/Pitch/Yaw calculation and the PID based on it
+    OrientationLoop_start();
 
-    startupMotors();
+    //Starts the motors
+    MotorCtrl_startupMotors();
 
     while (1)
     {
-        if (disableProps())
+        if (RcRx_disableProps())
         {
             OC1RS = OC_KILL;
             OC2RS = OC_KILL;
             OC3RS = OC_KILL;
             OC4RS = OC_KILL;
 
-            OC_ONE = OC_MIN;
-            OC_TWO = OC_MIN;
-            OC_THREE = OC_MIN;
-            OC_FOUR = OC_MIN;
+            MotorCtrl_OC_ONE = OC_MIN;
+            MotorCtrl_OC_TWO = OC_MIN;
+            MotorCtrl_OC_THREE = OC_MIN;
+            MotorCtrl_OC_FOUR = OC_MIN;
 
             T5CONCLR = 0x8000;
 
-            enableProps();
+            RcRx_enableProps();
 
             T5CONSET = 0x8000;
 
             yawFlag = 0;
-            determineZeroYaw();
+            MotorPID_determineZeroYaw();
 
-            startupMotors();
+            MotorCtrl_startupMotors();
         }
         
         //Update OCxRS registers with newly calculated values
-        OC1RS = OC_ONE;     //Front-Left Motor
-        OC2RS = OC_TWO;     //Front-Right Motor
-        OC3RS = OC_THREE;   //Back-Right Motor
-        OC4RS = OC_FOUR;    //Back-Left Motor
+        OC1RS = MotorCtrl_OC_ONE;     //Front-Left Motor
+        OC2RS = MotorCtrl_OC_TWO;     //Front-Right Motor
+        OC3RS = MotorCtrl_OC_THREE;   //Back-Right Motor
+        OC4RS = MotorCtrl_OC_FOUR;    //Back-Left Motor
 
         /*OC_ONE_PC = 100.0 * (float)(OC_ONE - OC_KILL) / (float)(OC_MAX - OC_KILL);
         OC_TWO_PC = 100.0 * (float)(OC_TWO - OC_KILL) / (float)(OC_MAX - OC_KILL);
         OC_THREE_PC = 100.0 * (float)(OC_THREE - OC_KILL) / (float)(OC_MAX - OC_KILL);
         OC_FOUR_PC = 100.0 * (float)(OC_FOUR - OC_KILL) / (float)(OC_MAX - OC_KILL);*/
-        OC_ONE_PC = OC_ONE;
-        OC_TWO_PC = OC_TWO;
-        OC_THREE_PC = OC_THREE;
-        OC_FOUR_PC = OC_FOUR;
+        MotorCtrl_OC_ONE_PC = MotorCtrl_OC_ONE;
+        MotorCtrl_OC_TWO_PC = MotorCtrl_OC_TWO;
+        MotorCtrl_OC_THREE_PC = MotorCtrl_OC_THREE;
+        MotorCtrl_OC_FOUR_PC = MotorCtrl_OC_FOUR;
     }
 
     return 0;

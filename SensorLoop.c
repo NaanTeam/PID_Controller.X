@@ -6,11 +6,11 @@
 void SensorLoop_start()
 {
 
-////    //Setup Accelerometer
+    //Setup Accelerometer
     ADXL362_startMeasurements();
-////    //Setup Gyroscope
+    //Setup Gyroscope
     L3G4200D_startMeasurements();
-////   //Setup 3-axis compass
+    //Setup 3-axis compass
     HMC5883L_startMeasurements();
 
 

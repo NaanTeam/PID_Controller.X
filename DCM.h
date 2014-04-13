@@ -25,7 +25,7 @@ extern "C" {
 #include "hardwareProfile.h"
 #include "math.h"
 #include "MathFunctions.h"
-#include "Orientation.h"
+#include "OrientationLoop.h"
 
 //******************************************************************************
 //Configuration #defines
