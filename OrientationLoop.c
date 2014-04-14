@@ -4,8 +4,6 @@
 //******************************************************************************
 //Local Variable and Typedef Declarations
 //******************************************************************************
-UINT8 Orientation_loopToggle = 1;
-
 float accelCorrected[3] = {0, 0, 0};
 float gyroCorrected[3] = {0, 0, 0};
 float magneticCorrected[3] = {0, 0, 0};
@@ -194,8 +192,6 @@ void OrientationLoop_stop()
 
 void OrientationLoop_reset()
 {
-    Orientation_loopToggle = 1;
-
     accelCorrected[0] = 0.0;
     accelCorrected[1] = 0.0;
     accelCorrected[2] = 0.0;

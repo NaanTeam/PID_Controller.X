@@ -40,8 +40,9 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 {
                     return; //error
                 }
-
-            //Accelerometer
+           /******************************************************************************
+             * Sensor - Accelerometer
+            ******************************************************************************/
             case SERIALCOMM_REGISTER_XAcceleration:
                 temp = (UINT8 *)(&ADXL362_XAcceleration);
                 buffer[buffer_len++] = temp[0];
@@ -113,8 +114,9 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
 
-
-            //Gyroscope
+           /******************************************************************************
+             * Sensor - Gyroscope
+            ******************************************************************************/
             case SERIALCOMM_REGISTER_XAngularRate:
                 temp = (UINT8 *)(&L3G4200D_XAngularRate);
                 buffer[buffer_len++] = temp[0];
@@ -187,8 +189,9 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
 
-
-            //3-axis Compass
+           /******************************************************************************
+             * Sensor - Magtometer
+            ******************************************************************************/
             case SERIALCOMM_REGISTER_XMagneticVector:
                 temp = (UINT8 *)(&HMC5883L_XMagneticVector);
                 buffer[buffer_len++] = temp[0];
@@ -227,8 +230,9 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[1];
                 break;
 
-
-
+           /******************************************************************************
+             * Perceived - Roll Pitch Yaw
+            ******************************************************************************/
             case SERIALCOMM_REGISTER_Pitch:
                 temp = (UINT8 *)(&OrientationLoop_Pitch);
                 buffer[buffer_len++] = temp[0];
@@ -258,6 +262,9 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
 
+           /******************************************************************************
+             * Desired - Roll Pitch Yaw
+            ******************************************************************************/
             case SERIALCOMM_REGISTER_DesiredPitch:
                 temp = (UINT8 *)(&IC_PITCH);
                 buffer[buffer_len++] = temp[0];
@@ -288,7 +295,9 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 break;
 
 
-
+           /******************************************************************************
+             * Motors
+            ******************************************************************************/
             case SERIALCOMM_REGISTER_Motor1:
                 temp = (UINT8 *)(&MotorCtrl_OC_ONE_PC);
                 buffer[buffer_len++] = temp[0];
@@ -318,36 +327,40 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
 
-
-          case SERIALCOMM_CONFIG_RollPitch_Kp:
+            /******************************************************************************
+             * Filter - Constants
+            ******************************************************************************/
+            case SERIALCOMM_CONFIG_Filter_RollPitch_P:
                 temp = (UINT8 *)(&DCM_RollPitch_Kp);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
-            case SERIALCOMM_CONFIG_RollPitch_Ki:
+            case SERIALCOMM_CONFIG_Filter_RollPitch_I:
                 temp = (UINT8 *)(&DCM_RollPitch_Ki);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
-            case SERIALCOMM_CONFIG_Yaw_Kp:
+            case SERIALCOMM_CONFIG_Filter_Yaw_P:
                 temp = (UINT8 *)(&DCM_Yaw_Kp);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
-            case SERIALCOMM_CONFIG_Yaw_Ki:
+            case SERIALCOMM_CONFIG_Filter_Yaw_I:
                 temp = (UINT8 *)(&DCM_Yaw_Ki);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
-
+            /******************************************************************************
+             * Misc
+            ******************************************************************************/
             case SERIALCOMM_REGISTER_VBatt:
                 temp = (UINT8 *)(&v_batt);
                 buffer[buffer_len++] = temp[0];
@@ -355,6 +368,76 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
                 break;
+
+           /******************************************************************************
+             * PID - Constants
+            ******************************************************************************/
+          case SERIALCOMM_CONFIG_PID_Roll_P:
+                temp = (UINT8 *)(&pRollConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_CONFIG_PID_Roll_I:
+                temp = (UINT8 *)(&iRollConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_CONFIG_PID_Roll_D:
+                temp = (UINT8 *)(&dRollConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
+          case SERIALCOMM_CONFIG_PID_Pitch_P:
+                temp = (UINT8 *)(&pPitchConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_CONFIG_PID_Pitch_I:
+                temp = (UINT8 *)(&iPitchConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_CONFIG_PID_Pitch_D:
+                temp = (UINT8 *)(&dPitchConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
+          case SERIALCOMM_CONFIG_PID_Yaw_P:
+                temp = (UINT8 *)(&pYawConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_CONFIG_PID_Yaw_I:
+                temp = (UINT8 *)(&iYawConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_CONFIG_PID_Yaw_D:
+                temp = (UINT8 *)(&dYawConst);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
         }
     }
 
@@ -373,14 +456,17 @@ inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
     {
         switch (message[MsgInterpreter_Index++])
         {
-            case SERIALCOMM_CONFIG_RollPitch_Kp:
+            /******************************************************************************
+             * Filter
+            ******************************************************************************/
+            case SERIALCOMM_CONFIG_Filter_RollPitch_P:
                 buffer[0] = message[MsgInterpreter_Index++];
                 buffer[1] = message[MsgInterpreter_Index++];
                 buffer[2] = message[MsgInterpreter_Index++];
                 buffer[3] = message[MsgInterpreter_Index++];
                 DCM_RollPitch_Kp = *((float*)buffer);
                 break;
-            case SERIALCOMM_CONFIG_RollPitch_Ki:
+            case SERIALCOMM_CONFIG_Filter_RollPitch_I:
                 buffer[0] = message[MsgInterpreter_Index++];
                 buffer[1] = message[MsgInterpreter_Index++];
                 buffer[2] = message[MsgInterpreter_Index++];
@@ -388,19 +474,92 @@ inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
                 DCM_RollPitch_Ki = *((float*)buffer);
 
                 break;
-            case SERIALCOMM_CONFIG_Yaw_Kp:
+            case SERIALCOMM_CONFIG_Filter_Yaw_P:
                 buffer[0] = message[MsgInterpreter_Index++];
                 buffer[1] = message[MsgInterpreter_Index++];
                 buffer[2] = message[MsgInterpreter_Index++];
                 buffer[3] = message[MsgInterpreter_Index++];
                 DCM_Yaw_Kp = *((float*)buffer);
                 break;
-            case SERIALCOMM_CONFIG_Yaw_Ki:
+            case SERIALCOMM_CONFIG_Filter_Yaw_I:
                 buffer[0] = message[MsgInterpreter_Index++];
                 buffer[1] = message[MsgInterpreter_Index++];
                 buffer[2] = message[MsgInterpreter_Index++];
                 buffer[3] = message[MsgInterpreter_Index++];
                 DCM_Yaw_Ki = *((float*)buffer);
+                break;
+            case SERIALCOMM_CONFIG_Filter_Reset:
+                OrientationLoop_reset();
+                DCM_reset();
+                break;
+
+           /******************************************************************************
+             * PID - Constants
+            ******************************************************************************/
+          case SERIALCOMM_CONFIG_PID_Roll_P:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                pRollConst = *((float*)buffer);
+                break;
+          case SERIALCOMM_CONFIG_PID_Roll_I:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                iRollConst = *((float*)buffer);
+                break;
+          case SERIALCOMM_CONFIG_PID_Roll_D:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                dRollConst = *((float*)buffer);
+                break;
+
+          case SERIALCOMM_CONFIG_PID_Pitch_P:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                pPitchConst = *((float*)buffer);
+                break;
+          case SERIALCOMM_CONFIG_PID_Pitch_I:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                iPitchConst = *((float*)buffer);
+                break;
+          case SERIALCOMM_CONFIG_PID_Pitch_D:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                dPitchConst = *((float*)buffer);
+                break;
+
+          case SERIALCOMM_CONFIG_PID_Yaw_P:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                pYawConst = *((float*)buffer);
+                break;
+          case SERIALCOMM_CONFIG_PID_Yaw_I:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                iYawConst = *((float*)buffer);
+                break;
+          case SERIALCOMM_CONFIG_PID_Yaw_D:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                dYawConst = *((float*)buffer);
                 break;
         }
     }

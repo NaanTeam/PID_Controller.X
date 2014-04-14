@@ -116,13 +116,26 @@ extern "C" {
     
 
 
+#define SERIALCOMM_CONFIG_Filter_RollPitch_P        0x80
+#define SERIALCOMM_CONFIG_Filter_RollPitch_I        0x81
+#define SERIALCOMM_CONFIG_Filter_Yaw_P              0x82
+#define SERIALCOMM_CONFIG_Filter_Yaw_I              0x83
+#define SERIALCOMM_CONFIG_Filter_Reset              0x84
+
+#define SERIALCOMM_CONFIG_PID_Roll_P        0x90
+#define SERIALCOMM_CONFIG_PID_Roll_I        0x91
+#define SERIALCOMM_CONFIG_PID_Roll_D        0x92
+#define SERIALCOMM_CONFIG_PID_Pitch_P       0x93
+#define SERIALCOMM_CONFIG_PID_Pitch_I       0x94
+#define SERIALCOMM_CONFIG_PID_Pitch_D       0x95
+#define SERIALCOMM_CONFIG_PID_Yaw_P         0x96
+#define SERIALCOMM_CONFIG_PID_Yaw_I         0x97
+#define SERIALCOMM_CONFIG_PID_Yaw_D         0x98
+#define SERIALCOMM_CONFIG_PID_Reset         0x99
 
 
 
-#define SERIALCOMM_CONFIG_RollPitch_Kp        0x80
-#define SERIALCOMM_CONFIG_RollPitch_Ki        0x81
-#define SERIALCOMM_CONFIG_Yaw_Kp              0x82
-#define SERIALCOMM_CONFIG_Yaw_Ki              0x83
+
 
 //******************************************************************************
 //Function Prototypes

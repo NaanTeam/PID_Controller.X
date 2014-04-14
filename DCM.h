@@ -55,6 +55,7 @@ void DCM_driftCorrection(float* accelVector, float scaledAccelMagnitude, float m
 void DCM_matrixUpdate(float timeDiff, float* gyroScaled);
 void DCM_normalize(void);
 void DCM_eulerAngle(float* roll, float* pitch, float* yaw);
+void DCM_reset();
 
 
 

@@ -240,3 +240,64 @@ void DCM_eulerAngle(float* roll, float* pitch, float* yaw)
 //    pitch = -asin((Accel_Vector[0])/(double)GRAVITY); // asin(acc_x)
 //    yaw = 0;
 }
+
+
+void DCM_reset()
+{
+    Omega_Vector[0]= 0;
+    Omega_Vector[1]= 0;
+    Omega_Vector[2]= 0;
+
+    Omega_P[0]= 0;
+    Omega_P[1]= 0;
+    Omega_P[2]= 0;
+
+    Omega_I[0]= 0;
+    Omega_I[1]= 0;
+    Omega_I[2]= 0;
+
+    Omega[0]= 0;
+    Omega[1]= 0;
+    Omega[2]= 0;
+
+    errorRollPitch[0] = 0;
+    errorRollPitch[1] = 0;
+    errorRollPitch[2] = 0;
+
+    errorYaw[0]= 0;
+    errorYaw[1]= 0;
+    errorYaw[2]= 0;
+
+    errorCourse=180;
+
+    DCM_Matrix[0][0]= 0;
+    DCM_Matrix[0][1]= 0;
+    DCM_Matrix[0][2]= 0;
+    DCM_Matrix[1][0]= 0;
+    DCM_Matrix[1][1]= 0;
+    DCM_Matrix[1][2]= 0;
+    DCM_Matrix[2][0]= 0;
+    DCM_Matrix[2][1]= 0;
+    DCM_Matrix[2][2]= 0;
+
+    Update_Matrix[0][0]= 0;
+    Update_Matrix[0][1]= 0;
+    Update_Matrix[0][2]= 0;
+    Update_Matrix[1][0]= 0;
+    Update_Matrix[1][1]= 0;
+    Update_Matrix[1][2]= 0;
+    Update_Matrix[2][0]= 0;
+    Update_Matrix[2][1]= 0;
+    Update_Matrix[2][2]= 0;
+
+    Temporary_Matrix[0][0]= 0;
+    Temporary_Matrix[0][1]= 0;
+    Temporary_Matrix[0][2]= 0;
+    Temporary_Matrix[1][0]= 0;
+    Temporary_Matrix[1][1]= 0;
+    Temporary_Matrix[1][2]= 0;
+    Temporary_Matrix[2][0]= 0;
+    Temporary_Matrix[2][1]= 0;
+    Temporary_Matrix[2][2]= 0;
+
+}
