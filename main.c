@@ -57,7 +57,6 @@ int main (void)
 {
     int i = 0;
 
-
     //Configures the board for operation
     Setup_initializeBoard();
 
@@ -118,24 +117,11 @@ int main (void)
         OC3RS = MotorCtrl_OC_THREE;   //Back-Right Motor
         OC4RS = MotorCtrl_OC_FOUR;    //Back-Left Motor
 
-        /*
-        MotorCtrl_OC_ONE_PC = 100.0 * (float)(MotorCtrl_OC_ONE - OC_KILL) / (float)(OC_MAX - OC_KILL);
-        MotorCtrl_OC_TWO_PC = 100.0 * (float)(MotorCtrl_OC_TWO - OC_KILL) / (float)(OC_MAX - OC_KILL);
-        MotorCtrl_OC_THREE_PC = 100.0 * (float)(MotorCtrl_OC_THREE - OC_KILL) / (float)(OC_MAX - OC_KILL);
-        MotorCtrl_OC_FOUR_PC = 100.0 * (float)(MotorCtrl_OC_FOUR - OC_KILL) / (float)(OC_MAX - OC_KILL);
-        //*/
-        ///*
+        //PC values to be used for visual purposes on the GUI
         MotorCtrl_OC_ONE_PC = MotorCtrl_OC_ONE;
         MotorCtrl_OC_TWO_PC = MotorCtrl_OC_TWO;
         MotorCtrl_OC_THREE_PC = MotorCtrl_OC_THREE;
         MotorCtrl_OC_FOUR_PC = MotorCtrl_OC_FOUR;
-        //*/
-        /*
-        MotorCtrl_OC_ONE_PC = PID_ROLL;
-        MotorCtrl_OC_TWO_PC = PID_PITCH;
-        MotorCtrl_OC_THREE_PC = PID_YAW;
-        MotorCtrl_OC_FOUR_PC = MotorCtrl_OC_FOUR;
-        //*/
     }
 
     return 0;
