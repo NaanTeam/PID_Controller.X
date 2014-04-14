@@ -5,20 +5,20 @@ float SENS_ROLL = 0.0,      //These are just placeholders for Connor's sensor ou
       SENS_PITCH = 0.0, 
       SENS_YAW = 0.0;   
 
-float PID_ROLL = 0.0,       //Roll output for motor controller
+float PID_ROLL  = 0.0,      //Roll output for motor controller
       PID_PITCH = 0.0,      //Pitch output for motor controller
-      PID_YAW = 0.0;        //Yaw output for motor controller
+      PID_YAW   = 0.0;      //Yaw output for motor controller
 
-float pRollConst = 20.0,     //Peripheral constant
-      iRollConst = 0.0,     //Intergral constant
+float pRollConst = 80.0,    //Proportional constant
+      iRollConst = 0.008,   //Integral constant
       dRollConst = 0.0;     //Derivative constant
 
-float pPitchConst = 0.0,    //Proportional constant
-      iPitchConst = 0.0,    //Intergral constant
+float pPitchConst = 80.0,   //Proportional constant
+      iPitchConst = 0.008,  //Integral constant
       dPitchConst = 0.0;    //Derivative constant
 
-float pYawConst = 10.0,     //Proportional constant
-      iYawConst = 0.0,      //Intergral constant
+float pYawConst = 0.0,      //Proportional constant
+      iYawConst = 0.0,      //Integral constant
       dYawConst = 0.0;      //Derivative constant
 
 float scaledOrientationYaw;
@@ -52,6 +52,8 @@ void MotorPID_setPIDRoll(void)
 
     PID_ROLL = (pRollConst * rError) + (iRollConst * rErrSum) + (dRollConst * dRollErr);
 
+    //PID_ROLL = pRollConst * rError; //Used just to get a number on the GUI (garbage code)
+
     rLastErr = rError;
     //rLastTime = rNow;
 }
@@ -71,6 +73,8 @@ void MotorPID_setPIDPitch(void)
     dPitchErr = (pError - pLastErr) / timer5TimeChange;
 
     PID_PITCH = (pPitchConst * pError) + (iPitchConst * pErrSum) + (dPitchConst * dPitchErr);
+
+    //PID_PITCH = iRollConst * rErrSum; //Used just to get a number on the GUI (garbage code)
 
     pLastErr = pError;
     //pLastTime = pNow;

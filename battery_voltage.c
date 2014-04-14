@@ -8,7 +8,8 @@
 #define PARAM5 ENABLE_AN2_ANA
 
 unsigned int ADC_value;
-float constant = 1.458; //1.2983(?)
+float constant = 1.643;    //Battery 1 constant
+//float constant = 1.484;    //Battery 2 constant
 float v_batt;
 
 void setup_ADC()
