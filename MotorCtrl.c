@@ -107,7 +107,7 @@ void MotorCtrl_adjustRollPitchYaw(void)
 void MotorCtrl_adjustThrust(void)
 {
     //Scales the throttle value so it is between OC_MIN and OC_MAX
-    OC_THRO = IC_THRO * (((float)OC_MAX - (float)OC_MIN) / 100.0) + (float)OC_MIN;
+    OC_THRO = (IC_THRO + GUI_THROTTLE) * (((float)OC_MAX - (float)OC_MIN) / 100.0) + (float)OC_MIN;
 }
 
 void MotorCtrl_shutOffMotors(void)

@@ -15,7 +15,7 @@
 #include "RcRx.h"
 #include "OrientationLoop.h"
 #include "Calibration.h"
-
+#include "GUI.h"
 
 #define PID_YAW_ROC             .0016
 

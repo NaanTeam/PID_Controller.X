@@ -26,6 +26,7 @@
                      projectFiles="true">
         <itemPath>MotorCtrl.h</itemPath>
         <itemPath>RcRx.h</itemPath>
+        <itemPath>GUI.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Sensors" projectFiles="true">
         <itemPath>HMC5883L.h</itemPath>
@@ -68,6 +69,7 @@
                      projectFiles="true">
         <itemPath>MotorCtrl.c</itemPath>
         <itemPath>RcRx.c</itemPath>
+        <itemPath>GUI.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Sensors" projectFiles="true">
         <itemPath>ADXL362.c</itemPath>

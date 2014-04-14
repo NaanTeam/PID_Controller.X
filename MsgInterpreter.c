@@ -294,6 +294,35 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
 
+            case SERIALCOMM_REGISTER_DesiredRoll_GUI:
+                temp = (UINT8 *)(&GUI_ROLL);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_REGISTER_DesiredPitch_GUI:
+                temp = (UINT8 *)(&GUI_PITCH);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_REGISTER_DesiredYaw_GUI:
+                temp = (UINT8 *)(&GUI_YAW);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+            case SERIALCOMM_REGISTER_DesiredThrottle_GUI:
+                temp = (UINT8 *)(&GUI_THROTTLE);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
 
            /******************************************************************************
              * Motors
@@ -450,6 +479,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
 inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
 {
     UINT8 * temp;
+    float temp_f;
     UINT8 buffer[32];
 
     while(MsgInterpreter_Index < MsgInterpreter_Length)
@@ -465,6 +495,40 @@ inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
             case SERIALCOMM_CONFIG_ShutoffMotor:
                 MotorCtrl_shutOffMotors();
                 break;
+
+            case SERIALCOMM_CONFIG_GUI_Roll:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustRoll(temp_f);
+                break;
+            case SERIALCOMM_CONFIG_GUI_Pitch:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustPitch(temp_f);
+                break;
+            case SERIALCOMM_CONFIG_GUI_Yaw:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustYaw(temp_f);
+                break;
+            case SERIALCOMM_CONFIG_GUI_Throttle:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustThrottle(temp_f);
+                break;
+
 
             /******************************************************************************
              * Filter

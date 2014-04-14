@@ -44,7 +44,7 @@ void MotorPID_setPIDRoll(void)
     //rTimeChange = (((float)rNow - (float)rLastTime) / 1000000.0F) * 1000.0F;
 
     //rError = (2.0 * (float)IC_ROLL) - (float)SENS_ROLL;
-    rError = IC_ROLL - SENS_ROLL;
+    rError = IC_ROLL + GUI_ROLL - SENS_ROLL;
 
     //rErrSum += (rError * rTimeChange);
     rErrSum += (rError * timer5TimeChange);
@@ -66,7 +66,7 @@ void MotorPID_setPIDPitch(void)
     //pTimeChange = (((float)pNow - (float)pLastTime) / 1000000.0F) * 1000.0F;
 
     //pError = (2.0 * (float)IC_PITCH) - (float)SENS_PITCH;
-    pError = IC_PITCH - SENS_PITCH;
+    pError = IC_PITCH + GUI_PITCH - SENS_PITCH;
 
     //pErrSum += (pError * pTimeChange);
     pErrSum += (pError * timer5TimeChange);
@@ -171,7 +171,7 @@ void MotorPID_determineZeroYaw(void)
         yawFlag++;
     }
 
-    Calibration_Yaw_Zero_Point += (IC_YAW * PID_YAW_ROC);
+    Calibration_Yaw_Zero_Point +=  ((IC_YAW + GUI_YAW) * PID_YAW_ROC);
 
     if (Calibration_Yaw_Zero_Point > PI)
     {

@@ -47,7 +47,8 @@ extern "C" {
 #include "MotorPID.h"
 #include "RcRx.h"
 #include "battery_voltage.h"
-
+#include "GUI.h"
+    
 //******************************************************************************
 //Configuration #defines
 //******************************************************************************
@@ -106,6 +107,16 @@ extern "C" {
 #define SERIALCOMM_REGISTER_DesiredYaw          0x45
 #define SERIALCOMM_REGISTER_DesiredRoll         0x46
 #define SERIALCOMM_REGISTER_DesiredThrottle     0x47
+#define SERIALCOMM_REGISTER_DesiredRoll_GUI          0x48
+#define SERIALCOMM_REGISTER_DesiredPitch_GUI         0x49
+#define SERIALCOMM_REGISTER_DesiredYaw_GUI           0x4A
+#define SERIALCOMM_REGISTER_DesiredThrottle_GUI      0x4B
+
+#define SERIALCOMM_CONFIG_GUI_Roll          0x4C
+#define SERIALCOMM_CONFIG_GUI_Pitch         0x4D
+#define SERIALCOMM_CONFIG_GUI_Yaw           0x4E
+#define SERIALCOMM_CONFIG_GUI_Throttle      0x4F
+
 
 #define SERIALCOMM_REGISTER_Motor1              0x50
 #define SERIALCOMM_REGISTER_Motor2              0x51
@@ -113,7 +124,6 @@ extern "C" {
 #define SERIALCOMM_REGISTER_Motor4              0x53
 #define SERIALCOMM_CONFIG_IdleMotor             0x54
 #define SERIALCOMM_CONFIG_ShutoffMotor          0x55
-
 
 #define SERIALCOMM_REGISTER_VBatt             0x60
     
