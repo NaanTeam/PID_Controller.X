@@ -136,6 +136,8 @@ extern "C" {
 #define SERIALCOMM_CONFIG_PID_Yaw_D         0x98
 #define SERIALCOMM_CONFIG_PID_Reset         0x99
 
+#define SERIALCOMM_CONFIG_SoftRestart         0xA0
+
 
 
 

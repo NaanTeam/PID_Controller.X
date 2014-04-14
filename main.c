@@ -55,6 +55,9 @@
 
 int main (void)
 {
+    int i = 0;
+
+
     //Configures the board for operation
     Setup_initializeBoard();
 
@@ -63,6 +66,13 @@ int main (void)
 
     //Starts the various communication protocols
     Setup_communications();
+
+    //gives it time to start up
+    while (i < (5400 * 200))
+    {
+        i++;
+    }
+
 
     //Calibrates the on-board sensors
     Calibration_sensorsOffsets();

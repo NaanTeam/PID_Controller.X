@@ -16,9 +16,6 @@ void Setup_initializeBoard(void)
 
 void Setup_communications(void)
 {
-    int i = 0;
-
-
     //Start Protocols
     FIFOSPI2_initialize();
     FIFOI2C2_initialize();
@@ -30,13 +27,6 @@ void Setup_communications(void)
 
     SensorLoop_start();
     CommunicationLoop_start();
-
-    //gives it time to start up
-    while (i < (1400 * 200))
-    {
-        i++;
-    }
-
 }
 
 void Setup_ports(void)

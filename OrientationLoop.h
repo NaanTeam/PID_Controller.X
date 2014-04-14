@@ -32,12 +32,12 @@ extern "C" {
 //******************************************************************************
 //Configuration #defines
 //******************************************************************************
-#define GRAVITY 1180 // This equivalent to 1G in the raw data coming from the accelerometer
+#define GRAVITY 515 // This equivalent to 1G in the raw data coming from the accelerometer
 
 //L3G4200D Sensitivity at 250dps
-#define Gyro_Gain_X 1.0*17.5e-3
-#define Gyro_Gain_Y 1.0*17.5e-3
-#define Gyro_Gain_Z 1.0*17.5e-3
+#define Gyro_Gain_X 0.5*17.5e-3
+#define Gyro_Gain_Y 0.5*17.5e-3
+#define Gyro_Gain_Z 0.5*17.5e-3
 #define Gyro_Scaled_X(x) x*ToRad(Gyro_Gain_X) //Return the scaled ADC raw data of the gyro in radians for second
 #define Gyro_Scaled_Y(x) x*ToRad(Gyro_Gain_Y) //Return the scaled ADC raw data of the gyro in radians for second
 #define Gyro_Scaled_Z(x) x*ToRad(Gyro_Gain_Z) //Return the scaled ADC raw data of the gyro in radians for second

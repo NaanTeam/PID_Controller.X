@@ -24,3 +24,10 @@ void Calibration_zeroYaw()
 {
     Calibration_Yaw_Zero_Point = scaledOrientationYaw;
 }
+
+void Calibration_offsetAcceleration()
+{
+    ADXL362_XAcceleration_Raw = ADXL362_XAcceleration_Raw - Calibration_AccelX_Center;
+    ADXL362_YAcceleration_Raw = ADXL362_YAcceleration_Raw - Calibration_AccelY_Center;
+    ADXL362_ZAcceleration_Raw = ADXL362_ZAcceleration_Raw - Calibration_AccelZ_Center;
+}

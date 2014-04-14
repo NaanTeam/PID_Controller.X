@@ -9,10 +9,10 @@
 //Local Variable and Typedef Declarations
 //******************************************************************************
 
-//Stationing working: 30, 5, 12, 1.5
+//Stationing working: .13, .01
 
-float DCM_RollPitch_Kp = 3.0/GRAVITY; 
-float DCM_RollPitch_Ki = .02/GRAVITY;
+float DCM_RollPitch_Kp = 0.04;
+float DCM_RollPitch_Ki = 0.00002;
 //float DCM_Yaw_Kp = 22.0;
 //float DCM_Yaw_Ki = 2.0;
 float DCM_Yaw_Kp = 5;
@@ -75,17 +75,17 @@ void DCM_matrixUpdate(float timeDiff, float* gyroRadSec)
 //    Update_Matrix[2][0]=-timeDiff*gyroRadSec[1];//-y
 //    Update_Matrix[2][1]=timeDiff*gyroRadSec[0];//x
 //    Update_Matrix[2][2]=0;
-//
+
     //drift correction
-  Update_Matrix[0][0]=0;
-  Update_Matrix[0][1]=-timeDiff*Omega_Vector[2];//-z
-  Update_Matrix[0][2]=timeDiff*Omega_Vector[1];//y
-  Update_Matrix[1][0]=timeDiff*Omega_Vector[2];//z
-  Update_Matrix[1][1]=0;
-  Update_Matrix[1][2]=-timeDiff*Omega_Vector[0];//-x
-  Update_Matrix[2][0]=-timeDiff*Omega_Vector[1];//-y
-  Update_Matrix[2][1]=timeDiff*Omega_Vector[0];//x
-  Update_Matrix[2][2]=0;
+    Update_Matrix[0][0]=0;
+    Update_Matrix[0][1]=-timeDiff*Omega_Vector[2];//-z
+    Update_Matrix[0][2]=timeDiff*Omega_Vector[1];//y
+    Update_Matrix[1][0]=timeDiff*Omega_Vector[2];//z
+    Update_Matrix[1][1]=0;
+    Update_Matrix[1][2]=-timeDiff*Omega_Vector[0];//-x
+    Update_Matrix[2][0]=-timeDiff*Omega_Vector[1];//-y
+    Update_Matrix[2][1]=timeDiff*Omega_Vector[0];//x
+    Update_Matrix[2][2]=0;
 
     Matrix_Multiply(Temporary_Matrix, DCM_Matrix,Update_Matrix); //a*b=c
 
@@ -191,7 +191,6 @@ void DCM_driftCorrection(float* accelVector, float scaledAccelMag, float magneti
     static float Scaled_Omega_I[3];
     float Accel_weight;
     float Integrator_magnitude;
-    float tempfloat;
 
 
     //*****Roll and Pitch***************
@@ -201,33 +200,33 @@ void DCM_driftCorrection(float* accelVector, float scaledAccelMag, float magneti
 
 
     Vector_Cross_Product(&errorRollPitch[0],&accelVector[0],&DCM_Matrix[2][0]); //adjust the ground of reference
-    Vector_Scale(&Omega_P[0],&errorRollPitch[0],DCM_RollPitch_Kp*Accel_weight);
+    Vector_Scale(&Omega_P[0], &errorRollPitch[0], DCM_RollPitch_Kp*Accel_weight);
 
     Vector_Scale(&Scaled_Omega_I[0],&errorRollPitch[0],DCM_RollPitch_Ki*Accel_weight);
     Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);
 
 
-    //*****YAW***************
-    //Calculate Heading_X and Heading_Y
-    magneticHeading_X = cos(magneticHeading);
-    magneticHeading_Y = sin(magneticHeading);
-
-    // We make the gyro YAW drift correction based on compass magnetic heading
-    errorCourse=(DCM_Matrix[0][0]*magneticHeading_Y) - (DCM_Matrix[1][0]*magneticHeading_X);  //Calculating YAW error
-    Vector_Scale(errorYaw,&DCM_Matrix[2][0],errorCourse); //Applys the yaw correction to the XYZ rotation of the aircraft, depeding the position.
-
-    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],DCM_Yaw_Kp);
-    Vector_Add(Omega_P,Omega_P,Scaled_Omega_P);//Adding  Proportional.
-
-    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],DCM_Yaw_Ki);
-    Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);//adding integrator to the Omega_I
-
-
-    //  Here we will place a limit on the integrator so that the integrator cannot ever exceed half the saturation limit of the gyros
-    Integrator_magnitude = sqrt(Vector_Dot_Product(Omega_I,Omega_I));
-    if (Integrator_magnitude > ToRad(300)) {
-    Vector_Scale(Omega_I,Omega_I,0.5f*ToRad(300)/Integrator_magnitude);
-    }
+//    //*****YAW***************
+//    //Calculate Heading_X and Heading_Y
+//    magneticHeading_X = cos(magneticHeading);
+//    magneticHeading_Y = sin(magneticHeading);
+//
+//    // We make the gyro YAW drift correction based on compass magnetic heading
+//    errorCourse=(DCM_Matrix[0][0]*magneticHeading_Y) - (DCM_Matrix[1][0]*magneticHeading_X);  //Calculating YAW error
+//    Vector_Scale(errorYaw,&DCM_Matrix[2][0],errorCourse); //Applys the yaw correction to the XYZ rotation of the aircraft, depeding the position.
+//
+//    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],DCM_Yaw_Kp);
+//    Vector_Add(Omega_P,Omega_P,Scaled_Omega_P);//Adding  Proportional.
+//
+//    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],DCM_Yaw_Ki);
+//    Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);//adding integrator to the Omega_I
+//
+//
+//    //  Here we will place a limit on the integrator so that the integrator cannot ever exceed half the saturation limit of the gyros
+//    Integrator_magnitude = sqrt(Vector_Dot_Product(Omega_I,Omega_I));
+//    if (Integrator_magnitude > ToRad(300)) {
+//    Vector_Scale(Omega_I,Omega_I,0.5f*ToRad(300)/Integrator_magnitude);
+//    }
 }
 
 void DCM_eulerAngle(float* roll, float* pitch, float* yaw)

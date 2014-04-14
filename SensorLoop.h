@@ -30,6 +30,7 @@ extern "C" {
 #include "L3G4200D.h"
 #include "HMC5883L.h"
 
+#include "Calibration.h"
 
 //******************************************************************************
 //Function Prototypes

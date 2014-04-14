@@ -43,9 +43,9 @@ float OrientationLoop_calcCompassHeading(float* magneticVectors);
 void OrientationLoop_adjustSensorError(float* accelCorrected, float* gyroCorrected, float* magneticCorrected)
 {
     //Accel
-    accelCorrected[0] = ADXL362_XAcceleration_Raw_Avg - XAccel_Offeset;
-    accelCorrected[1] = ADXL362_YAcceleration_Raw_Avg - YAccel_Offeset;
-    accelCorrected[2] = ADXL362_ZAcceleration_Raw_Avg - ZAccel_Offeset;
+    accelCorrected[0] = ADXL362_XAcceleration_Raw_Avg;
+    accelCorrected[1] = ADXL362_YAcceleration_Raw_Avg;
+    accelCorrected[2] = ADXL362_ZAcceleration_Raw_Avg;
     //Gyro
     gyroCorrected[0] = (float)(L3G4200D_XAngularRate_Raw_Avg - Calibration_Gyro_Offset_X);
     gyroCorrected[1] = (float)(L3G4200D_YAngularRate_Raw_Avg - Calibration_Gyro_Offset_Y);
@@ -143,7 +143,7 @@ void OrientationLoop_start()
     }
 }
 
-
+int i = 0;
 void OrientationLoop_update()
 {
 
@@ -174,8 +174,10 @@ void OrientationLoop_update()
     DCM_matrixUpdate(timeDiff, gyroScaled);
     //Renormalize the DCM matrix
     DCM_normalize();
-    //Calculate drift correction
+
+    //Correct for drift
     DCM_driftCorrection(accelCorrected, scaledAccelMagnitude, Magnetic_Heading);
+        
 
 
     //Convery DCM into euler angles
