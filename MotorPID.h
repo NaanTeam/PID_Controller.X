@@ -49,5 +49,6 @@ void MotorPID_setPIDValues(void);
 void MotorPID_setPIDRoll(void);
 void MotorPID_setPIDPitch(void);
 void MotorPID_setPIDYaw(void);
+void MotorPID_resetPID(void);
 
 #endif

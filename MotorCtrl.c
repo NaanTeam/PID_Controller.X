@@ -129,6 +129,22 @@ void MotorCtrl_adjustThrust(void)
     MotorCtrl_OC_FOUR = OC_VAL;
 }
 
+void MotorCtrl_shutOffMotors(void)
+{
+    MotorCtrl_OC_ONE   = OC_KILL;
+    MotorCtrl_OC_TWO   = OC_KILL;
+    MotorCtrl_OC_THREE = OC_KILL;
+    MotorCtrl_OC_FOUR  = OC_KILL;
+}
+
+void MotorCtrl_idleMotors(void)
+{
+    MotorCtrl_OC_ONE   = OC_MIN;
+    MotorCtrl_OC_TWO   = OC_MIN;
+    MotorCtrl_OC_THREE = OC_MIN;
+    MotorCtrl_OC_FOUR  = OC_MIN;
+}
+
 /*void adjustRoll(void)
 {
     unsigned int adjustedRoll = OC_PID_SCALE * PID_ROLL;

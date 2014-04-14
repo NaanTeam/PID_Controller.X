@@ -16,7 +16,7 @@
 
 #define OC_KILL         2500
 #define OC_MIN          3000
-#define OC_MAX          3750
+#define OC_MAX          3250
 #define OC_PID_SCALE    100
 
 extern unsigned int MotorCtrl_OC_ONE,    //Pulse-width on Left-Front motor from 2000 to 4000
@@ -25,9 +25,9 @@ extern unsigned int MotorCtrl_OC_ONE,    //Pulse-width on Left-Front motor from 
                     MotorCtrl_OC_FOUR;   //Pulse-width on Left-Back motor from 2000 to 4000
 
 extern  float MotorCtrl_OC_ONE_PC,
-                    MotorCtrl_OC_TWO_PC,
-                    MotorCtrl_OC_THREE_PC,
-                    MotorCtrl_OC_FOUR_PC;
+              MotorCtrl_OC_TWO_PC,
+              MotorCtrl_OC_THREE_PC,
+              MotorCtrl_OC_FOUR_PC;
 
 void MotorCtrl_setupOutputCompares(void);
 void MotorCtrl_startupMotors(void);
@@ -37,6 +37,7 @@ void MotorCtrl_adjustThrust(void);
 //void adjustPitch(void);
 //void adjustYaw(void);
 void MotorCtrl_adjustRollPitchYaw(void);
-
+void MotorCtrl_shutOffMotors(void);
+void MotorCtrl_idleMotors(void);
 
 #endif

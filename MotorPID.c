@@ -23,9 +23,8 @@ float pYawConst = 10.0,     //Proportional constant
 
 float scaledOrientationYaw;
 
-unsigned int rLastTime, pLastTime, yLastTime;
-
 float rErrSum, rLastErr, pErrSum, pLastErr, yErrSum, yLastErr;
+float rError, dRollErr, pError, dPitchErr, yError, dYawErr;
 
 int yawFlag = 0;
 
@@ -40,7 +39,6 @@ void MotorPID_setPIDRoll(void)
 {
     //clock_t rNow = clock();
     //float rTimeChange, rError;
-    float rError, dRollErr;
 
     //time change is saved as milliseconds
     //rTimeChange = (((float)rNow - (float)rLastTime) / 1000000.0F) * 1000.0F;
@@ -62,7 +60,6 @@ void MotorPID_setPIDPitch(void)
 {
     //clock_t pNow = clock();
     //float pTimeChange, pError;
-    float pError, dPitchErr;
 
     //pTimeChange = (((float)pNow - (float)pLastTime) / 1000000.0F) * 1000.0F;
 
@@ -83,7 +80,6 @@ void MotorPID_setPIDYaw(void)
 {
     //unsigned int yNow = TMR5;
     //float yTimeChange, yError;
-    float yError, dYawErr;
 
     //yTimeChange = (((float)yNow - (float)yLastTime) / 1000000.0F) * 1000;
     
@@ -182,4 +178,19 @@ void MotorPID_determineZeroYaw(void)
     {
         Calibration_Yaw_Zero_Point += (2.0 * PI);
     }
+}
+
+void MotorPID_resetPID(void)
+{
+    //Set all error and PID outputs to zero
+    PID_ROLL  = 0.0,
+    PID_PITCH = 0.0,
+    PID_YAW   = 0.0,
+
+    rErrSum = 0.0,   rLastErr  = 0.0,
+    pErrSum = 0.0,   pLastErr  = 0.0,
+    yErrSum = 0.0,   yLastErr  = 0.0,
+    rError  = 0.0,   dRollErr  = 0.0,
+    pError  = 0.0,   dPitchErr = 0.0,
+    yError  = 0.0,   dYawErr   = 0.0;
 }
