@@ -74,10 +74,10 @@ void MotorCtrl_adjustOCValues(void)
 
 void MotorCtrl_adjustRollPitchYaw(void)
 {
-    MotorCtrl_OC_ONE = OC_THRO + PID_ROLL + PID_PITCH + PID_YAW;
-    MotorCtrl_OC_TWO = OC_THRO - PID_ROLL + PID_PITCH - PID_YAW;
-    MotorCtrl_OC_THREE = OC_THRO - PID_ROLL - PID_PITCH + PID_YAW;
-    MotorCtrl_OC_FOUR = OC_THRO + PID_ROLL - PID_PITCH - PID_YAW;
+    MotorCtrl_OC_ONE   = OC_THRO - PID_ROLL - PID_PITCH - PID_YAW;
+    MotorCtrl_OC_TWO   = OC_THRO + PID_ROLL - PID_PITCH + PID_YAW;
+    MotorCtrl_OC_THREE = OC_THRO + PID_ROLL + PID_PITCH - PID_YAW;
+    MotorCtrl_OC_FOUR  = OC_THRO - PID_ROLL + PID_PITCH + PID_YAW;
 
     if (MotorCtrl_OC_ONE > OC_MAX)
         MotorCtrl_OC_ONE = OC_MAX;

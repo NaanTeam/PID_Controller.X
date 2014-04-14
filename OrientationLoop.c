@@ -137,10 +137,10 @@ void OrientationLoop_start()
     OpenTimer5(T5_ON | T5_SOURCE_INT | T1_PS_1_64, 12500);//50hz @ 40MHz
 
     //gives it time to start up
-    while (i < (1400 * 200))
-    {
-        i++;
-    }
+//    while (i < (1400 * 200))
+//    {
+//        i++;
+//    }
 }
 
 int i = 0;

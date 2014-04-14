@@ -61,7 +61,7 @@ int main (void)
     Setup_initializeBoard();
 
     //Blocking Call// waits for RC controller to zero
-    //RcRx_zeroController();
+    RcRx_zeroController();
 
     //Starts the various communication protocols
     Setup_communications();
@@ -77,7 +77,7 @@ int main (void)
     Calibration_sensorsOffsets();
 
     //Blocking Call// waits for a startup sequnce on the RC controller
-    //RcRx_enableProps();
+    RcRx_enableProps();
 
     //Starts the PID Roll/Pitch/Yaw calculation and the PID based on it
     OrientationLoop_start();

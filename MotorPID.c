@@ -9,16 +9,16 @@ float PID_ROLL  = 0.0,      //Roll output for motor controller
       PID_PITCH = 0.0,      //Pitch output for motor controller
       PID_YAW   = 0.0;      //Yaw output for motor controller
 
-float pRollConst = 80.0,    //Proportional constant
-      iRollConst = 0.008,   //Integral constant
+float pRollConst = 0.0,    //Proportional constant
+      iRollConst = 0.0,   //Integral constant
       dRollConst = 0.0;     //Derivative constant
 
-float pPitchConst = 80.0,   //Proportional constant
-      iPitchConst = 0.008,  //Integral constant
+float pPitchConst = 0.0,   //Proportional constant
+      iPitchConst = 0.0,  //Integral constant
       dPitchConst = 0.0;    //Derivative constant
 
-float pYawConst = 0.0,      //Proportional constant
-      iYawConst = 0.0,      //Integral constant
+float pYawConst = 80.0,      //Proportional constant
+      iYawConst = 0.008,      //Integral constant
       dYawConst = 0.0;      //Derivative constant
 
 float scaledOrientationYaw;
