@@ -456,6 +456,16 @@ inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
     {
         switch (message[MsgInterpreter_Index++])
         {
+          /******************************************************************************
+             * Motors
+            ******************************************************************************/
+            case SERIALCOMM_CONFIG_IdleMotor:
+                MotorCtrl_idleMotors();
+                break;
+            case SERIALCOMM_CONFIG_ShutoffMotor:
+                MotorCtrl_shutOffMotors();
+                break;
+
             /******************************************************************************
              * Filter
             ******************************************************************************/
@@ -494,8 +504,12 @@ inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
                 break;
 
            /******************************************************************************
-             * PID - Constants
+             * PID
             ******************************************************************************/
+         case SERIALCOMM_CONFIG_PID_Reset:
+                MotorPID_resetPID();
+                break;
+
           case SERIALCOMM_CONFIG_PID_Roll_P:
                 buffer[0] = message[MsgInterpreter_Index++];
                 buffer[1] = message[MsgInterpreter_Index++];

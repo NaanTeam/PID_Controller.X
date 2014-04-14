@@ -111,6 +111,9 @@ extern "C" {
 #define SERIALCOMM_REGISTER_Motor2              0x51
 #define SERIALCOMM_REGISTER_Motor3              0x52
 #define SERIALCOMM_REGISTER_Motor4              0x53
+#define SERIALCOMM_CONFIG_IdleMotor             0x54
+#define SERIALCOMM_CONFIG_ShutoffMotor          0x55
+
 
 #define SERIALCOMM_REGISTER_VBatt             0x60
     
