@@ -241,7 +241,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
             case SERIALCOMM_REGISTER_Yaw:
-                temp = (UINT8 *)(&scaledOrientationYaw);
+                temp = (UINT8 *)(&OrientationLoop_Yaw);
                 buffer[buffer_len++] = temp[0];
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];

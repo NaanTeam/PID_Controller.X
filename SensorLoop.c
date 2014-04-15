@@ -62,12 +62,12 @@ void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
         0.993 * ADXL362_ZAcceleration_Raw_Avg);
 
 
-    L3G4200D_XAngularRate_Raw_Avg = (0.30*L3G4200D_XAngularRate_Raw +
-        0.70 * L3G4200D_XAngularRate_Raw_Avg);
-    L3G4200D_YAngularRate_Raw_Avg = (0.30*L3G4200D_YAngularRate_Raw +
-        0.70 * L3G4200D_YAngularRate_Raw_Avg);
-    L3G4200D_ZAngularRate_Raw_Avg = (0.30*L3G4200D_ZAngularRate_Raw +
-        0.70 * L3G4200D_ZAngularRate_Raw_Avg);
+    L3G4200D_XAngularRate_Raw_Avg = (0.10*L3G4200D_XAngularRate_Raw +
+        0.90 * L3G4200D_XAngularRate_Raw_Avg);
+    L3G4200D_YAngularRate_Raw_Avg = (0.10*L3G4200D_YAngularRate_Raw +
+        0.90 * L3G4200D_YAngularRate_Raw_Avg);
+    L3G4200D_ZAngularRate_Raw_Avg = (0.10*L3G4200D_ZAngularRate_Raw +
+        0.90 * L3G4200D_ZAngularRate_Raw_Avg);
 
     ADXL362_convertXYZT();
     L3G4200D_convertXYZT();

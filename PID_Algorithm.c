@@ -1,6 +1,6 @@
 #include "PID_Algorithm.h"
 #include "RC_Receiver.h"
-#include "Orientation.h"
+#include "OrientationLoop.h"
 #include "Calibration.h"
 
 float SENS_ROLL = 0.0,      //These are just placeholders for Connor's sensor output
@@ -134,27 +134,27 @@ void setPIDYaw(void)
 
 void getSensorValues(void)
 {
-    SENS_ROLL = Orientation_Roll;
-    SENS_PITCH = Orientation_Pitch;
+    SENS_ROLL = OrientationLoop_Roll;
+    SENS_PITCH = OrientationLoop_Pitch;
 
-    if (Orientation_Yaw > 0)
+    if (OrientationLoop_Yaw > 0)
     {
-        scaledOrientationYaw = Orientation_Yaw / 2.0;
+        scaledOrientationYaw = OrientationLoop_Yaw / 2.0;
     }
 
-    else if (Orientation_Yaw > -3.15 && Orientation_Yaw <= -2.10)
+    else if (OrientationLoop_Yaw > -3.15 && OrientationLoop_Yaw <= -2.10)
     {
-        scaledOrientationYaw = (Orientation_Yaw * 1.5) + 6.283;
+        scaledOrientationYaw = (OrientationLoop_Yaw * 1.5) + 6.283;
     }
 
-    else if (Orientation_Yaw <= 0 && Orientation_Yaw > -2.10)
+    else if (OrientationLoop_Yaw <= 0 && OrientationLoop_Yaw > -2.10)
     {
-        scaledOrientationYaw = Orientation_Yaw * 1.5;
+        scaledOrientationYaw = OrientationLoop_Yaw * 1.5;
     }
 
     else
     {
-        scaledOrientationYaw = Orientation_Yaw;
+        scaledOrientationYaw = OrientationLoop_Yaw;
     }
 
     SENS_YAW = scaledOrientationYaw;
