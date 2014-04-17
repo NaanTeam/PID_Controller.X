@@ -17,8 +17,8 @@ float pPitchConst = 0.0,   //Proportional constant
       iPitchConst = 0.0,  //Integral constant
       dPitchConst = 0.0;    //Derivative constant
 
-float pYawConst = 80.0,      //Proportional constant
-      iYawConst = 0.008,      //Integral constant
+float pYawConst = 0.0,      //Proportional constant
+      iYawConst = 0.0,      //Integral constant
       dYawConst = 0.0;      //Derivative constant
 
 float scaledOrientationYaw;

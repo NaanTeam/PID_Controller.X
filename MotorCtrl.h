@@ -17,6 +17,11 @@
 #define OC_KILL         2500
 #define OC_MIN          3000
 #define OC_MAX          3250
+
+#define OC_ONE_OFFSET   50
+#define OC_TWO_OFFSET   -50
+#define OC_THREE_OFFSET 50
+#define OC_FOUR_OFFSET  -50
 //#define OC_PID_SCALE    100
 
 extern unsigned int MotorCtrl_OC_ONE,    //Pulse-width on Left-Front motor from 2000 to 4000
