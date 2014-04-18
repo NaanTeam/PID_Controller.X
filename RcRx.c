@@ -58,25 +58,25 @@ void RcRx_zeroController(void)
             else
                 i--;
         }
-        ym = ym / 10;
+        ym = ym / 50;
 
-        for(j = 0; j < 10; j++)
+        for(j = 0; j < 50; j++)
         {
             if(period3 > MID_THRESH_L && period3 < MID_THRESH_H)
                 pm = pm + period3;
             else
                 j--;
         }
-        pm = pm / 10;
+        pm = pm / 50;
 
-        for(k = 0; k < 10; k++)
+        for(k = 0; k < 50; k++)
         {
             if(period4 > MID_THRESH_L && period4 < MID_THRESH_H)
                 rm = rm + period4;
             else
                 k--;
         }
-        rm = rm / 10;
+        rm = rm / 50;
 
         if(ym > MID_THRESH_L && ym < MID_THRESH_H &&
            pm > MID_THRESH_L && pm < MID_THRESH_H &&
