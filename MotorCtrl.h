@@ -14,33 +14,41 @@
 #include "RcRx.h"
 #include "MotorPID.h"
 
-#define OC_KILL         2500
-#define OC_MIN          3000
-#define OC_MAX          3250
+#define OC_KILL         2500    //Absolute min (off)
+#define OC_MIN          3000    //Idle
+#define OC_MAX          3250    //Absolute max 5000
 
-#define OC_ONE_OFFSET   50
-#define OC_TWO_OFFSET   -50
-#define OC_THREE_OFFSET 50
-#define OC_FOUR_OFFSET  -50
-//#define OC_PID_SCALE    100
+#define OC_ONE_OFFSET   0
+#define OC_TWO_OFFSET   0
+#define OC_THREE_OFFSET 0
+#define OC_FOUR_OFFSET  0
 
-extern unsigned int MotorCtrl_OC_ONE,    //Pulse-width on Left-Front motor from 2000 to 4000
-                    MotorCtrl_OC_TWO,    //Pulse-width on Right-Front motor from 2000 to 4000
-                    MotorCtrl_OC_THREE,  //Pulse-width on Right-Back motor from 2000 to 4000
-                    MotorCtrl_OC_FOUR;   //Pulse-width on Left-Back motor from 2000 to 4000
+#define OC_ONE_MIN      (OC_MIN + OC_ONE_OFFSET)
+#define OC_TWO_MIN      (OC_MIN + OC_TWO_OFFSET)
+#define OC_THREE_MIN    (OC_MIN + OC_THREE_OFFSET)
+#define OC_FOUR_MIN     (OC_MIN + OC_FOUR_OFFSET)
+
+#define OC_ONE_MAX      (OC_MAX + OC_ONE_OFFSET)
+#define OC_TWO_MAX      (OC_MAX + OC_TWO_OFFSET)
+#define OC_THREE_MAX    (OC_MAX + OC_THREE_OFFSET)
+#define OC_FOUR_MAX     (OC_MAX + OC_FOUR_OFFSET)
+
+extern unsigned int MotorCtrl_OC_ONE,    //Pulse-width on Left-Front motor from 2500 to 5000
+                    MotorCtrl_OC_TWO,    //Pulse-width on Right-Front motor from 2500 to 5000
+                    MotorCtrl_OC_THREE,  //Pulse-width on Right-Back motor from 2500 to 5000
+                    MotorCtrl_OC_FOUR;   //Pulse-width on Left-Back motor from 2500 to 5000
 
 extern  float MotorCtrl_OC_ONE_PC,
               MotorCtrl_OC_TWO_PC,
               MotorCtrl_OC_THREE_PC,
               MotorCtrl_OC_FOUR_PC;
 
+extern int motorsFlag;
+
 void MotorCtrl_setupOutputCompares(void);
 void MotorCtrl_startupMotors(void);
 void MotorCtrl_adjustOCValues(void);
 void MotorCtrl_adjustThrust(void);
-//void adjustRoll(void);
-//void adjustPitch(void);
-//void adjustYaw(void);
 void MotorCtrl_adjustRollPitchYaw(void);
 void MotorCtrl_shutOffMotors(void);
 void MotorCtrl_idleMotors(void);

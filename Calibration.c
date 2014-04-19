@@ -22,7 +22,7 @@ void Calibration_sensorsOffsets()
 
 void Calibration_zeroYaw()
 {
-    Calibration_Yaw_Zero_Point = scaledOrientationYaw;
+    Calibration_Yaw_Zero_Point = OrientationLoop_Yaw;
 }
 
 void Calibration_offsetAcceleration()

@@ -90,7 +90,8 @@ void RcRx_zeroController(void)
 //Both sticks down and in
 void RcRx_enableProps(void)
 {
-    while(IC_THRO > 0.25 || IC_YAW > (-1.0*(PI-0.2)) || IC_PITCH < ((PI/2.0)-0.1) || IC_ROLL < ((PI/2.0)-0.1)){}
+    while(IC_THRO > 0.25 || IC_YAW > (-1.0*(PI-0.2)) || IC_PITCH < ((PI/2.0)-0.1) || \
+          IC_ROLL < ((PI/2.0)-0.1) || IC_AUX > 50){}
     while(IC_THRO > 0.25 || IC_YAW != 0.0 || IC_PITCH != 0.0 || IC_ROLL != 0.0){}
     PROPS_ENABLE = 1;
 }

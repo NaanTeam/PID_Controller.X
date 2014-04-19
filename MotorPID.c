@@ -134,28 +134,7 @@ void MotorPID_getSensorValues(void)
 {
     SENS_ROLL = OrientationLoop_Roll;
     SENS_PITCH = OrientationLoop_Pitch;
-
-    if (OrientationLoop_Yaw > 0)
-    {
-        scaledOrientationYaw = OrientationLoop_Yaw / 2.0;
-    }
-
-    else if (OrientationLoop_Yaw > -3.15 && OrientationLoop_Yaw <= -2.10)
-    {
-        scaledOrientationYaw = (OrientationLoop_Yaw * 1.5) + 6.283;
-    }
-
-    else if (OrientationLoop_Yaw <= 0 && OrientationLoop_Yaw > -2.10)
-    {
-        scaledOrientationYaw = OrientationLoop_Yaw * 1.5;
-    }
-
-    else
-    {
-        scaledOrientationYaw = OrientationLoop_Yaw;
-    }
-
-    SENS_YAW = scaledOrientationYaw;
+    SENS_YAW = OrientationLoop_Yaw;
 }
 
 void MotorPID_determineZeroYaw(void)

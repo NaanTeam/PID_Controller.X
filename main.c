@@ -89,15 +89,17 @@ int main (void)
     {
         if (RcRx_disableProps())
         {
+            motorsFlag = 0;
+
             OC1RS = OC_KILL;
             OC2RS = OC_KILL;
             OC3RS = OC_KILL;
             OC4RS = OC_KILL;
 
-            MotorCtrl_OC_ONE   = (OC_MIN + OC_ONE_OFFSET);
-            MotorCtrl_OC_TWO   = (OC_MIN + OC_TWO_OFFSET);
-            MotorCtrl_OC_THREE = (OC_MIN + OC_THREE_OFFSET);
-            MotorCtrl_OC_FOUR  = (OC_MIN + OC_FOUR_OFFSET);
+            MotorCtrl_OC_ONE   = OC_KILL;
+            MotorCtrl_OC_TWO   = OC_KILL;
+            MotorCtrl_OC_THREE = OC_KILL;
+            MotorCtrl_OC_FOUR  = OC_KILL;
 
             T5CONCLR = 0x8000;
 

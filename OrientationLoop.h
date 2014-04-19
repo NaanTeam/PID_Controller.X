@@ -28,6 +28,7 @@ extern "C" {
 #include "L3G4200D.h"
 #include "ADXL362.h"
 #include "Calibration.h"
+#include "MotorCtrl.h"
 
 //******************************************************************************
 //Configuration #defines

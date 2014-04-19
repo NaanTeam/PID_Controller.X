@@ -230,10 +230,13 @@ void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void)
 
     MotorPID_getSensorValues();
     MotorPID_determineZeroYaw();
-    MotorPID_computePIDValues();
-    MotorCtrl_adjustOCValues();
-
     read_voltage();
+
+    if(motorsFlag)
+    {
+        MotorPID_computePIDValues();
+        MotorCtrl_adjustOCValues();
+    }
 
     //LATFINV = BIT_1;
 }

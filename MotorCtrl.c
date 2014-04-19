@@ -9,15 +9,17 @@
  ******************************************************************************/
 #include "MotorCtrl.h"
 
-unsigned int    MotorCtrl_OC_ONE   = OC_MIN + OC_ONE_OFFSET,    //Pulse-width on Left-Front motor from 2000 to 4000
-                MotorCtrl_OC_TWO   = OC_MIN + OC_TWO_OFFSET,    //Pulse-width on Right-Front motor from 2000 to 4000
-                MotorCtrl_OC_THREE = OC_MIN + OC_THREE_OFFSET,  //Pulse-width on Right-Back motor from 2000 to 4000
-                MotorCtrl_OC_FOUR  = OC_MIN + OC_FOUR_OFFSET;   //Pulse-width on Left-Back motor from 2000 to 4000
+unsigned int    MotorCtrl_OC_ONE   = OC_KILL;    //Pulse-width on Left-Front motor from 2000 to 4000
+unsigned int    MotorCtrl_OC_TWO   = OC_KILL;    //Pulse-width on Right-Front motor from 2000 to 4000
+unsigned int    MotorCtrl_OC_THREE = OC_KILL;  //Pulse-width on Right-Back motor from 2000 to 4000
+unsigned int    MotorCtrl_OC_FOUR  = OC_KILL;   //Pulse-width on Left-Back motor from 2000 to 4000
 
 float   MotorCtrl_OC_ONE_PC,
         MotorCtrl_OC_TWO_PC,
         MotorCtrl_OC_THREE_PC,
         MotorCtrl_OC_FOUR_PC;
+
+int motorsFlag = 0;     //0-motors off, 1-motors on
 
 unsigned int    OC_THRO = 0;
 
@@ -51,8 +53,8 @@ void MotorCtrl_startupMotors(void)
 {
     int ii = 0;
 
-    while ((OC1RS != (OC_MIN + OC_ONE_OFFSET)) && (OC2RS != (OC_MIN + OC_TWO_OFFSET)) \
-      && (OC3RS != (OC_MIN + OC_THREE_OFFSET)) && (OC4RS != (OC_MIN + OC_FOUR_OFFSET)))
+    while ((MotorCtrl_OC_ONE < OC_ONE_MIN) || (MotorCtrl_OC_TWO < OC_TWO_MIN) \
+      || (MotorCtrl_OC_THREE < OC_THREE_MIN) || (MotorCtrl_OC_FOUR < OC_FOUR_MIN))
     {
         while (ii < 500)
         {
@@ -60,30 +62,24 @@ void MotorCtrl_startupMotors(void)
         }
         ii = 0;
         
-        if (OC1RS < (OC_MIN + OC_ONE_OFFSET))
-            OC1RS++;
+        if (MotorCtrl_OC_ONE < (OC_ONE_MIN))
+            MotorCtrl_OC_ONE++;
 
-        else if (OC1RS > (OC_MIN + OC_ONE_OFFSET))
-            OC1RS--;
+        if (MotorCtrl_OC_TWO < (OC_TWO_MIN))
+            MotorCtrl_OC_TWO++;
 
-        if (OC2RS < (OC_MIN + OC_TWO_OFFSET))
-            OC2RS++;
+        if (MotorCtrl_OC_THREE < (OC_THREE_MIN))
+            MotorCtrl_OC_THREE++;
 
-        else if (OC2RS > (OC_MIN + OC_TWO_OFFSET))
-            OC2RS--;
+        if (MotorCtrl_OC_FOUR < (OC_FOUR_MIN))
+            MotorCtrl_OC_FOUR++;
 
-        if (OC3RS < (OC_MIN + OC_THREE_OFFSET))
-            OC3RS++;
-
-        else if (OC3RS > (OC_MIN + OC_THREE_OFFSET))
-            OC3RS--;
-
-        if (OC4RS < (OC_MIN + OC_FOUR_OFFSET))
-            OC4RS++;
-
-        else if (OC4RS > (OC_MIN + OC_FOUR_OFFSET))
-            OC4RS--;
+        OC1RS = MotorCtrl_OC_ONE;
+        OC2RS = MotorCtrl_OC_TWO;
+        OC3RS = MotorCtrl_OC_THREE;
+        OC4RS = MotorCtrl_OC_FOUR;
     }
+    motorsFlag = 1;
 }
 
 void MotorCtrl_adjustOCValues(void)
@@ -94,40 +90,41 @@ void MotorCtrl_adjustOCValues(void)
 
 void MotorCtrl_adjustRollPitchYaw(void)
 {
-    MotorCtrl_OC_ONE   = OC_THRO - PID_ROLL - PID_PITCH - PID_YAW;
-    MotorCtrl_OC_TWO   = OC_THRO + PID_ROLL - PID_PITCH + PID_YAW;
-    MotorCtrl_OC_THREE = OC_THRO + PID_ROLL + PID_PITCH - PID_YAW;
-    MotorCtrl_OC_FOUR  = OC_THRO - PID_ROLL + PID_PITCH + PID_YAW;
+    MotorCtrl_OC_ONE   = OC_ONE_MIN + OC_THRO - PID_ROLL - PID_PITCH - PID_YAW;
+    MotorCtrl_OC_TWO   = OC_TWO_MIN + OC_THRO + PID_ROLL - PID_PITCH + PID_YAW;
+    MotorCtrl_OC_THREE = OC_THREE_MIN + OC_THRO + PID_ROLL + PID_PITCH - PID_YAW;
+    MotorCtrl_OC_FOUR  = OC_FOUR_MIN + OC_THRO - PID_ROLL + PID_PITCH + PID_YAW;
 
-    if (MotorCtrl_OC_ONE > (OC_MAX + OC_ONE_OFFSET))
-        MotorCtrl_OC_ONE = (OC_MAX + OC_ONE_OFFSET);
+    if (MotorCtrl_OC_ONE > OC_ONE_MAX)
+        MotorCtrl_OC_ONE = OC_ONE_MAX;
 
-    else if (MotorCtrl_OC_ONE < (OC_MIN + OC_ONE_OFFSET))
-        MotorCtrl_OC_ONE = (OC_MIN + OC_ONE_OFFSET);
+    else if (MotorCtrl_OC_ONE < OC_ONE_MIN)
+        MotorCtrl_OC_ONE = OC_ONE_MIN;
 
-    if (MotorCtrl_OC_TWO > (OC_MAX + OC_TWO_OFFSET))
-        MotorCtrl_OC_TWO = (OC_MAX + OC_TWO_OFFSET);
+    if (MotorCtrl_OC_TWO > OC_TWO_MAX)
+        MotorCtrl_OC_TWO = OC_TWO_MAX;
 
-    else if (MotorCtrl_OC_TWO < (OC_MIN + OC_TWO_OFFSET))
-        MotorCtrl_OC_TWO = (OC_MIN + OC_TWO_OFFSET);
+    else if (MotorCtrl_OC_TWO < OC_TWO_MIN)
+        MotorCtrl_OC_TWO = OC_TWO_MIN;
 
-    if (MotorCtrl_OC_THREE > (OC_MAX + OC_THREE_OFFSET))
-        MotorCtrl_OC_THREE = (OC_MAX + OC_THREE_OFFSET);
+    if (MotorCtrl_OC_THREE > OC_THREE_MAX)
+        MotorCtrl_OC_THREE = OC_THREE_MAX;
 
-    else if (MotorCtrl_OC_THREE < (OC_MIN + OC_THREE_OFFSET))
-        MotorCtrl_OC_THREE = (OC_MIN + OC_THREE_OFFSET);
+    else if (MotorCtrl_OC_THREE < OC_THREE_MIN)
+        MotorCtrl_OC_THREE = OC_THREE_MIN;
 
-    if (MotorCtrl_OC_FOUR > (OC_MAX + OC_FOUR_OFFSET))
-        MotorCtrl_OC_FOUR = (OC_MAX + OC_FOUR_OFFSET);
+    if (MotorCtrl_OC_FOUR > OC_FOUR_MAX)
+        MotorCtrl_OC_FOUR = OC_FOUR_MAX;
 
-    else if (MotorCtrl_OC_FOUR < (OC_MIN + OC_FOUR_OFFSET))
-        MotorCtrl_OC_FOUR = (OC_MIN + OC_FOUR_OFFSET);
+    else if (MotorCtrl_OC_FOUR < OC_FOUR_MIN)
+        MotorCtrl_OC_FOUR = OC_FOUR_MIN;
 }
 
 void MotorCtrl_adjustThrust(void)
 {
     //Scales the throttle value so it is between OC_MIN and OC_MAX
-    OC_THRO = (IC_THRO + GUI_THROTTLE) * (((float)OC_MAX - (float)OC_MIN) / 100.0) + (float)OC_MIN;
+    //OC_THRO = (IC_THRO + GUI_THROTTLE) * (((float)OC_MAX - (float)OC_MIN) / 100.0) + (float)OC_MIN;
+    OC_THRO = IC_THRO * ((float)(OC_MAX - OC_MIN) / 100.0);
 }
 
 void MotorCtrl_shutOffMotors(void)
@@ -140,8 +137,8 @@ void MotorCtrl_shutOffMotors(void)
 
 void MotorCtrl_idleMotors(void)
 {
-    MotorCtrl_OC_ONE   = (OC_MIN + OC_ONE_OFFSET);
-    MotorCtrl_OC_TWO   = (OC_MIN + OC_TWO_OFFSET);
-    MotorCtrl_OC_THREE = (OC_MIN + OC_THREE_OFFSET);
-    MotorCtrl_OC_FOUR  = (OC_MIN + OC_FOUR_OFFSET);
+    MotorCtrl_OC_ONE   = OC_ONE_MIN;
+    MotorCtrl_OC_TWO   = OC_TWO_MIN;
+    MotorCtrl_OC_THREE = OC_THREE_MIN;
+    MotorCtrl_OC_FOUR  = OC_FOUR_MIN;
 }
