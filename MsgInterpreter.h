@@ -102,7 +102,6 @@ extern "C" {
 #define SERIALCOMM_REGISTER_Pitch               0x40
 #define SERIALCOMM_REGISTER_Yaw                 0x41
 #define SERIALCOMM_REGISTER_Roll                0x42
-#define SERIALCOMM_REGISTER_ScaledYaw           0x43
 #define SERIALCOMM_REGISTER_DesiredPitch        0x44
 #define SERIALCOMM_REGISTER_DesiredYaw          0x45
 #define SERIALCOMM_REGISTER_DesiredRoll         0x46
