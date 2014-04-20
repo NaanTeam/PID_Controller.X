@@ -21,7 +21,7 @@ float pYawConst = 0.0,      //Proportional constant
       iYawConst = 0.0,      //Integral constant
       dYawConst = 0.0;      //Derivative constant
 
-float scaledOrientationYaw;
+float scaledOrientationYaw = 0.0;
 
 float rErrSum, rLastErr, pErrSum, pLastErr, yErrSum, yLastErr;
 float rError, dRollErr, pError, dPitchErr, yError, dYawErr;
