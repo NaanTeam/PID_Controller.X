@@ -253,6 +253,7 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[1];
                 buffer[buffer_len++] = temp[2];
                 buffer[buffer_len++] = temp[3];
+                break;
 
            /******************************************************************************
              * Desired - Roll Pitch Yaw
