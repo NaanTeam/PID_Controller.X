@@ -4,6 +4,7 @@
 #include "hardwareProfile.h"
 
 void setup_ADC(); //function prototype
+void read_voltage();
 
 extern float v_batt;
 

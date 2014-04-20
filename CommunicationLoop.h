@@ -24,6 +24,7 @@ extern "C" {
 #include "FIFOUART1.h"
 #include "FIFOUART4.h" 
 #include "MsgInterpreter.h"
+#include "battery_voltage.h"
 
 //******************************************************************************
 //Configuration #defines

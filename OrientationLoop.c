@@ -12,7 +12,7 @@ float scaledAccelMagnitude = 0.0;
 float gyroScaled[3] = {0, 0, 0};
 float Magnetic_Heading = 0.0;
 
-float timer5TimeChange = 20.0;
+float timer5TimeChange = 0.02;
 
 //******************************************************************************
 //Public Variable Declarations
@@ -230,7 +230,6 @@ void __ISR(_TIMER_5_VECTOR, IPL3AUTO) Timer5Handler(void)
 
     MotorPID_getSensorValues();
     MotorPID_determineZeroYaw();
-    read_voltage();
 
     if(motorsFlag)
     {

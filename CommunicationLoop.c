@@ -136,6 +136,8 @@ void __ISR(_TIMER_4_VECTOR, IPL4AUTO) Timer4Handler(void)
             CommunicationLoop_Index = 0;
         }
     }
+
+    read_voltage();
   
     INTClearFlag(INT_T4);// Be sure to clear the Timer1 interrupt status
 }

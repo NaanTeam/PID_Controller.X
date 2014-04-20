@@ -72,7 +72,6 @@ int main (void)
         i++;
     }
 
-
     //Calibrates the on-board sensors
     Calibration_sensorsOffsets();
 
@@ -87,43 +86,14 @@ int main (void)
 
     while (1)
     {
+        //Check if sequence to disable props has been initiated
         if (RcRx_disableProps())
         {
-            motorsFlag = 0;
-
-            OC1RS = OC_KILL;
-            OC2RS = OC_KILL;
-            OC3RS = OC_KILL;
-            OC4RS = OC_KILL;
-
-            MotorCtrl_OC_ONE   = OC_KILL;
-            MotorCtrl_OC_TWO   = OC_KILL;
-            MotorCtrl_OC_THREE = OC_KILL;
-            MotorCtrl_OC_FOUR  = OC_KILL;
-
-            T5CONCLR = 0x8000;
-
-            RcRx_enableProps();
-
-            T5CONSET = 0x8000;
-
-            yawFlag = 0;
-            MotorPID_determineZeroYaw();
-
-            MotorCtrl_startupMotors();
+            MotorCtrl_killMotorsAndWait();
         }
-        
-        //Update OCxRS registers with newly calculated values
-        OC1RS = MotorCtrl_OC_ONE;     //Front-Left Motor
-        OC2RS = MotorCtrl_OC_TWO;     //Front-Right Motor
-        OC3RS = MotorCtrl_OC_THREE;   //Back-Right Motor
-        OC4RS = MotorCtrl_OC_FOUR;    //Back-Left Motor
 
-        //PC values to be used for visual purposes on the GUI
-        MotorCtrl_OC_ONE_PC = MotorCtrl_OC_ONE;
-        MotorCtrl_OC_TWO_PC = MotorCtrl_OC_TWO;
-        MotorCtrl_OC_THREE_PC = MotorCtrl_OC_THREE;
-        MotorCtrl_OC_FOUR_PC = MotorCtrl_OC_FOUR;
+        //Saves OC_X values to OCxRS registers
+        MotorCtrl_updateOCRSValues();
     }
 
     return 0;
