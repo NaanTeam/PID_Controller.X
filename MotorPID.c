@@ -20,9 +20,6 @@ float pYawConst = 0.0,      //Proportional constant for YAW
       iYawConst = 0.0,      //Integral constant for YAW
       dYawConst = 0.0;      //Derivative constant for YAW
 
-float scaledOrientationYaw;     ///////TO BE DELETED FROM CODE
-                                ///////WAITING TILL IT IS GONE FROM GUI
-
 float rErrSum, rLastErr, pErrSum, pLastErr, yErrSum, yLastErr;
 float rError, dRollErr, pError, dPitchErr, yError, dYawErr;
 
