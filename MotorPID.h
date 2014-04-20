@@ -40,8 +40,6 @@ extern float pYawConst,     //Proportional constant
       iYawConst,      //Intergral constant
       dYawConst;      //Derivative constant
 
-extern float scaledOrientationYaw;
-
 extern int yawFlag;
 
 void MotorPID_getSensorValues(void);
