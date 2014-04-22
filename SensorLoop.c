@@ -46,6 +46,7 @@ int accelTotal_x = 0;
 //TODO KNOWN BUG: with SPI. Reordering ADXl and L3G will make L3G's reading bad.
 void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
 {
+    float accel_lp_const = 0.007;
 
     ADXL362_popXYZT();
     L3G4200D_popXYZT();
@@ -54,12 +55,13 @@ void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
     //Calibrate Raws
     Calibration_offsetAcceleration();
 
-    ADXL362_XAcceleration_Raw_Avg = (0.007*ADXL362_XAcceleration_Raw +
-        0.993 * ADXL362_XAcceleration_Raw_Avg);
-    ADXL362_YAcceleration_Raw_Avg = (0.007*ADXL362_YAcceleration_Raw +
-        0.993 * ADXL362_YAcceleration_Raw_Avg);
-    ADXL362_ZAcceleration_Raw_Avg = (0.007*ADXL362_ZAcceleration_Raw +
-        0.993 * ADXL362_ZAcceleration_Raw_Avg);
+
+    ADXL362_XAcceleration_Raw_Avg = (accel_lp_const*ADXL362_XAcceleration_Raw +
+        (1.0-accel_lp_const) * ADXL362_XAcceleration_Raw_Avg);
+    ADXL362_YAcceleration_Raw_Avg = (accel_lp_const*ADXL362_YAcceleration_Raw +
+        (1.0-accel_lp_const) * ADXL362_YAcceleration_Raw_Avg);
+    ADXL362_ZAcceleration_Raw_Avg = (accel_lp_const*ADXL362_ZAcceleration_Raw +
+        (1.0-accel_lp_const) * ADXL362_ZAcceleration_Raw_Avg);
 
 
     L3G4200D_XAngularRate_Raw_Avg = (0.10*L3G4200D_XAngularRate_Raw +
