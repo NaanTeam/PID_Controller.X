@@ -10,8 +10,7 @@
 
 #include "hardwareProfile.h"
 
-#define PER_REG     55000
-#define MAX_PER     20000       //Used for Timer5 to control the PID Algorithm
+#define PER_REG     55000           
 
 //Shared variables
 extern float IC_THRO,               //Throttle percentage 0.0 thru 100.0%

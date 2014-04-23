@@ -95,10 +95,10 @@ void MotorCtrl_adjustOCValues(void)
 void MotorCtrl_adjustRollPitchYaw(void)
 {
     //Adjust Roll, Pitch, and Yaw for each motor separately
-    MotorCtrl_OC_ONE   = OC_ONE_MIN + OC_THRO - PID_ROLL - PID_PITCH - PID_YAW;
-    MotorCtrl_OC_TWO   = OC_TWO_MIN + OC_THRO + PID_ROLL - PID_PITCH + PID_YAW;
-    MotorCtrl_OC_THREE = OC_THREE_MIN + OC_THRO + PID_ROLL + PID_PITCH - PID_YAW;
-    MotorCtrl_OC_FOUR  = OC_FOUR_MIN + OC_THRO - PID_ROLL + PID_PITCH + PID_YAW;
+    MotorCtrl_OC_ONE   = OC_ONE_MIN + OC_THRO + PID_ROLL - PID_PITCH - PID_YAW;
+    MotorCtrl_OC_TWO   = OC_TWO_MIN + OC_THRO - PID_ROLL - PID_PITCH + PID_YAW;
+    MotorCtrl_OC_THREE = OC_THREE_MIN + OC_THRO - PID_ROLL + PID_PITCH - PID_YAW;
+    MotorCtrl_OC_FOUR  = OC_FOUR_MIN + OC_THRO + PID_ROLL + PID_PITCH + PID_YAW;
 
     //Ensure motor one stays within its MAX and MIN values
     if (MotorCtrl_OC_ONE > OC_ONE_MAX)

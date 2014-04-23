@@ -22,6 +22,9 @@
 #define PITCH_L         2477.0
 #define ROLL_L          2477.0
 
+#define ROLL_LIMIT      30.0 //degrees (max of 90.0)
+#define PITCH_LIMIT     30.0 //degrees (max of 90.0)
+
 unsigned int IC1_CT_Rise, IC1_CT_Fall, period1,
              IC2_CT_Rise, IC2_CT_Fall, period2, ym,
              IC3_CT_Rise, IC3_CT_Fall, period3, pm,
@@ -90,8 +93,8 @@ void RcRx_zeroController(void)
 //Both sticks down and in
 void RcRx_enableProps(void)
 {
-    while(IC_THRO > 0.25 || IC_YAW > (-1.0*(PI-0.2)) || IC_PITCH < ((PI/2.0)-0.1) || \
-          IC_ROLL < ((PI/2.0)-0.1) || IC_AUX > 50){}
+    while(IC_THRO > 0.25 || IC_YAW > (-1.0*(PI-0.2)) || IC_PITCH < (((PI/2.0)-0.1)/(90.0/PITCH_LIMIT)) || \
+          IC_ROLL < (((PI/2.0)-0.1)/(90.0/ROLL_LIMIT)) || IC_AUX > 50){}
     while(IC_THRO > 0.25 || IC_YAW != 0.0 || IC_PITCH != 0.0 || IC_ROLL != 0.0){}
     PROPS_ENABLE = 1;
 }
@@ -105,7 +108,8 @@ int RcRx_disableProps(void)
         return 1;
     }
 
-    if(IC_THRO < 0.25 && IC_YAW > (PI-0.2) && IC_PITCH > ((PI/2)-0.1) && IC_ROLL < -(PI/2)-0.2)
+    if(IC_THRO < 0.25 && IC_YAW > (PI-0.2) && IC_PITCH > (((PI/2)-0.1)/(90.0/PITCH_LIMIT)) && \
+       IC_ROLL < ((-(PI/2)-0.2)/(90.0/ROLL_LIMIT)))
     {
         PROPS_ENABLE = 0;
         return 1;
@@ -192,8 +196,8 @@ void __ISR(_INPUT_CAPTURE_2_VECTOR) INT_IC2_Handler(void)
     {
         if(period2 > ym + 5)
         {
-            yaw_pc = ((YAW_H + period2 - (2 * ym)) / (YAW_H - ym)) * 50.0;
-            IC_YAW = 2 * PI * ((yaw_pc - 50) / 100.0);
+            yaw_pc = ((YAW_H + period2 - (2.0 * ym)) / (YAW_H - ym)) * 50.0;
+            IC_YAW = 2 * PI * ((yaw_pc - 50.0) / 100.0);
         }
         
         else if(period2 < ym - 5)
@@ -234,19 +238,19 @@ void __ISR(_INPUT_CAPTURE_3_VECTOR) INT_IC3_Handler(void)
         period3 = PITCH_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
-    //a Pitch angle -90.0 thru 90.0 degrees
+    //a Pitch angle -PITCH_LIMIT to PITCH_LIMIT degrees
     if(zero_mode == 0)
     {
         if(period3 > pm + 5)
         {
-            pitch_pc = ((PITCH_H + period3 - (2 * pm)) / (PITCH_H - pm)) * 50.0;
-            IC_PITCH = -1.0 * PI * ((pitch_pc - 50) / 100.0);
+            pitch_pc = ((PITCH_H + period3 - (2.0 * pm)) / (PITCH_H - pm)) * 50.0;
+            IC_PITCH = (-1.0 * PI * ((pitch_pc - 50.0) / 100.0))/(90.0/PITCH_LIMIT);
         }
         
         else if(period3 < pm - 5)
         {
             pitch_pc = ((period3 - PITCH_L) / (pm - PITCH_L)) * 50.0;
-            IC_PITCH = PI * ((50.0 - pitch_pc) / 100.0);
+            IC_PITCH = (PI * ((50.0 - pitch_pc) / 100.0))/(90.0/PITCH_LIMIT);
         }
         
         else
@@ -283,19 +287,19 @@ void __ISR(_INPUT_CAPTURE_4_VECTOR) INT_IC4_Handler(void)
         period4 = ROLL_L;
 
     //Turn period into a percentage 0.0 thru 100.0% and
-    //a Roll angle -90.0 thru 90.0 degrees
+    //a Roll angle -ROLL_LIMIT to ROLL_LIMIT degrees
     if(zero_mode == 0)
     {
         if(period4 > rm + 5)
         {
-            roll_pc = ((ROLL_H + period4 - (2 * rm)) / (ROLL_H - rm)) * 50.0;
-            IC_ROLL = PI * ((roll_pc - 50) / 100.0);
+            roll_pc = ((ROLL_H + period4 - (2.0 * rm)) / (ROLL_H - rm)) * 50.0;
+            IC_ROLL = (PI * ((roll_pc - 50.0) / 100.0))/(90.0/ROLL_LIMIT);
         }
         
         else if(period4 < rm - 5)
         {
             roll_pc = ((period4 - ROLL_L) / (rm-ROLL_L)) * 50.0;
-            IC_ROLL = -1.0 * PI * ((50.0 - roll_pc) / 100.0);
+            IC_ROLL = (-1.0 * PI * ((50.0 - roll_pc) / 100.0))/(90.0/ROLL_LIMIT);
         }
         
         else

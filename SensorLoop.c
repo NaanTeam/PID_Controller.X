@@ -46,7 +46,7 @@ int accelTotal_x = 0;
 //TODO KNOWN BUG: with SPI. Reordering ADXl and L3G will make L3G's reading bad.
 void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
 {
-    float accel_lp_const = 0.007;
+    float accel_lp_const = 0.01;
 
     ADXL362_popXYZT();
     L3G4200D_popXYZT();
