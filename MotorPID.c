@@ -23,6 +23,10 @@ float pYawConst = 0.0,      //Proportional constant for YAW
 float rErrSum, rLastErr, pErrSum, pLastErr, yErrSum, yLastErr;
 float rError, dRollErr, pError, dPitchErr, yError, dYawErr;
 
+float PID_ROLL_rError,
+        PID_ROLL_rErrSum,
+        PID_ROLL_dRollErr;
+
 int yawFlag = 0;
 
 void MotorPID_computePIDValues(void)
@@ -34,14 +38,14 @@ void MotorPID_computePIDValues(void)
 
 void MotorPID_setPIDRoll(void)
 {
-    rError = IC_ROLL + GUI_ROLL - SENS_ROLL;
+    PID_ROLL_rError = IC_ROLL + GUI_ROLL - SENS_ROLL;
 
-    rErrSum += (rError * timer5TimeChange);
-    dRollErr = (rError - rLastErr) / timer5TimeChange;
+    PID_ROLL_rErrSum += (PID_ROLL_rError * timer5TimeChange);
+    PID_ROLL_dRollErr = (PID_ROLL_rError - rLastErr) / timer5TimeChange;
 
-    PID_ROLL = (pRollConst * rError) + (iRollConst * rErrSum) + (dRollConst * dRollErr);
+    PID_ROLL = (pRollConst * PID_ROLL_rError) + (iRollConst * PID_ROLL_rErrSum) + (dRollConst * PID_ROLL_dRollErr);
 
-    rLastErr = rError;
+    rLastErr = PID_ROLL_rError;
 }
 
 void MotorPID_setPIDPitch(void)
@@ -120,6 +124,10 @@ void MotorPID_resetPID(void)
     PID_ROLL  = 0.0,
     PID_PITCH = 0.0,
     PID_YAW   = 0.0,
+
+    PID_ROLL_rError = 0.0;
+    PID_ROLL_rErrSum = 0.0;
+    PID_ROLL_dRollErr = 0.0;
 
     rErrSum = 0.0,   rLastErr  = 0.0,
     pErrSum = 0.0,   pLastErr  = 0.0,

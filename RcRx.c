@@ -100,8 +100,20 @@ void RcRx_zeroController(void)
 void RcRx_enableProps(void)
 {
     while(IC_THRO > 0.25 || IC_YAW > (-1.0*(PI-0.2)) || IC_PITCH < (((PI/2.0)-0.1)/(90.0/PITCH_LIMIT)) || \
-          IC_ROLL < (((PI/2.0)-0.1)/(90.0/ROLL_LIMIT)) || IC_AUX > 50){}
-    while(IC_THRO > 0.25 || IC_YAW != 0.0 || IC_PITCH != 0.0 || IC_ROLL != 0.0){}
+          IC_ROLL < (((PI/2.0)-0.1)/(90.0/ROLL_LIMIT)) || IC_AUX > 50)
+    {
+        if (GUI_EnableFlightFlag == 1)
+        {
+            break;
+        }
+    }
+    while(IC_THRO > 0.25 || IC_YAW != 0.0 || IC_PITCH != 0.0 || IC_ROLL != 0.0)
+    {
+        if (GUI_EnableFlightFlag == 1)
+        {
+            break;
+        }
+    }
     PROPS_ENABLE = 1;
 }
 

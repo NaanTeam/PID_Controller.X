@@ -90,7 +90,7 @@ int main (void)
     while (1)
     {
         //Check if sequence to disable props has been initiated
-        if (RcRx_disableProps())
+        if (RcRx_disableProps() )//|| !GUI_EnableFlightFlag)
         {
             MotorCtrl_killMotorsAndWait();
         }

@@ -460,6 +460,28 @@ inline int MsgInterpreter_interpret_readRegisters(UINT8 message[])
                 buffer[buffer_len++] = temp[3];
                 break;
 
+          case SERIALCOMM_REGISTER_PID_ROLL_ERROR:
+                temp = (UINT8 *)(&PID_ROLL_rError);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_REGISTER_PID_ROLL_ERROR_SUM:
+                temp = (UINT8 *)(&PID_ROLL_rErrSum);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+          case SERIALCOMM_REGISTER_PID_ROLL_ERROR_DERIVATIVE:
+                temp = (UINT8 *)(&PID_ROLL_dRollErr);
+                buffer[buffer_len++] = temp[0];
+                buffer[buffer_len++] = temp[1];
+                buffer[buffer_len++] = temp[2];
+                buffer[buffer_len++] = temp[3];
+                break;
+
         }
     }
 

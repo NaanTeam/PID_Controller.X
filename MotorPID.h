@@ -27,10 +27,16 @@ extern float PID_ROLL,          //Roll correction value between -100.0 and 100.0
              PID_PITCH,         //Pitch correction value between -100.0 and 100.0
              PID_YAW;           //Yaw correction value between -100.0 and 100.0
 
+extern float PID_ROLL_rError,
+      PID_ROLL_rErrSum,
+      PID_ROLL_dRollErr;
+
 
 extern float pRollConst,     //Proportional constant
       iRollConst,     //Intergral constant
       dRollConst;     //Derivative constant
+
+
 
 extern float pPitchConst,    //Proportional constant
       iPitchConst,    //Intergral constant
