@@ -20,9 +20,9 @@ void SensorLoop_start()
     INTSetVectorSubPriority(INT_TIMER_1_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
     INTEnable(INT_T1, INT_ENABLED);
     //Turn on clock
-    OpenTimer1(T1_ON | T1_SOURCE_INT | T1_PS_1_64, 3125); //200hz //6250);//100hz @ 40MHz //2*6250);//400hz @ 40MHz  //6250); //800hz @ 40MHz (T1_PS_1_8)
+    OpenTimer1(T1_ON | T1_SOURCE_INT | T1_PS_1_64, 3125); //200hz 6250);//100hz @ 40MHz //2*6250);//400hz @ 40MHz  //6250); //800hz @ 40MHz (T1_PS_1_8)
 
-    //T1_PS_1_64, 12500);//50hz @ 40MHz
+    //3125); //200hz
 
 }
 
@@ -35,7 +35,6 @@ void SensorLoop_start()
 int SensorLoop_ToggleCount = 0;
 
 #define Avg_Count 6
-#define alpha 0.05
 //Running Average 
 int gyroRunning_x[Avg_Count];
 int gyroTotal_x = 0;
@@ -46,11 +45,11 @@ int accelTotal_x = 0;
 //TODO KNOWN BUG: with SPI. Reordering ADXl and L3G will make L3G's reading bad.
 void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
 {
-    float accel_lp_const = 0.01;
+    float accel_lp_const = 0.018;
 
     ADXL362_popXYZT();
     L3G4200D_popXYZT();
-    HMC5883L_popXZY();
+    //HMC5883L_popXZY();
 
     //Calibrate Raws
     Calibration_offsetAcceleration();
@@ -73,11 +72,11 @@ void __ISR(_TIMER_1_VECTOR, IPL3AUTO) Timer1Handler(void)
 
     ADXL362_convertXYZT();
     L3G4200D_convertXYZT();
-    HMC5883L_convertXYZ();
+    //HMC5883L_convertXYZ();
 
     ADXL362_pushReadXYZT();
     L3G4200D_pushReadXYZT();
-    HMC5883L_pushReadXZY();
+    //HMC5883L_pushReadXZY();
 
     INTClearFlag(INT_T1);// Be sure to clear the Timer1 interrupt status
 }
