@@ -18,10 +18,10 @@
 #define OC_MIN          3000    //Idle
 #define OC_MAX          3250    //Absolute max 5000
 
-#define OC_ONE_OFFSET   -10
-#define OC_TWO_OFFSET   0
-#define OC_THREE_OFFSET 0
-#define OC_FOUR_OFFSET  -10
+#define OC_ONE_OFFSET   0
+#define OC_TWO_OFFSET   12
+#define OC_THREE_OFFSET 12
+#define OC_FOUR_OFFSET  0
 
 #define OC_ONE_MIN      (OC_MIN + OC_ONE_OFFSET)
 #define OC_TWO_MIN      (OC_MIN + OC_TWO_OFFSET)
