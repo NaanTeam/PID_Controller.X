@@ -9,6 +9,7 @@
 #define	RC_RECIEVER_H
 
 #include "hardwareProfile.h"
+#include "GUI.h"
 
 #define PER_REG     55000           
 

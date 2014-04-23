@@ -16,18 +16,24 @@ void Setup_initializeBoard(void)
 
 void Setup_communications(void)
 {
-    //Start Protocols
-    FIFOSPI2_initialize();
-    FIFOI2C2_initialize();
     FIFOUART1_initialize();
     FIFOUART4_initialize(); //Maher
 
     //Enable system-wide interrupts
     INTEnableInterrupts();
 
-    SensorLoop_start();
     CommunicationLoop_start();
 }
+
+void Setup_sensorComm(void)
+{
+    //Start Protocols
+    FIFOSPI2_initialize();
+    FIFOI2C2_initialize();
+
+    SensorLoop_start();
+}
+
 
 void Setup_ports(void)
 {

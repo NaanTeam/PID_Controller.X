@@ -212,21 +212,21 @@ void DCM_driftCorrection(float* accelVector, float scaledAccelMag, float magneti
     magneticHeading_Y = sin(magneticHeading);
 
     // We make the gyro YAW drift correction based on compass magnetic heading
-//    errorCourse=(DCM_Matrix[0][0]*magneticHeading_Y) - (DCM_Matrix[1][0]*magneticHeading_X);  //Calculating YAW error
-//    Vector_Scale(errorYaw,&DCM_Matrix[2][0],errorCourse); //Applys the yaw correction to the XYZ rotation of the aircraft, depeding the position.
-//
-//    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],DCM_Yaw_Kp);
-//    Vector_Add(Omega_P,Omega_P,Scaled_Omega_P);//Adding  Proportional.
-//
-//    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],DCM_Yaw_Ki);
-//    Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);//adding integrator to the Omega_I
-//
-//
-//    //  Here we will place a limit on the integrator so that the integrator cannot ever exceed half the saturation limit of the gyros
-//    Integrator_magnitude = sqrt(Vector_Dot_Product(Omega_I,Omega_I));
-//    if (Integrator_magnitude > ToRad(300)) {
-//    Vector_Scale(Omega_I,Omega_I,0.5f*ToRad(300)/Integrator_magnitude);
-//    }
+    errorCourse=(DCM_Matrix[0][0]*magneticHeading_Y) - (DCM_Matrix[1][0]*magneticHeading_X);  //Calculating YAW error
+    Vector_Scale(errorYaw,&DCM_Matrix[2][0],errorCourse); //Applys the yaw correction to the XYZ rotation of the aircraft, depeding the position.
+
+    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],DCM_Yaw_Kp);
+    Vector_Add(Omega_P,Omega_P,Scaled_Omega_P);//Adding  Proportional.
+
+    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],DCM_Yaw_Ki);
+    Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);//adding integrator to the Omega_I
+
+
+    //  Here we will place a limit on the integrator so that the integrator cannot ever exceed half the saturation limit of the gyros
+    Integrator_magnitude = sqrt(Vector_Dot_Product(Omega_I,Omega_I));
+    if (Integrator_magnitude > ToRad(300)) {
+    Vector_Scale(Omega_I,Omega_I,0.5f*ToRad(300)/Integrator_magnitude);
+    }
 }
 
 void DCM_eulerAngle(float* roll, float* pitch, float* yaw)

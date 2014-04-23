@@ -489,38 +489,7 @@ inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
                 MotorCtrl_shutOffMotors();
                 break;
 
-            case SERIALCOMM_CONFIG_GUI_Roll:
-                buffer[0] = message[MsgInterpreter_Index++];
-                buffer[1] = message[MsgInterpreter_Index++];
-                buffer[2] = message[MsgInterpreter_Index++];
-                buffer[3] = message[MsgInterpreter_Index++];
-                temp_f = *((float*)buffer);
-                GUI_adjustRoll(temp_f);
-                break;
-            case SERIALCOMM_CONFIG_GUI_Pitch:
-                buffer[0] = message[MsgInterpreter_Index++];
-                buffer[1] = message[MsgInterpreter_Index++];
-                buffer[2] = message[MsgInterpreter_Index++];
-                buffer[3] = message[MsgInterpreter_Index++];
-                temp_f = *((float*)buffer);
-                GUI_adjustPitch(temp_f);
-                break;
-            case SERIALCOMM_CONFIG_GUI_Yaw:
-                buffer[0] = message[MsgInterpreter_Index++];
-                buffer[1] = message[MsgInterpreter_Index++];
-                buffer[2] = message[MsgInterpreter_Index++];
-                buffer[3] = message[MsgInterpreter_Index++];
-                temp_f = *((float*)buffer);
-                GUI_adjustYaw(temp_f);
-                break;
-            case SERIALCOMM_CONFIG_GUI_Throttle:
-                buffer[0] = message[MsgInterpreter_Index++];
-                buffer[1] = message[MsgInterpreter_Index++];
-                buffer[2] = message[MsgInterpreter_Index++];
-                buffer[3] = message[MsgInterpreter_Index++];
-                temp_f = *((float*)buffer);
-                GUI_adjustThrottle(temp_f);
-                break;
+
 
 
             /******************************************************************************
@@ -631,6 +600,64 @@ inline int MsgInterpreter_interpret_writeRegisters(UINT8 message[])
                 buffer[2] = message[MsgInterpreter_Index++];
                 buffer[3] = message[MsgInterpreter_Index++];
                 dYawConst = *((float*)buffer);
+                break;
+
+         /******************************************************************************
+         * GUI
+          ******************************************************************************/
+            case SERIALCOMM_CONFIG_GUI_Roll:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustRoll(temp_f);
+                break;
+            case SERIALCOMM_CONFIG_GUI_Pitch:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustPitch(temp_f);
+                break;
+            case SERIALCOMM_CONFIG_GUI_Yaw:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustYaw(temp_f);
+                break;
+            case SERIALCOMM_CONFIG_GUI_Throttle:
+                buffer[0] = message[MsgInterpreter_Index++];
+                buffer[1] = message[MsgInterpreter_Index++];
+                buffer[2] = message[MsgInterpreter_Index++];
+                buffer[3] = message[MsgInterpreter_Index++];
+                temp_f = *((float*)buffer);
+                GUI_adjustThrottle(temp_f);
+                break;
+
+            case SERIALCOMM_CONFIG_SoftRestart:
+                buffer[0] = message[MsgInterpreter_Index++];
+                if (buffer[0] == SERIALCOMM_CONFIG_SoftRestart) //Safety precaution
+                {
+                    GUI_SoftRestart();
+                }
+                break;
+            case SERIALCOMM_CONFIG_GUI_EnableFlight:
+                buffer[0] = message[MsgInterpreter_Index++];
+                if (buffer[0] == SERIALCOMM_CONFIG_GUI_EnableFlight) //Safety precaution
+                {
+                    GUI_EnableFlight();
+                }
+                break;
+            case SERIALCOMM_CONFIG_GUI_DisableFlight:
+                buffer[0] = message[MsgInterpreter_Index++];
+                if (buffer[0] == SERIALCOMM_CONFIG_GUI_DisableFlight) //Safety precaution
+                {
+                    GUI_DisableFlight();
+                }
                 break;
         }
     }

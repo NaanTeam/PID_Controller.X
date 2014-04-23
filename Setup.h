@@ -16,5 +16,6 @@ void Setup_ports(void);
 void Setup_timers(void);
 void Setup_configInterrupts(void);
 void Setup_communications(void);
+void Setup_sensorComm(void);
 
 #endif	/* SETUP_H */

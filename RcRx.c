@@ -52,12 +52,14 @@ void RcRx_zeroController(void)
     ym, pm, rm = 0;
     int i, j, k;
 
-    while(zero_mode == 1)
+    while((zero_mode == 1) || !GUI_EnableFlightFlag)
     {
         for(i = 0; i < 50; i++)
         {
             if(period2 > MID_THRESH_L && period2 < MID_THRESH_H)
                 ym = ym + period2;
+            else if (GUI_EnableFlightFlag == 1)
+                return;
             else
                 i--;
         }
@@ -67,6 +69,8 @@ void RcRx_zeroController(void)
         {
             if(period3 > MID_THRESH_L && period3 < MID_THRESH_H)
                 pm = pm + period3;
+            else if (GUI_EnableFlightFlag == 1)
+                return;
             else
                 j--;
         }
@@ -76,6 +80,8 @@ void RcRx_zeroController(void)
         {
             if(period4 > MID_THRESH_L && period4 < MID_THRESH_H)
                 rm = rm + period4;
+            else if (GUI_EnableFlightFlag == 1)
+                return;
             else
                 k--;
         }

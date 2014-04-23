@@ -60,11 +60,14 @@ int main (void)
     //Configures the board for operation
     Setup_initializeBoard();
 
+    //Starts the various communication protocols
+    Setup_communications();
+
     //Blocking Call// waits for RC controller to zero
     RcRx_zeroController();
 
-    //Starts the various communication protocols
-    Setup_communications();
+    //Startup sensor communication protocols and sensor loop
+    Setup_sensorComm();
 
     //gives it time to start up
     while (i < (5400 * 200))

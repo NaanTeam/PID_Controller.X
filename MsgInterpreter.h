@@ -48,7 +48,7 @@ extern "C" {
 #include "RcRx.h"
 #include "battery_voltage.h"
 #include "GUI.h"
-    
+ 
 //******************************************************************************
 //Configuration #defines
 //******************************************************************************
@@ -63,7 +63,6 @@ extern "C" {
 #define SERIALCOMM_START_TOKEN      0x01
 #define SERIALCOMM_READ_REGISTER    0x02
 #define SERIALCOMM_WRITE_REGISTER   0x03
-#define SERIALCOMM_MOTOR1_ON        0x10
 #define SERIALCOMM_END_TOKEN        0xFF
 
 //Message protocol command instruction
@@ -111,10 +110,7 @@ extern "C" {
 #define SERIALCOMM_REGISTER_DesiredYaw_GUI           0x4A
 #define SERIALCOMM_REGISTER_DesiredThrottle_GUI      0x4B
 
-#define SERIALCOMM_CONFIG_GUI_Roll          0x4C
-#define SERIALCOMM_CONFIG_GUI_Pitch         0x4D
-#define SERIALCOMM_CONFIG_GUI_Yaw           0x4E
-#define SERIALCOMM_CONFIG_GUI_Throttle      0x4F
+
 
 
 #define SERIALCOMM_REGISTER_Motor1              0x50
@@ -145,7 +141,15 @@ extern "C" {
 #define SERIALCOMM_CONFIG_PID_Yaw_D         0x98
 #define SERIALCOMM_CONFIG_PID_Reset         0x99
 
-#define SERIALCOMM_CONFIG_SoftRestart         0xA0
+
+//GUI
+#define SERIALCOMM_CONFIG_GUI_Roll          0x4C
+#define SERIALCOMM_CONFIG_GUI_Pitch         0x4D
+#define SERIALCOMM_CONFIG_GUI_Yaw           0x4E
+#define SERIALCOMM_CONFIG_GUI_Throttle      0x4F
+#define SERIALCOMM_CONFIG_SoftRestart           0xA0
+#define SERIALCOMM_CONFIG_GUI_EnableFlight      0xA1
+#define SERIALCOMM_CONFIG_GUI_DisableFlight     0xA2
 
 
 

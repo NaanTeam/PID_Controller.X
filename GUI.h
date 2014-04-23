@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+extern int GUI_EnableFlightFlag;
+
 extern float GUI_ROLL,         //From the GUI
              GUI_PITCH,
              GUI_YAW,
@@ -21,6 +23,11 @@ void GUI_adjustRoll(float offset);
 void GUI_adjustPitch(float offset);
 void GUI_adjustYaw(float offset);
 void GUI_adjustThrottle(float offset);
+
+void GUI_SoftRestart();
+void GUI_EnableFlight();
+void GUI_DisableFlight();
+
 
 #ifdef	__cplusplus
 }
