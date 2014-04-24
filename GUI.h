@@ -14,6 +14,9 @@ extern "C" {
 
 extern int GUI_EnableFlightFlag;
 
+extern int GUI_MODE;
+
+
 extern float GUI_ROLL,         //From the GUI
              GUI_PITCH,
              GUI_YAW,

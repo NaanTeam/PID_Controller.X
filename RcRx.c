@@ -52,7 +52,7 @@ void RcRx_zeroController(void)
     ym, pm, rm = 0;
     int i, j, k;
 
-    while((zero_mode == 1) || !GUI_EnableFlightFlag)
+    while((zero_mode == 1) || (GUI_MODE && !GUI_EnableFlightFlag))
     {
         for(i = 0; i < 50; i++)
         {

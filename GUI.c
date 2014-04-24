@@ -6,6 +6,7 @@ float GUI_ROLL = 0.0,
       GUI_THROTTLE = 0.0;
 
 int GUI_EnableFlightFlag = 0;
+int GUI_MODE = 0;
 
 void GUI_adjustRoll(float offset)
 {
@@ -35,6 +36,7 @@ void GUI_SoftRestart()
 void GUI_EnableFlight()
 {
     GUI_EnableFlightFlag = 1;
+    GUI_MODE = 1;
 }
 
 void GUI_DisableFlight()
