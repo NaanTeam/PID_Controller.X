@@ -207,7 +207,7 @@ void DCM_driftCorrection(float* accelVector, float scaledAccelMag, float magneti
 
 
     //*****YAW***************
-//    //Calculate Heading_X and Heading_Y
+    //Calculate Heading_X and Heading_Y
 //    magneticHeading_X = cos(magneticHeading);
 //    magneticHeading_Y = sin(magneticHeading);
 //
