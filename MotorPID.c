@@ -25,9 +25,11 @@ float pPitchConst = 0.0,    //Proportional constant for PITCH
       iPitchConst = 0.0,    //Integral constant for PITCH
       dPitchConst = 0.0;    //Derivative constant for PITCH
 
-float pYawConst = 0.0,      //Proportional constant for YAW
-      iYawConst = 0.0,      //Integral constant for YAW
-      dYawConst = 0.0;      //Derivative constant for YAW
+//We fixed pitch and roll to 0 so that yaw is only movement and found that these
+//constants worked fairly well on PVC pipe testing platform
+float pYawConst = 200.0,    //Proportional constant for YAW
+      iYawConst = 0.5,      //Integral constant for YAW
+      dYawConst = 1000.0;   //Derivative constant for YAW
 
 float pErrRoll, iErrSumRoll, dErrChngRoll, rLastErr;
 float pErrPitch, iErrSumPitch, dErrChngPitch, pLastErr;
