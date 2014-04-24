@@ -19,22 +19,22 @@
 
 #define PID_YAW_ROC             .0016
 
-extern float SENS_ROLL,         //These will come from Connor, delete later
-             SENS_PITCH,
-             SENS_YAW;
+extern float    SENS_ROLL,      //Roll value given by sensors
+                SENS_PITCH,     //Pitch value given by sensors
+                SENS_YAW;       //Yaw value given by sensors
 
-extern float PID_ROLL,          //Roll correction value between -100.0 and 100.0
-             PID_PITCH,         //Pitch correction value between -100.0 and 100.0
-             PID_YAW;           //Yaw correction value between -100.0 and 100.0
+extern float    PID_ROLL,       //Roll correction value between -100.0 and 100.0
+                PID_PITCH,      //Pitch correction value between -100.0 and 100.0
+                PID_YAW;        //Yaw correction value between -100.0 and 100.0
 
-extern float PID_ROLL_rError,
-      PID_ROLL_rErrSum,
-      PID_ROLL_dRollErr;
+extern float    PID_ROLL_pErr,
+                PID_ROLL_iErr,
+                PID_ROLL_dErr;
 
 
-extern float pRollConst,     //Proportional constant
-      iRollConst,     //Intergral constant
-      dRollConst;     //Derivative constant
+extern float    pRollConst,     //Proportional constant
+                iRollConst,     //Intergral constant
+                dRollConst;     //Derivative constant
 
 
 
@@ -42,9 +42,10 @@ extern float pPitchConst,    //Proportional constant
       iPitchConst,    //Intergral constant
       dPitchConst;    //Derivative constant
 
-extern float pYawConst,     //Proportional constant
-      iYawConst,      //Intergral constant
-      dYawConst;      //Derivative constant
+
+extern float    pYawConst,      //Proportional constant
+                iYawConst,      //Intergral constant
+                dYawConst;      //Derivative constant
 
 extern int yawFlag;
 

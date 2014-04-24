@@ -14,13 +14,13 @@
 #include "RcRx.h"
 #include "MotorPID.h"
 
-#define OC_KILL         2500    //Absolute min (off)
+#define OC_KILL         2500    //Absolute min (1ms pulse)
 #define OC_MIN          3000    //Idle
-#define OC_MAX          3250    //Absolute max 5000
+#define OC_MAX          3250    //Absolute max 5000 (2ms pulse)
 
 #define OC_ONE_OFFSET   0
-#define OC_TWO_OFFSET   12
-#define OC_THREE_OFFSET 12
+#define OC_TWO_OFFSET   8
+#define OC_THREE_OFFSET 8
 #define OC_FOUR_OFFSET  0
 
 #define OC_ONE_MIN      (OC_MIN + OC_ONE_OFFSET)
@@ -43,7 +43,7 @@ extern  float   MotorCtrl_OC_ONE_PC,    //Percentage of Motor One value for GUI
                 MotorCtrl_OC_THREE_PC,  //Percentage of Motor Three value for GUI
                 MotorCtrl_OC_FOUR_PC;   //Percentage of Motor Four value for GUI
 
-extern int      motorsFlag;
+extern int  motorsFlag;
 
 void MotorCtrl_setupOutputCompares(void);
 void MotorCtrl_startupMotors(void);
